@@ -1,0 +1,33 @@
+##tomcat 서버의 port 번호 설정
+server:
+  port: 9000
+##context path 설정
+  servlet:
+    context-path: /flower
+    session:
+      tracking-modes: cookie
+## oracle DataSource Setting ( Connection Pool )
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: scott
+    password: tiger
+  servlet:
+    multipart:
+      max-request-size: 60MB
+      max-file-size: 50MB
+       
+## mybatis에서 사용하는 mppaer xml 문서가 어디에 있는지 알려주기 classpath:은 resource 폴더를 가르킨다.
+## type alias scan setting @Alias 어노테이션이 붙은ㅋ 클래스를 찾아서 사용할 준비
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.acorn.flower.**
+## file size, reqeust size setting
+
+##swager
+springdoc:
+    swagger-ui:
+      path: /swagger
+    api-docs:
+      path: /api-docs
