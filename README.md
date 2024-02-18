@@ -4,7 +4,7 @@
 
 ## 프로젝트 특징
 
-* React, Spring을 기반으로 꽃을 판매하는 키오스크 서비스
+* React, Spring Boot을 기반으로 꽃을 판매하는 키오스크 서비스
     
 * 프론트엔드와 백엔드를 분리하여 프로젝트 개발
     * 각 파트의 별도 Repository를 생성 후 작업
@@ -13,7 +13,7 @@
 
 * 회원가입은 X
 
-* 로그인 처리는 Spring Bott Security와 Jwt Token방식으로 처리
+* 로그인 처리는 Spring Boot Security와 Jwt Token방식으로 처리
 
 * 초기 더미데이터는 DBeaver를 통한 DB에 직접 삽입
   
