@@ -1,5 +1,5 @@
 package com.acorn.flower.kiosk;
 
-public class KioskDao {
+public interface KioskDao {
 
 }
