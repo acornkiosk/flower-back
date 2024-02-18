@@ -78,4 +78,4 @@
 
 | 일자       | 진행 목록                                                    |
 | ---------- | ------------------------------------------------------------ |
-| 2024.02.17 | [ 프로젝트 화면계획서 V0.1 작성](https://docs.google.com/spreadsheets/d/14dzd7AIT8R0XmBXdqJpmf3p8h0dSwBAPmi3kCuonuSo/edit#gid=0) <br />프론트/백엔드 Repository 생성 |
+| 2024.02.17 | [ 프로젝트 화면계획서 V0.1 작성]([https://docs.google.com/spreadsheets/d/14dzd7AIT8R0XmBXdqJpmf3p8h0dSwBAPmi3kCuonuSo/edit#gid=0](https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl)https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl) <br />프론트/백엔드 Repository 생성 |
