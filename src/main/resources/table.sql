@@ -48,7 +48,11 @@ CREATE TABLE menu
 	category_id	NUMBER NOT NULL
 );
 
+<<<<<<< Updated upstream
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
+=======
+--외래키 추가(kiosk(부모)의 pk를 일반 필드로(FK)로 사용)
+>>>>>>> Stashed changes
 ALTER TABLE menu
 ADD FOREIGN KEY (category_id) REFERENCES COMMON(code_id);
 
@@ -58,7 +62,11 @@ CREATE TABLE COMMON
 	code_id NUMBER	PRIMARY KEY,
 	p_code_id NUMBER,
 	code_name VARCHAR2(50) NOT NULL,
+<<<<<<< Updated upstream
+	code_value VARCHAR2(50),
+=======
 	code_value VARCHAR2(50) NOT NULL,
+>>>>>>> Stashed changes
 	code_img VARCHAR2(2000) 
 );
 
