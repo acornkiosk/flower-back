@@ -58,7 +58,7 @@ CREATE TABLE COMMON
 	code_id NUMBER	PRIMARY KEY,
 	p_code_id NUMBER,
 	code_name VARCHAR2(50) NOT NULL,
-	code_value VARCHAR2(50) NOT NULL,
+	code_value VARCHAR2(50),
 	code_img VARCHAR2(2000) 
 );
 
