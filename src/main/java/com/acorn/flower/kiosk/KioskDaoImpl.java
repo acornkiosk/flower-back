@@ -1,5 +1,36 @@
 package com.acorn.flower.kiosk;
 
-public class KioskDaoImpl {
+import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class KioskDaoImpl implements KioskDao{
+
+	@Autowired
+	private SqlSession session;
+	@Override
+	public int insert(KioskDto dto) {
+		int result = session.insert("kiosk.insert", dto);
+		return result;
+		
+	}
+	@Override
+	public List<KioskDto> getList() {
+		List<KioskDto> list = session.selectList("kiosk.getList");
+		return list;
+	}
+	@Override
+	public int delete(int id) {
+		int result = session.delete("kiosk.delete",id);
+		return result;
+	}
+	@Override
+	public KioskDto getKiosk(int id) {
+		KioskDto dto = session.selectOne("kiosk.getKiosk",id);
+		return dto;
+	}
+	
 }

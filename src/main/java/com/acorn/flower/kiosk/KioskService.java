@@ -1,5 +1,10 @@
 package com.acorn.flower.kiosk;
 
-public interface KioskService {
+import java.util.List;
 
+public interface KioskService {
+	public boolean insert(KioskDto dto);
+	public List<KioskDto> getList();
+	public KioskDto getKiosk(int id);
+	public boolean delete(int id);
 }
