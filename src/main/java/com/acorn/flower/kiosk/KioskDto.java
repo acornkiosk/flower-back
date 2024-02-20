@@ -17,3 +17,4 @@ public class KioskDto {
 	private String location;
 	private String power;
 }
+
