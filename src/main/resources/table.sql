@@ -17,7 +17,8 @@ CREATE TABLE cart
 	menu_name VARCHAR2(100) NOT NULL, --메뉴 이름
 	menu_price NUMBER NOT NULL, --메뉴 가격
 	menu_count NUMBER NOT NULL, -- 메뉴 갯수
-	OPTIONS VARCHAR2(500) -- 메뉴 옵션
+	OPTIONS VARCHAR2(500), -- 메뉴 옵션
+	regdate DATE -- 주문등록 시간
 );
 
 -- 주문 테이블 id 전용 테이블 생성
