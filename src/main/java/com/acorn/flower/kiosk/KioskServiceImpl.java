@@ -45,4 +45,49 @@ public class KioskServiceImpl implements KioskService {
 		return dto;
 	}
 
+	@Override
+	public boolean turnOn(int id) {
+		int result =  dao.turnOn(id);
+		
+		if(result != 1) return false;
+		
+		return true;
+	}
+	
+	@Override
+	public boolean turnOff(int id) {
+		int result =  dao.turnOff(id);
+		
+		if(result != 1) return false;
+		
+		return true;
+	}
+
+	@Override
+	public boolean turnOnAll() {
+		int result = dao.turnOnAll();
+		
+		if(result == 0) return false;
+		
+		return true;
+	}
+
+	@Override
+	public boolean turnOffAll() {
+		int result = dao.turnOffAll();
+		
+		if(result == 0) return false;
+		
+		return true;
+	}
+
+	@Override
+	public boolean updateLocation(KioskDto dto) {
+		int result = dao.updateLocation(dto);
+		
+		if(result == 0) return false;
+		
+		return true;
+	}
+
 }

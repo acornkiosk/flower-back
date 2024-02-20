@@ -21,4 +21,32 @@
 		DELETE FROM KIOSK
 		WHERE id = #{id}
 	</delete>
+	
+	<update id="turnOn" parameterType="int">
+		UPDATE KIOSK
+		SET POWER = 'on'
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="turnOff" parameterType="int">
+		UPDATE KIOSK
+		SET POWER = 'off'
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="turnOnAll">
+		UPDATE KIOSK
+		SET POWER = 'on'
+	</update>
+	
+	<update id="turnOffAll">
+		UPDATE KIOSK
+		SET POWER = 'off'
+	</update>
+	
+	<update id="updateLocation" parameterType="kioskDto">
+		UPDATE KIOSK
+		SET LOCATION = #{location}
+		WHERE id = #{id}
+	</update>
 </mapper>
