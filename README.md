@@ -49,6 +49,9 @@
 
 ## API 설계
 
+## 로그인 프로세스
+![image](https://github.com/acornkiosk/flower_back/assets/94777814/274685fe-30ef-4878-9007-9bfea86ccdac)
+![image](https://github.com/acornkiosk/flower_back/assets/94777814/56872714-d87b-4eb9-a54f-cf07016160d7)
 
 ## 개발 역할분담 (백엔드)
 
