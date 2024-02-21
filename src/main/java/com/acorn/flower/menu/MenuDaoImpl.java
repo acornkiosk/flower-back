@@ -1,5 +1,7 @@
 package com.acorn.flower.menu;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -11,7 +13,13 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public int insert(MenuDto dto) {
-		int result=session.insert("menu.insert",dto);
+		int result = session.insert("menu.insert", dto);
 		return result;
+	}
+
+	@Override
+	public List<MenuDto> getList(MenuDto dto) {
+		
+		return null;
 	}
 }
