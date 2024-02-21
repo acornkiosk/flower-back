@@ -19,7 +19,7 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public List<MenuDto> getList(MenuDto dto) {
-		
-		return null;
+		List<MenuDto> list = session.selectList("menu.getList",dto);
+		return list;
 	}
 }

@@ -6,7 +6,7 @@
    <insert id="insert" parameterType="menuDto">
       INSERT INTO menu
       (id,name,price <if test="img_name != null">,img_name</if>,summary,description,is_sold,category_id)
-      VALUES(seq_menu_id.NEXTVAL,#{name},#{price} <if test="img_name != null">,#{img_name}</if>,#{summary},#{description},'false',#{category_id})
+      VALUES(seq_menu_id.NEXTVAL,#{name},#{price}<if test="img_name != null">,#{img_name}</if>,#{summary},#{description},'false',#{category_id})
    </insert>
 
 	
@@ -14,22 +14,12 @@
    <select id="getList" parameterType="menuDto" resultType="menuDto">
       SELECT id,name,price,img_name,summary,description,is_sold,category_id
       FROM menu
-      <if test="category_id != null">WHERE category_id = #{category_id}</if>
+      <if test="category_id != 0">
+	    WHERE category_id = #{category_id}
+	  </if>
    </select>
    
    
-   
-   <select id="getCategory">
-     SELECT
-		B.code_id AS code_id,
-		B.code_name AS code_name
-	 FROM
-		common A
-	 JOIN common B ON
-		A.code_id = B.p_code_id
-	 WHERE
-		A.code_id = 1000
-   </select>
    
   
 
