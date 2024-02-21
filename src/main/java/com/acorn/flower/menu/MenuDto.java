@@ -20,5 +20,6 @@ public class MenuDto {
 	private String summary;
 	private String description;
 	private String is_sold;
+	private String category;
 	private int category_id;	
 }
