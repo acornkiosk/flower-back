@@ -3,7 +3,8 @@
 <mapper namespace="order">
 	<insert id="insert" parameterType="orderDto">
 		INSERT INTO CART
-		(
+		(	
+			ORDER_ID,
 			ID,
 			KIOSK_ID,
 			MENU_NAME,
@@ -14,7 +15,8 @@
 		)
 		VALUES
 		(
-			#{id},
+			#{order_id},
+			seq_order_id.nextval,
 			#{kiosk_id},
 			#{menu_name},
 			#{menu_price},
@@ -25,13 +27,55 @@
 	</insert>
 
 	<select id="getOrders" parameterType="int" resultType="orderDto">
-		SELECT ID ,KIOSK_ID , MENU_NAME ,MENU_PRICE ,MENU_COUNT ,OPTIONS ,REGDATE
+		SELECT ORDER_ID ,ID ,KIOSK_ID , MENU_NAME ,MENU_PRICE ,MENU_COUNT ,OPTIONS ,REGDATE
 		FROM CART
+		WHERE ORDER_ID = #{id}
+	</select>
+	
+	<select id="getAllOrders" resultType="orderDto">
+		SELECT
+			ORDER_ID,
+			ID ,
+			KIOSK_ID ,
+			MENU_NAME ,
+			MENU_PRICE ,
+			MENU_COUNT ,
+			OPTIONS ,
+			REGDATE
+		FROM 
+			CART
+	</select>
+	
+	<select id="getOrder" parameterType="int" resultType="orderDto">
+		SELECT 
+			ORDER_ID ,
+			ID ,
+			KIOSK_ID ,
+			MENU_NAME ,
+			MENU_PRICE ,
+			MENU_COUNT ,
+			OPTIONS ,
+			REGDATE 
+		FROM CART 
 		WHERE ID = #{id}
 	</select>
 	
 	<delete id="deleteAll" parameterType="int">
 		DELETE FROM CART
-		WHERE ID = #{id}	
+		WHERE ORDER_ID = #{id}	
 	</delete>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM CART
+		WHERE id= #{id}
+	</delete>
+	
+	<update id="update" parameterType="orderDto">
+		UPDATE CART 
+		SET 
+			MENU_PRICE = #{menu_price},
+			MENU_COUNT = #{menu_count},
+			OPTIONS =  #{options}
+		WHERE id=#{id}
+	</update>
 </mapper>

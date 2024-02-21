@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OrderDto {
+	private int order_id;
 	private int id;
 	private int kiosk_id;
 	private String menu_name;

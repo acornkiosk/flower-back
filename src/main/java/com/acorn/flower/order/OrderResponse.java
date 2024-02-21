@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class OrderResponse {
+	private OrderDto dto;
 	private List<OrderDto> list;
 	private HttpStatusCode status;
 }
