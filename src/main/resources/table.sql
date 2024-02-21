@@ -9,16 +9,21 @@ CREATE TABLE kiosk
 -- 키오스크 id 시퀀스 생성
 CREATE SEQUENCE seq_kiosk_id;
 
---주문 테이블 생성
-CREATE TABLE cart
+-- 주문 테이블 생성 
+CREATE TABLE CART
 (
-	id NUMBER NOT NULL, --주문 id
+	order_id NUMBER NOT NULL, --전체 주문 id
+	id NUMBER PRIMARY KEY, -- 단일 주문 id 
 	kiosk_id NUMBER NOT NULL, -- 키오스크 id
 	menu_name VARCHAR2(100) NOT NULL, --메뉴 이름
 	menu_price NUMBER NOT NULL, --메뉴 가격
 	menu_count NUMBER NOT NULL, -- 메뉴 갯수
-	OPTIONS VARCHAR2(500) -- 메뉴 옵션
+	OPTIONS VARCHAR2(500), -- 메뉴 옵션
+	regdate DATE -- 주문등록 시간
 );
+
+-- 단일 주문 id 시퀀스 생성
+CREATE SEQUENCE seq_order_id;
 
 -- 주문 테이블 id 전용 테이블 생성
 CREATE TABLE cart_id
