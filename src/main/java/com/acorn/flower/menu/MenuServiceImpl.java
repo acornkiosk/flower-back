@@ -1,6 +1,7 @@
 package com.acorn.flower.menu;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +20,9 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public boolean insert(MenuDto dto) {
-		
-		
-		
 		// 선택된 이미지 파일을 가져와서		
 		MultipartFile image=dto.getImage();
-		if(image.getSize()!=0) {
+		if(image!=null){
 			//fileLocation에 원본이미지 이름의 형태로 저장한다. 근데 확장자는 어떻게?? 일단 보류
 			String saveFileName=dto.getImage().getOriginalFilename();
 			//저장할 파일의 전체 경로 구성하기
@@ -42,5 +40,11 @@ public class MenuServiceImpl implements MenuService {
 		int result =menuDao.insert(dto);
 		if(result!=1) return false;
 		return true;
+	}
+
+	@Override
+	public List<MenuDto> getList(MenuDto dto) {
+		List<MenuDto> list= menuDao.getList(dto);
+		return list;
 	}
 }
