@@ -13,13 +13,21 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 키오스크 관리
+ */
 @Slf4j
 @RestController
 public class KioskController {
 
 	@Autowired
 	private KioskService service;
-
+	
+	/**
+	 * 키오스크 추가
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/kiosk")
 	public ResponseEntity<KioskResponse> addKiosk(@RequestBody KioskDto dto) {
 		boolean isSuccess;
@@ -44,6 +52,10 @@ public class KioskController {
 		}
 	}
 
+	/**
+	 * 키오스크 리스트 조회
+	 * @return
+	 */
 	@GetMapping("/api/kiosk/list")
 	public ResponseEntity<KioskResponse> getList() {
 		KioskResponse response = new KioskResponse();
@@ -68,6 +80,11 @@ public class KioskController {
 		}
 	}
 
+	/**
+	 * 키오스크 조회
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/get")
 	public ResponseEntity<KioskResponse> getKiosk(@RequestBody int id) {
 		KioskResponse response = new KioskResponse();
@@ -89,7 +106,12 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
+	/**
+	 * 키오스크 삭제
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/delete")
 	public ResponseEntity<KioskResponse> delete(@RequestBody int id) {
 		boolean isSuccess;
@@ -114,6 +136,11 @@ public class KioskController {
 		}
 	}
 
+	/**
+	 * 키오스크 전원 켜기
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/turnOn")
 	public ResponseEntity<KioskResponse> turnOn(@RequestBody int id) {
 		boolean isSuccess;
@@ -139,6 +166,11 @@ public class KioskController {
 		}
 	}
 	
+	/**
+	 * 키오스크 전원 끄기
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/turnOff")
 	public ResponseEntity<KioskResponse> turnOff(@RequestBody int id) {
 		boolean isSuccess;
@@ -164,6 +196,10 @@ public class KioskController {
 		}
 	}
 	
+	/**
+	 * 키오스크 전체 전원 켜기
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/turnOnAll")
 	public ResponseEntity<KioskResponse> turnOnAll() {
 		boolean isSuccess;
@@ -189,6 +225,10 @@ public class KioskController {
 		}
 	}
 	
+	/**
+	 * 키오스크 전체 전원 끄기
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/turnOffAll")
 	public ResponseEntity<KioskResponse> turnOffAll() {
 		boolean isSuccess;
@@ -214,6 +254,11 @@ public class KioskController {
 		}
 	}
 	
+	/**
+	 * 키오스크 위치 변경
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/kiosk/update/location")
 	public ResponseEntity<KioskResponse> updateLocation(@RequestBody KioskDto dto) {
 		boolean isSuccess;

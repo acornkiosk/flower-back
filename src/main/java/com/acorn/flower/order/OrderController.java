@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 주문 관리
+ */
 @Slf4j
 @RestController
 public class OrderController {
@@ -19,6 +22,11 @@ public class OrderController {
 	@Autowired
 	private OrderService service;
 
+	/**
+	 * 주문 추가
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/order")
 	public ResponseEntity<OrderResponse> addOrder(@RequestBody OrderDto dto) {
 		boolean isSuccess;
@@ -44,6 +52,11 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 단일 주문 조회
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/order/get")
 	public ResponseEntity<OrderResponse> getOrder(@RequestBody int id) {
 		OrderResponse response = new OrderResponse();
@@ -67,6 +80,11 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 주문번호 주문 리스트 조회
+	 * @param order_id
+	 * @return
+	 */
 	@PostMapping("/api/order/list")
 	public ResponseEntity<OrderResponse> getOrderList(@RequestBody int order_id) {
 
@@ -93,6 +111,10 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 전체 주문 리스트 조회
+	 * @return
+	 */
 	@GetMapping("/api/order/list")
 	public ResponseEntity<OrderResponse> getAllOrderList() {
 
@@ -119,6 +141,11 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 전체 주문 삭제 
+	 * @param order_id
+	 * @return
+	 */
 	@PostMapping("/api/order/deleteAll")
 	public ResponseEntity<OrderResponse> deleteAllOrders(@RequestBody int order_id) {
 		boolean isSuccess;
@@ -144,6 +171,11 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 단일 주문 삭제
+	 * @param id
+	 * @return
+	 */
 	@PostMapping("/api/order/delete")
 	public ResponseEntity<OrderResponse> deleteOrders(@RequestBody int id) {
 		boolean isSuccess;
@@ -169,6 +201,11 @@ public class OrderController {
 		}
 	}
 
+	/**
+	 * 주문 정보 수정
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/order/update")
 	public ResponseEntity<OrderResponse> updateOrder(@RequestBody OrderDto dto) {
 		boolean isSuccess;
