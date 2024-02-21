@@ -1,5 +1,7 @@
 package com.acorn.flower.common;
 
-public interface CommonService {
+import java.util.List;
 
+public interface CommonService {
+	public List<CommonDto> getChild(int code_id);
 }
