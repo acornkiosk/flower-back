@@ -52,7 +52,8 @@ CREATE TABLE menu
 	is_sold	VARCHAR2(50) CHECK (is_sold IN ('true', 'false')) NOT NULL,
 	category_id	NUMBER NOT NULL
 );
-
+drop table menu;
+drop table Common;
 
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
 ALTER TABLE menu

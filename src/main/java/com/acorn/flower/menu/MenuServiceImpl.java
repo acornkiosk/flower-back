@@ -23,7 +23,8 @@ public class MenuServiceImpl implements MenuService {
 		// 선택된 이미지 파일을 가져와서		
 		MultipartFile image=dto.getImage();
 		if(image!=null){
-			//fileLocation에 원본이미지 이름의 형태로 저장한다. 근데 확장자는 어떻게?? 일단 보류
+			//fileLocation에 원본이미지 이름의 형태로 저장한다.
+			//그럼 확장자는 어떻게? , 같은 이름의 이미지는 중복해서 넣을 수 없다
 			String saveFileName=dto.getImage().getOriginalFilename();
 			//저장할 파일의 전체 경로 구성하기
 			String filePath=fileLocation+File.separator+saveFileName;
@@ -46,5 +47,42 @@ public class MenuServiceImpl implements MenuService {
 	public List<MenuDto> getList(MenuDto dto) {
 		List<MenuDto> list= menuDao.getList(dto);
 		return list;
+	}
+
+	@Override
+	public MenuDto getMenu(int id) {
+		MenuDto dto= menuDao.getMenu(id);
+		return dto;
+	}
+
+	@Override
+	public boolean update(MenuDto dto) {
+		MultipartFile image=dto.getImage();
+		if(image!=null){
+			//fileLocation에 원본이미지 이름의 형태로 저장한다.
+			//그럼 확장자는 어떻게? , 같은 이름의 이미지는 중복해서 넣을 수 없다
+			String saveFileName=dto.getImage().getOriginalFilename();
+			//저장할 파일의 전체 경로 구성하기
+			String filePath=fileLocation+File.separator+saveFileName;
+			try {
+				//업로드된 파일을 이동시킬 목적지 File 객체
+				File f=new File(filePath);
+				//MultipartFile 객체의 메소드를 통해서 실제로 이동시키기(전송하기)
+				dto.getImage().transferTo(f);
+			}catch(Exception e) {
+				e.printStackTrace();
+			}
+			dto.setImg_name(saveFileName);
+		}
+		int result =menuDao.update(dto);
+		if(result!=1) return false;
+		return true;
+	}
+
+	@Override
+	public boolean delete(int id) {
+		int result =menuDao.delete(id);
+		if(result!=1) return false;
+		return true;
 	}
 }

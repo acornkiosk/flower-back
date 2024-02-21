@@ -19,6 +19,50 @@
 	  </if>
    </select>
    
+   <select id="getMenu" parameterType="int" resultType="menuDto">
+   	  SELECT
+		  m.ID AS id,
+		  m.NAME AS name,
+		  m.PRICE AS price,
+		  m.IMG_NAME AS img_name,
+		  m.SUMMARY AS summary ,
+		  m.DESCRIPTION AS description, 
+		  m.IS_SOLD AS is_sold,
+		  m.CATEGORY_ID AS category_id,
+		  c.CODE_NAME AS category
+	  FROM
+		  menu m
+	  JOIN common c ON
+		  m.CATEGORY_ID = c.CODE_ID
+	  WHERE
+		  m.id = #{id}
+   	  
+   </select>
+   
+   <update id="update" parameterType="menuDto">
+   	  UPDATE 
+   	      menu 
+   	  SET 
+   	  	  name=#{name}, 
+   	 	  price=#{price}, 
+   	 	  <if test="img_name != null">img_name=#{img_name},</if>
+   	  	  summary=#{summary}, 
+   	  	  is_sold=#{is_sold},
+   	  	  category_id=#{category_id}
+   	  WHERE 
+   	  	  id=#{id}
+   	 
+   </update>
+   
+   <delete id="delete" parameterType="int">
+   	  DELETE 
+   	  FROM 
+   	  		menu
+   	  WHERE 
+   	  		id=#{id} 
+   </delete>
+   
+   
    
    
   
