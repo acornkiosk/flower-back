@@ -1,5 +1,7 @@
 package com.acorn.flower.common;
 
-public interface CommonDao {
+import java.util.List;
 
+public interface CommonDao {
+	public List<CommonDto> getChild(int code_id);
 }
