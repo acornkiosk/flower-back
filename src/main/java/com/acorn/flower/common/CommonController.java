@@ -11,13 +11,20 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * 공통 코드 관리
+ */
 @Slf4j
 @RestController
 public class CommonController {
 	@Autowired
 	private CommonService service;
 	
-	
+	/**
+	 * 하위 정보 리스트 조회
+	 * @param code_id
+	 * @return
+	 */
 	@PostMapping("/api/common/child")
 	public ResponseEntity<CommonResponse> getCategory(@RequestBody int code_id) {
 		CommonResponse response = new CommonResponse();
