@@ -44,6 +44,15 @@ public class KioskServiceImpl implements KioskService {
 		
 		return dto;
 	}
+	
+	@Override
+	public KioskDto getLast() {
+		KioskDto dto = dao.getLast();
+		
+		if(dto == null) return null;
+		
+		return dto;
+	}
 
 	@Override
 	public boolean turnOn(int id) {
