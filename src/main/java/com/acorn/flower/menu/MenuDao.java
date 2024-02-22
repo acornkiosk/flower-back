@@ -6,6 +6,8 @@ public interface MenuDao {
 	public int insert(MenuDto dto);
 	public List<MenuDto> getList(MenuDto dto);
 	public MenuDto getMenu(int id);
+	public MenuDto getLast();
 	public int update(MenuDto dto);
 	public int delete(int id);
+	
 }

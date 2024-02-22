@@ -158,16 +158,19 @@ public class MenuController {
 	public ResponseEntity<MenuResponse> addMenu(@RequestBody MenuDto dto) {
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
+	
 		try {
 			isSuccess = menuService.insert(dto);
+			MenuDto insertDto= menuService.getLast();
 			if (isSuccess) {
-				log.info("menu = {}", dto.toString());
-				response.setDto(dto);
+				
+				log.info("menu = {}", insertDto.toString());
+				response.setDto(insertDto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("menu데이터 insert 실패");
-				response.setDto(dto);
+				response.setDto(insertDto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}

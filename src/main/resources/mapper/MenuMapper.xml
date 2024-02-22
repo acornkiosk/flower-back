@@ -8,7 +8,16 @@
       (id,name,price <if test="img_name != null">,img_name</if>,summary,description,is_sold,category_id)
       VALUES(seq_menu_id.NEXTVAL,#{name},#{price}<if test="img_name != null">,#{img_name}</if>,#{summary},#{description},'false',#{category_id})
    </insert>
-
+   
+   <!-- 마지막꺼 가져오기 -->
+	<select id="getLast" resultType="menuDto">
+		SELECT *
+		FROM
+			(SELECT  *
+			FROM menu
+			ORDER BY id DESC) 
+		WHERE ROWNUM=1
+	</select>
 	
 	<!-- 전체 or 카테고리별 메뉴 리스트-->
    <select id="getList" parameterType="menuDto" resultType="menuDto">
@@ -47,6 +56,7 @@
    	 	  price=#{price}, 
    	 	  <if test="img_name != null">img_name=#{img_name},</if>
    	  	  summary=#{summary}, 
+   	  	  description=#{description},
    	  	  is_sold=#{is_sold},
    	  	  category_id=#{category_id}
    	  WHERE 
