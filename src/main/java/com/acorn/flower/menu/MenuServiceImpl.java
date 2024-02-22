@@ -85,4 +85,10 @@ public class MenuServiceImpl implements MenuService {
 		if(result!=1) return false;
 		return true;
 	}
+
+	@Override
+	public MenuDto getLast() {
+		MenuDto dto= menuDao.getLast();
+		return dto;
+	}
 }
