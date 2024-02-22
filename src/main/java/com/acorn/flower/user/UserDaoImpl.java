@@ -31,14 +31,14 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public int update(UserDto dto) {
-        int result = session.update("users.update", dto);
+    public int insert(UserDto dto) {
+        int result = session.insert("users.insert", dto);
         return result;
     }
 
     @Override
-    public int insert(UserDto dto) {
-        int result = session.insert("users.insert", dto);
+    public int update(UserDto dto) {
+        int result = session.update("users.update", dto);
         return result;
     }
 }

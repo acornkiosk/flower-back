@@ -24,19 +24,19 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(String id) {
-        int result = dao.delete(id);
+    public boolean insert(UserDto dto) {
+        int result = dao.insert(dto);
 
-        if(result != 1) return false;
+        if (result != 1) return false;
 
         return true;
     }
 
     @Override
-    public boolean insert(UserDto dto) {
-        int result = dao.insert(dto);
+    public boolean delete(String id) {
+        int result = dao.delete(id);
 
-        if (result != 1) return false;
+        if(result != 1) return false;
 
         return true;
     }
