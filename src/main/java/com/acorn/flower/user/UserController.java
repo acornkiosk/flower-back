@@ -77,6 +77,36 @@ public class UserController {
     }
 
     /**
+     * create a new user, find a user by dto
+     * @param dto
+     * @return
+     */
+    @PostMapping("/api/user/add")
+    public ResponseEntity<UserResponse> userAdd(@RequestBody UserDto dto) {
+        boolean isSuccess;
+        UserResponse response = new UserResponse();
+        try {
+            isSuccess = service.insert(dto);
+            UserDto insertedDto = service.getUser(dto.getId());
+            if (isSuccess) {
+                log.info("user = {}", insertedDto.toString());
+                response.setDto(insertedDto);
+                response.setStatus(HttpStatus.OK);
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            } else {
+                log.error("추가되지 않았습니다.");
+                response.setDto(dto);
+                response.setStatus(HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+            }
+        } catch (Exception e) {
+            log.error("서버에 문제가 있습니다.");
+            response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    /**
      * delete user, find a user by id
      * @param id
      * @return
@@ -104,36 +134,6 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-        /**
-         * create a new user, find a user by dto
-         * @param dto
-         * @return
-         */
-        @PostMapping("/api/user/add")
-        public ResponseEntity<UserResponse> userAdd(@RequestBody UserDto dto) {
-            boolean isSuccess;
-            UserResponse response = new UserResponse();
-            try {
-                isSuccess = service.insert(dto);
-                UserDto insertedDto = service.getUser(dto.getId());
-                if (isSuccess) {
-                    log.info("user = {}", insertedDto.toString());
-                    response.setDto(insertedDto);
-                    response.setStatus(HttpStatus.OK);
-                    return new ResponseEntity<>(response, HttpStatus.OK);
-                } else {
-                    log.error("추가되지 않았습니다.");
-                    response.setDto(dto);
-                    response.setStatus(HttpStatus.BAD_REQUEST);
-                    return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-                }
-            } catch (Exception e) {
-                log.error("서버에 문제가 있습니다.");
-                response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-                return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-            }
-        }
 
     /**
      * update user, find a user by dto
