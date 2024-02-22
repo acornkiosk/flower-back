@@ -9,15 +9,17 @@ public interface KioskService {
 
 	public KioskDto getKiosk(int id);
 
+	public KioskDto getLast();
+
 	public boolean delete(int id);
 
 	public boolean turnOn(int id);
-	
+
 	public boolean turnOff(int id);
-	
+
 	public boolean turnOnAll();
-	
+
 	public boolean turnOffAll();
-	
+
 	public boolean updateLocation(KioskDto dto);
 }
