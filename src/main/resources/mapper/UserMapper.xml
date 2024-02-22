@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="users">
     <select id="getUserList" resultType="userDto">
-        SELECT ID ,PASSWORD , USERNAME ,RANK, ROLE, REGDATE
+        SELECT ID, PASSWORD, USERNAME, RANK, ROLE, REGDATE
         FROM USER_MANAGE
     </select>
 
     <select id="getUser" parameterType="String" resultType="userDto">
         SELECT
             ID,
-            PASSWORD ,
-            USERNAME ,
+            PASSWORD,
+            USERNAME,
             RANK,
             ROLE,
             REGDATE
@@ -26,7 +26,7 @@
                 ID,
                 PASSWORD,
                 <if test="userName != null">
-                    USERNAME
+                    USERNAME,
                 </if>
                 RANK,
                 ROLE,
@@ -37,7 +37,7 @@
                 #{id},
                 #{password},
                 <if test="userName != null">
-                    #{userName}
+                    #{userName},git
                 </if>
                 #{rank},
                 '[4004]',
