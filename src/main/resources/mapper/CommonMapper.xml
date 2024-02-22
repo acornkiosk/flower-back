@@ -7,5 +7,44 @@
 		WHERE P_CODE_ID = #{code_id}
 	</select>
 	
+	<insert id="insert" parameterType="commonDto">
+		INSERT INTO common
+			(
+				CODE_ID ,
+				P_CODE_ID ,
+				CODE_NAME ,
+				CODE_VALUE,
+				CODE_IMG
+			)
+		VALUES
+			(
+				#{CODE_ID},
+				#{P_CODE_ID},
+				#{CODE_NAME},
+				#{CODE_VALUE},
+				#{CODE_IMG}
+			)
+	</insert>
+	
+	<update id="update" parameterType="commonDto">
+		UPDATE common
+		SET
+		 P_CODE_ID = #{P_CODE_ID}, 
+		 CODE_NAME = #{CODE_NAME}, 
+		 CODE_VALUE = #{CODE_VALUE}, 
+		 CODE_IMG = #{CODE_IMG}
+		WHERE CODE_ID = #{CODE_ID}
+	</update>
+	
+	<delete id="delete" parameterType="Int">
+		DELETE FROM common
+		WHERE CODE_ID = #{CODE_ID}
+	</delete>
+	
+	<select id="getRow">
+		SELECT CODE_ID, P_CODE_ID ,CODE_NAME ,CODE_VALUE, CODE_IMG
+		FROM common
+		WHERE CODE_ID = #{CODE_ID}
+	</select>
 	
 </mapper>
