@@ -17,6 +17,16 @@
 		WHERE id = #{id}
 	</select>
 	
+	<select id="getLast" resultType="kioskDto">
+		SELECT ID, LOCATION, POWER
+			FROM (
+				SELECT ID ,LOCATION ,POWER 
+				FROM KIOSK 	
+				ORDER BY id desc
+			)
+		WHERE ROWNUM = 1
+	</select>
+	
 	<delete id="delete" parameterType="int">
 		DELETE FROM KIOSK
 		WHERE id = #{id}

@@ -22,9 +22,10 @@ public class KioskController {
 
 	@Autowired
 	private KioskService service;
-	
+
 	/**
 	 * 키오스크 추가
+	 * 
 	 * @param dto
 	 * @return
 	 */
@@ -36,7 +37,8 @@ public class KioskController {
 			isSuccess = service.insert(dto);
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
-				response.setDto(dto);
+				KioskDto insertedDto = service.getLast();
+				response.setDto(insertedDto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -54,13 +56,14 @@ public class KioskController {
 
 	/**
 	 * 키오스크 리스트 조회
+	 * 
 	 * @return
 	 */
 	@GetMapping("/api/kiosk/list")
 	public ResponseEntity<KioskResponse> getList() {
 		KioskResponse response = new KioskResponse();
 		try {
-			List<KioskDto> list = new ArrayList<KioskDto>();
+			List<KioskDto> list = service.getList();
 			if (!list.isEmpty()) {
 				for (KioskDto dto : list) {
 					log.info("kiosk = {}", dto.toString());
@@ -82,6 +85,7 @@ public class KioskController {
 
 	/**
 	 * 키오스크 조회
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -106,9 +110,10 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 키오스크 삭제
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -138,6 +143,7 @@ public class KioskController {
 
 	/**
 	 * 키오스크 전원 켜기
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -165,9 +171,10 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 키오스크 전원 끄기
+	 * 
 	 * @param id
 	 * @return
 	 */
@@ -195,9 +202,10 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 키오스크 전체 전원 켜기
+	 * 
 	 * @return
 	 */
 	@PostMapping("/api/kiosk/turnOnAll")
@@ -224,9 +232,10 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 키오스크 전체 전원 끄기
+	 * 
 	 * @return
 	 */
 	@PostMapping("/api/kiosk/turnOffAll")
@@ -253,9 +262,10 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 	/**
 	 * 키오스크 위치 변경
+	 * 
 	 * @param dto
 	 * @return
 	 */
@@ -267,7 +277,7 @@ public class KioskController {
 			isSuccess = service.updateLocation(dto);
 			KioskDto changedDto = service.getKiosk(dto.getId());
 			if (isSuccess) {
-				log.info(dto.getId()+ "번 위치 " +dto.getLocation() + "로 바뀜");
+				log.info(dto.getId() + "번 위치 " + dto.getLocation() + "로 바뀜");
 				response.setDto(changedDto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);

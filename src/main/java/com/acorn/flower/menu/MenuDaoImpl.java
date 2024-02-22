@@ -19,7 +19,31 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public List<MenuDto> getList(MenuDto dto) {
-		
-		return null;
+		List<MenuDto> list = session.selectList("menu.getList",dto);
+		return list;
+	}
+
+	@Override
+	public MenuDto getMenu(int id) {
+		MenuDto dto = session.selectOne("menu.getMenu", id);
+		return dto;
+	}
+
+	@Override
+	public int update(MenuDto dto) {
+		int result=session.update("menu.update",dto);
+		return result;
+	}
+
+	@Override
+	public int delete(int id) {
+		int result= session.delete("menu.delete",id);
+		return result;
+	}
+
+	@Override
+	public MenuDto getLast() {
+		MenuDto dto=session.selectOne("menu.getLast");
+		return dto;
 	}
 }
