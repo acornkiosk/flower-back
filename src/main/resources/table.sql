@@ -53,10 +53,6 @@ CREATE TABLE menu
 	category_id	NUMBER NOT NULL
 );
 
-drop table menu;
-drop table Common;
->>>>>>> origin
-
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
 ALTER TABLE menu
 ADD FOREIGN KEY (category_id) REFERENCES COMMON(code_id);
