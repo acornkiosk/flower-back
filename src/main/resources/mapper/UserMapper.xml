@@ -1,33 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="user">
-	<update id="updateRank" parameterType="userDto">
-		UPDATE USER_MANAGE
-		SET password = #{password},
-			rank = #{rank},
-			role = #{role}
-		WHERE 
-	</update>
-	
-	<insert id="insertUser" parameterType="userDto">
-		INSERT INTO USER_MANAGE
-		(ID, PASSWORD, USERNAME, RANK, ROLE, REGDATE)
-		VALUES (seq_user_id.NEXTVAL, #{password}, #{userName), #{rank}, #{role}, #{regdate})
-	</insert>
-	
-	<delete id="deleteUser" parameterType="String">
-		DELETE FROM USER_MANAGE
-		WHERE id = #{id}, name = #{name}, RANK = #{rank}
-	</delete>
-	
-	<select id="getList" resultType="UserDto">
-		SELECT ID, NAME, RANK, ROLE, REGDATE
-		FROM USER_MANAGE
-	</select>
-	
-	<select id="getUser">
-		SELECT ID, NAME, RANK, ROLE, REGDATE
-		FROM USER_MANAGE
-		WHERE id = #{id}
-	</select>
-	
+</mapper>

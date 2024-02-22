@@ -7,6 +7,5 @@ public interface CommonService {
 	public boolean insertRow(CommonDto dto);
 	public boolean updateRow(CommonDto dto);
 	public boolean deleteRow(int code_id);
-	public CommonDto getRow(int code_id);
 
 }

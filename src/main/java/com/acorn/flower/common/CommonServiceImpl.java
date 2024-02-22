@@ -45,10 +45,4 @@ public class CommonServiceImpl implements CommonService {
 		return true;
 		
 	}
-
-	@Override
-	public CommonDto getRow(int code_id) {
-		CommonDto dto = dao.getRow(code_id);
-		return dto;
-	}
 }

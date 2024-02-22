@@ -35,12 +35,4 @@ public class CommonDaoImpl implements CommonDao {
 		int result = session.delete("common.delete", code_id);
 		return result;
 	}
-
-	@Override
-	public CommonDto getRow(int code_id) {
-		CommonDto dto = session.selectOne("common.getRow", code_id);
-		return dto;
-	}
-	
-
 }
