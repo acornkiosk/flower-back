@@ -36,15 +36,10 @@
 		WHERE CODE_ID = #{CODE_ID}
 	</update>
 	
-	<delete id="delete" parameterType="Int">
+	<delete id="delete" parameterType="int">
 		DELETE FROM common
 		WHERE CODE_ID = #{CODE_ID}
 	</delete>
-	
-	<select id="getRow">
-		SELECT CODE_ID, P_CODE_ID ,CODE_NAME ,CODE_VALUE, CODE_IMG
-		FROM common
-		WHERE CODE_ID = #{CODE_ID}
-	</select>
+
 	
 </mapper>
