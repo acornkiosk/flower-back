@@ -20,9 +20,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getUser(String id) {
         UserDto dto = dao.getUser(id);
-
-        if(dto == null) return null;
-
         return dto;
     }
 

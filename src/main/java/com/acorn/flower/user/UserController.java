@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- *  직원 관리
- *  @author "오영찬", "이준호"
+ *  user management
+ *  @author "Younchan Oh", "Junho Lee"
  *  @version 1.0.0
  *  @date 2024.02.17
  */
@@ -22,22 +22,11 @@ public class UserController {
     private UserService service;
 
     /**
-     * 직원관리 페이지로 이동
+     * list all members of user
      * @return
      */
-    @GetMapping("/api/owner/user/index")
-    public List<UserDto> userIndex(){
-        List<UserDto> list = service.getUserList();
-        return list;
-    }
-
-    /**
-     * 직원 리스트 조회
-     * @return
-     */
-    @GetMapping("/api/owner/user/list")
+    @GetMapping("/api/user/list")
     public ResponseEntity<UserResponse> getUserList() {
-        System.out.println("asdfsadfasdf");
         UserResponse response = new UserResponse();
         try {
             List<UserDto> list = service.getUserList();
@@ -61,15 +50,14 @@ public class UserController {
     }
 
     /**
-     * 직원 조회
+     * find a user by id
      * @param id
      * @return
      */
-    @PostMapping("/api/onwer/user/get")
+    @PostMapping("/api/user/get")
     public ResponseEntity<UserResponse> getUser(@RequestBody String id) {
         UserResponse response = new UserResponse();
         try {
-            int userId = Integer.parseInt(id);
             UserDto dto = service.getUser(id);
             if (dto != null) {
                 log.info("user = {}", dto.toString());
@@ -89,11 +77,11 @@ public class UserController {
     }
 
     /**
-     * 직원 삭제
+     * delete user, find a user by id
      * @param id
      * @return
      */
-    @PostMapping("/api/owner/user/delete")
+    @PostMapping("/api/user/delete")
     public ResponseEntity<UserResponse> userDelete(@RequestBody String id) {
         boolean isSuccess;
         UserResponse response = new UserResponse();
@@ -118,19 +106,20 @@ public class UserController {
     }
 
         /**
-         * 직원 추가
+         * create a new user, find a user by dto
          * @param dto
          * @return
          */
-        @PostMapping("/api/owner/user/add")
+        @PostMapping("/api/user/add")
         public ResponseEntity<UserResponse> userAdd(@RequestBody UserDto dto) {
             boolean isSuccess;
             UserResponse response = new UserResponse();
             try {
                 isSuccess = service.insert(dto);
+                UserDto insertedDto = service.getUser(dto.getId());
                 if (isSuccess) {
-                    log.info("user = {}", dto.toString());
-                    response.setDto(dto);
+                    log.info("user = {}", insertedDto.toString());
+                    response.setDto(insertedDto);
                     response.setStatus(HttpStatus.OK);
                     return new ResponseEntity<>(response, HttpStatus.OK);
                 } else {
@@ -147,19 +136,19 @@ public class UserController {
         }
 
     /**
-     * 직원 정보 수정
+     * update user, find a user by dto
      * @param dto
      * @return
      */
-    @PostMapping("/api/owner/user/update")
+    @PostMapping("/api/user/update")
     public ResponseEntity<UserResponse> userUpdate(@RequestBody UserDto dto) {
         UserResponse response = new UserResponse();
         try {
             boolean isSuccess = service.updateUser(dto);
             if (isSuccess) {
-                log.info(dto.getUserId() + "직원 정보가 변경 되었습니다.");
-                UserDto updateDto = service.getUser(dto.getUserId());
-                response.setDto(updateDto);
+                log.info(dto.getId() + "직원 정보가 변경 되었습니다.");
+                UserDto updatedDto = service.getUser(dto.getId());
+                response.setDto(updatedDto);
                 response.setStatus(HttpStatus.OK);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {

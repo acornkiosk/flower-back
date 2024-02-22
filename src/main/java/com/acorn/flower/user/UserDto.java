@@ -14,10 +14,9 @@ import org.springframework.http.HttpStatus;
 @NoArgsConstructor
 @Data
 public class UserDto {
-
+	private String userName;
 	private String id;
 	private String password;
-	private String userName;
 	private int rank;
 	private String role;
 	private String regdate;
