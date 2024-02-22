@@ -37,7 +37,7 @@
                 #{id},
                 #{password},
                 <if test="userName != null">
-                    #{userName},git
+                    #{userName},
                 </if>
                 #{rank},
                 '[4004]',
