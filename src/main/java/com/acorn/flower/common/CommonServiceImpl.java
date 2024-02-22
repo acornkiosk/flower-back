@@ -15,4 +15,40 @@ public class CommonServiceImpl implements CommonService {
 		List<CommonDto> list = dao.getChild(code_id);
 		return list;
 	}
+
+	@Override
+	public boolean insertRow(CommonDto dto) {
+		int result = dao.insert(dto);
+		
+		if(result != 1) return false;
+		
+		return true;
+		
+	}
+
+	@Override
+	public boolean updateRow(CommonDto dto) {
+		int result = dao.update(dto);
+		
+		if(result != 1) return false;
+		
+		return true;
+		
+	}
+
+	@Override
+	public boolean deleteRow(int code_id) {
+		int result = dao.delete(code_id);
+		
+		if(result != 1)return false;
+		
+		return true;
+		
+	}
+
+	@Override
+	public CommonDto getRow(int code_id) {
+		CommonDto dto = dao.getRow(code_id);
+		return dto;
+	}
 }
