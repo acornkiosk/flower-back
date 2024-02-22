@@ -40,4 +40,10 @@ public class MenuDaoImpl implements MenuDao {
 		int result= session.delete("menu.delete",id);
 		return result;
 	}
+
+	@Override
+	public MenuDto getLast() {
+		MenuDto dto=session.selectOne("menu.getLast");
+		return dto;
+	}
 }

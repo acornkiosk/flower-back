@@ -52,12 +52,24 @@ CREATE TABLE menu
 	is_sold	VARCHAR2(50) CHECK (is_sold IN ('true', 'false')) NOT NULL,
 	category_id	NUMBER NOT NULL
 );
-drop table menu;
-drop table Common;
 
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
 ALTER TABLE menu
 ADD FOREIGN KEY (category_id) REFERENCES COMMON(code_id);
+
+--사용자 테이블 생성
+CREATE TABLE USER_MANAGE (
+	ID VARCHAR2(100) PRIMARY KEY,
+	PASSWORD VARCHAR2(100) NOT NULL,
+	USERNAME VARCHAR2(100) NOT NULL,
+	RANK NUMBER NOT NULL,
+	ROLE VARCHAR2(100) NOT NULL,
+	REGDATE VARCHAR2(100) NOT NULL
+);
+
+--외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK) 사용)
+ALTER TABLE USER_MANAGE 
+ADD FOREIGN KEY (rank) REFERENCES COMMON(code_id);
 
 --공통 테이블 생성
 CREATE TABLE COMMON
