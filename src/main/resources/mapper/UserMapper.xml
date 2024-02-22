@@ -1,4 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="user">
+<mapper namespace="users">
+    <select id="getUserList" resultType="userDto">
+        SELECT ID ,PASSWORD , USERNAME ,RANK, ROLE, REGDATE
+        FROM USER_MANAGE
+    </select>
+
+    <select id="getUser" parameterType="String" resultType="userDto">
+        SELECT
+            ID,
+            PASSWORD ,
+            USERNAME ,
+            RANK,
+            ROLE,
+            REGDATE
+        FROM
+            USER_MANAGE
+        WHERE
+            ID = #{id}
+    </select>
+
+    <delete id="delete" parameterType="String">
+        DELETE
+        FROM
+            USER_MANAGE
+        WHERE
+            id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="userDto">
+        INSERT INTO USER_MANAGE
+            (
+                ID,
+                PASSWORD,
+                <if test="userName != null">
+                    USERNAME,
+                </if>
+                RANK,
+                ROLE,
+                REGDATE
+        )
+        VALUES
+            (
+                #{id},
+                #{password},
+                <if test="userName != null">
+                    #{userName},
+                </if>
+                #{rank},
+                '[4004]',
+               SYSDATE)
+    </insert>
+
+    <update id="update" parameterType="userDto">
+        UPDATE USER_MANAGE
+        SET
+            username = #{userName},
+            password = #{password},
+            RANK = #{rank},
+            ROLE = #{role}
+        WHERE
+            id = #{id}
+    </update>
+
 </mapper>
