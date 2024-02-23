@@ -39,10 +39,13 @@
 	
 	<!-- 전체 or 카테고리별 메뉴 리스트-->
    <select id="getList" parameterType="menuDto" resultType="menuDto">
-      SELECT id,name,price,img_name,summary,description,is_sold,category_id
-      FROM menu
+       SELECT m.id AS id, m.name AS name,m.price AS price,m.img_name AS img_name,
+		      m.summary AS summary,m.description as description, m.is_sold AS is_sold,
+		      m.category_id AS category_id,c.CODE_NAME AS category
+		      FROM menu m 
+		      JOIN common c ON m.CATEGORY_ID =c.CODE_ID 
       <if test="category_id != 0">
-	    WHERE category_id = #{category_id}
+	    WHERE m.category_id = #{category_id}
 	  </if>
    </select>
    
