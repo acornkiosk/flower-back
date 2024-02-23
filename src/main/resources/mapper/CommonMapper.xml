@@ -11,19 +11,19 @@
 	<insert id="insert" parameterType="commonDto">
 	    INSERT INTO common
 	    (
-	        code_id
-	        <if test="p_code_id != 0">, p_code_id</if>,
-	        code_name
-	        <if test="code_value != null">, code_value</if>
-	        <if test="code_img != null">, code_img</if>
+	        code_id, 
+	        p_code_id,
+	        code_name,
+	        code_value,
+	        code_img
 	    )
 	    VALUES
 	    (
-	        #{code_id}
-	        <if test="p_code_id != 0">, #{p_code_id},</if>
-	        #{code_name}
-	        <if test="code_value != null">, #{code_value},</if>
-	        <if test="code_img != null">, #{code_img},</if>
+	        #{code_id},
+	        #{p_code_id},
+	        #{code_name},
+	        #{code_value},
+	        #{code_img}
 	    )
 	</insert>
 
@@ -32,10 +32,10 @@
 	<update id="update" parameterType="commonDto">
 	    UPDATE common
 	    SET
-	    <if test="p_code_id != 0">p_code_id = #{p_code_id},</if>
-	    <if test="code_name != null">code_name = #{code_name},</if>
-	    <if test="code_value != null">code_value = #{code_value},</if>
-	    <if test="code_img != null">code_img = #{code_img}</if>
+	    	p_code_id = #{p_code_id},
+	    	code_name = #{code_name},
+	    	code_value = #{code_value},
+	    	code_img = #{code_img}
 	    WHERE code_id = #{code_id}
 	</update>
 
@@ -45,5 +45,12 @@
 		WHERE
 		code_id = #{code_id}
 	</delete>
+	
+	<select id="getCommon" parameterType="int" resultType="commonDto">
+		SELECT
+		CODE_ID ,P_CODE_ID ,CODE_NAME ,CODE_VALUE ,CODE_IMG
+		FROM COMMON
+		WHERE CODE_ID = #{code_id}
+	</select>
 
 </mapper>

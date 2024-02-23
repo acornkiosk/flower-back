@@ -77,7 +77,6 @@ public class CommonController {
 	   @PostMapping("/api/common/update")
 	   public ResponseEntity<CommonResponse> updateCommon(@RequestBody CommonDto dto){
 	      CommonResponse response = new CommonResponse();
-	      
 	      try {
 	         boolean isSuccess = service.updateRow(dto);
 	         if(isSuccess) {
@@ -100,12 +99,11 @@ public class CommonController {
 	   @PostMapping("/api/common/delete")
 	   public ResponseEntity<CommonResponse> deleteCommon(@RequestBody int code_id){
 	      CommonResponse response = new CommonResponse();
-	      
 	      try {
 	    	  CommonDto dto = service.getCommon(code_id);
 	         boolean isSuccess = service.deleteRow(code_id);
 	         if(isSuccess) {
-	            log.info("common = {}", code_id);
+	            log.info("common = {}", dto);
 	            response.setDto(dto);
 	            response.setStatus(HttpStatus.OK);
 	            return new ResponseEntity<CommonResponse>(response,HttpStatus.OK);

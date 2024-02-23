@@ -31,7 +31,7 @@ public class CommonServiceImpl implements CommonService {
 	public boolean updateRow(CommonDto dto) {
 		int result = dao.update(dto);
 		
-		if(result != 1) return false;
+		if(result == 0) return false;
 		
 		return true;
 		
@@ -50,8 +50,6 @@ public class CommonServiceImpl implements CommonService {
 	@Override
 	public CommonDto getCommon(int code_id) {
 		CommonDto dto = dao.getCommon(code_id);
-		
-		if(dto == null) return null;
 		
 		return dto;
 	}

@@ -40,6 +40,6 @@ public class CommonDaoImpl implements CommonDao {
 	@Override
 	public CommonDto getCommon(int code_id) {
 		CommonDto dto = session.selectOne("common.getCommon", code_id);
-		return null;
+		return dto;
 	}
 }
