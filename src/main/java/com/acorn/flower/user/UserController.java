@@ -189,7 +189,7 @@ public class UserController {
 		try {
 			//입력한 username 과 password 를 인증토큰 객체에 담아서 
 			UsernamePasswordAuthenticationToken authToken=
-					new UsernamePasswordAuthenticationToken(dto.getUserName(), dto.getPassword());	
+					new UsernamePasswordAuthenticationToken(dto.getId(), dto.getPassword());	
 			//인증 메니저 객체를 이용해서 인증을 진행한다 
 			authManager.authenticate(authToken);
 		}catch(Exception e) {
@@ -200,5 +200,10 @@ public class UserController {
 		//예외가 발생하지 않고 여기까지 실행 된다면 인증을 통과 한 것이다. 토큰을 발급해서 응답한다.
 		String token=jwtUtil.generateToken(dto.getUserName());
 		return token;
+	}
+	
+	@GetMapping("/ping")
+	public String ping() {
+		return "pong";
 	}
 }

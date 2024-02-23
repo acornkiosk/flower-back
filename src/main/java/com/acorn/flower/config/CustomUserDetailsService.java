@@ -13,21 +13,21 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-
+import com.acorn.flower.user.UserDao;
 import com.acorn.flower.user.UserDto;
-import com.acorn.flower.user.UserService;
+
 
 @Service //bean 으로 만들기 위해
 public class CustomUserDetailsService implements UserDetailsService{
 	@Autowired
-		private UserService service;
+		private UserDao dao;
 	
 	//Spring Security 가 로그인 처리시 호출하는 메소드 
 	@Override
 	public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
 		//2. UserDetails 객체에 해당정보를 담아서 리턴해 주어야 한다
 		
-		UserDto dto=service.getUser(id);
+		UserDto dto=dao.getUser(id);
 		
 		
 		//DB 비밀번호(1234) 이기때문에 아래 해시화 해야한다. test임 
