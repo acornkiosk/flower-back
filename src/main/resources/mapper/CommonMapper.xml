@@ -2,44 +2,55 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="common">
 	<select id="getChild" parameterType="int" resultType="commonDto">
-		SELECT CODE_ID ,P_CODE_ID ,CODE_NAME ,CODE_VALUE ,CODE_IMG 
-		FROM COMMON 
+		SELECT
+		CODE_ID ,P_CODE_ID ,CODE_NAME ,CODE_VALUE ,CODE_IMG
+		FROM COMMON
 		WHERE P_CODE_ID = #{code_id}
 	</select>
-	
+
 	<insert id="insert" parameterType="commonDto">
-		INSERT INTO common
-			(
-				CODE_ID ,
-				P_CODE_ID ,
-				CODE_NAME ,
-				CODE_VALUE,
-				CODE_IMG
-			)
-		VALUES
-			(
-				#{CODE_ID},
-				#{P_CODE_ID},
-				#{CODE_NAME},
-				#{CODE_VALUE},
-				#{CODE_IMG}
-			)
+	    INSERT INTO common
+	    (
+	        code_id, 
+	        p_code_id,
+	        code_name,
+	        code_value,
+	        code_img
+	    )
+	    VALUES
+	    (
+	        #{code_id},
+	        #{p_code_id},
+	        #{code_name},
+	        #{code_value},
+	        #{code_img}
+	    )
 	</insert>
-	
+
+
+
 	<update id="update" parameterType="commonDto">
-		UPDATE common
-		SET
-		 P_CODE_ID = #{P_CODE_ID}, 
-		 CODE_NAME = #{CODE_NAME}, 
-		 CODE_VALUE = #{CODE_VALUE}, 
-		 CODE_IMG = #{CODE_IMG}
-		WHERE CODE_ID = #{CODE_ID}
+	    UPDATE common
+	    SET
+	    	p_code_id = #{p_code_id},
+	    	code_name = #{code_name},
+	    	code_value = #{code_value},
+	    	code_img = #{code_img}
+	    WHERE code_id = #{code_id}
 	</update>
-	
+
+
 	<delete id="delete" parameterType="int">
 		DELETE FROM common
-		WHERE CODE_ID = #{CODE_ID}
+		WHERE
+		code_id = #{code_id}
 	</delete>
-
 	
+	<select id="getCommon" parameterType="int" resultType="commonDto">
+		SELECT
+		CODE_ID ,P_CODE_ID ,CODE_NAME ,CODE_VALUE ,CODE_IMG
+		FROM COMMON
+		WHERE CODE_ID = #{code_id}
+	</select>
+
 </mapper>
