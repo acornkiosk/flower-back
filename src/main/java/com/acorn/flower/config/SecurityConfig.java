@@ -1,5 +1,7 @@
 package com.acorn.flower.config;
 
+
+import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
+import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import com.acorn.flower.jwt.JwtFilter;
 
 @Configuration // 설정 클래스라고 알려준다
@@ -26,6 +29,9 @@ public class SecurityConfig {
 		
 		@Autowired
 		private JwtFilter jwtFilter;
+		
+		@Autowired
+		private DataSource dataSource;
 		
 	@Bean // 메소드에서 리턴되는 SecurityFilterChain 을 bean 으로 만들어준다.
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
@@ -65,4 +71,12 @@ public class SecurityConfig {
 			return http.getSharedObject(AuthenticationManagerBuilder.class).userDetailsService(userDetailService)
 					.passwordEncoder(bCryptPasswordEncoder).and().build();	
 		}
+		
+		@Bean
+		public PersistentTokenRepository persitstentTokenRepository() {
+			JdbcTokenRepositoryImpl repo=new JdbcTokenRepositoryImpl(); //사용자의 로그인 토큰을 저장하고 관리하는 인터페이스(Security에서 제공해준다)
+			repo.setDataSource(dataSource); //매소드를 통해 yml에 설정한 db와 연동
+			return repo;
+		}
 }
+

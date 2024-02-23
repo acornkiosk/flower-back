@@ -3,9 +3,10 @@ package com.acorn.flower;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.PropertySource;
-@PropertySource("classpath:application.yml")
-@PropertySource(value="classpath:custom.properties")
 
+//custom.properties 파일 로딩하도록 설정
+@PropertySource("classpath:application.yml")
+@PropertySource(value = "classpath:custom.properties")
 @SpringBootApplication
 public class FlowerApplication {
 
