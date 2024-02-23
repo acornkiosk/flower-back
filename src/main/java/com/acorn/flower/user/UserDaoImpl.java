@@ -1,43 +1,44 @@
 package com.acorn.flower.user;
+
 import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-//dao 는 @Repository 라는 어노테이션을 이용해서 bean 으로 만든다 
 @Repository
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl implements UserDao {
+
 	@Autowired
 	private SqlSession session;
 
 	@Override
-	public void insert(UserDto dto) {
-		session.insert("user.insert", dto);
-		
-	}
-
-	@Override
-	public void update(UserDto dto) {
-		session.update("user.update", dto);
-		
-	}
-
-	@Override
-	public void delete(String id) {
-		session.delete("user.delete", id);
-		
+	public List<UserDto> getUserList() {
+		List<UserDto> list = session.selectList("users.getUserList");
+		return list;
 	}
 
 	@Override
 	public UserDto getUser(String id) {
-		return session.selectOne("user.getUser", id);
+		UserDto dto = session.selectOne("users.getUser", id);
+		return dto;
 	}
 
 	@Override
-	public List<UserDto> getUserList() {
-		return session.selectList("user.getUserList");
+	public int delete(String id) {
+		int result = session.delete("users.delete", id);
+		return result;
 	}
-	
-	
 
+	@Override
+	public int insert(UserDto dto) {
+		int result = session.insert("users.insert", dto);
+		return result;
+	}
+
+	@Override
+	public int update(UserDto dto) {
+		int result = session.update("users.update", dto);
+		return result;
+	}
 }
