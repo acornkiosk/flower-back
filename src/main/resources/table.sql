@@ -59,6 +59,7 @@ drop table Common;
 ALTER TABLE menu
 ADD FOREIGN KEY (category_id) REFERENCES COMMON(code_id);
 
+
 --공통 테이블 생성
 CREATE TABLE COMMON
 (
