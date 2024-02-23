@@ -46,8 +46,7 @@
 * 협업 툴 : Notion  
 
 ## 테이블 설계
-![flowerDB](https://github.com/acornkiosk/flower_back/assets/94777814/325cb73e-2d07-403f-bf19-ccf7ecc0e662)
-
+![flowerDB](https://github.com/acornkiosk/Flower_back/assets/94777814/cc380112-85fa-40b6-9dc2-4ae849308a3c)
 
 ## API 설계
 
