@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -155,10 +158,10 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu")
-	public ResponseEntity<MenuResponse> addMenu(@RequestBody MenuDto dto) {
+	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute MenuDto dto) { 
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
-	
+		System.out.println(dto);
 		try {
 			isSuccess = menuService.insert(dto);
 			MenuDto insertDto= menuService.getLast();
