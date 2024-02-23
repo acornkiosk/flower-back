@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.acorn.flower.common.CommonService;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -19,7 +21,8 @@ import lombok.extern.slf4j.Slf4j;
 public class MenuController {
 	@Autowired
 	private MenuService menuService;
-	
+	@Autowired
+	private CommonService commonService;
 	/**
 	 * 메뉴 수정
 	 * 
