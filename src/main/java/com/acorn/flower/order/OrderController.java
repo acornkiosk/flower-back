@@ -23,7 +23,7 @@ public class OrderController {
 	private OrderService service;
 
 	/**
-	 * 주문 추가
+	 * 주문 추가 body : order dto
 	 * @param dto
 	 * @return
 	 */
@@ -53,7 +53,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 단일 주문 조회
+	 * 단일 주문 조회 body : order id
 	 * @param id
 	 * @return
 	 */
@@ -81,7 +81,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 주문번호 주문 리스트 조회
+	 * 주문번호 주문 리스트 조회 body order order_id
 	 * @param order_id
 	 * @return
 	 */
@@ -112,7 +112,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 전체 주문 리스트 조회
+	 * 전체 주문 리스트 조회 param x
 	 * @return
 	 */
 	@GetMapping("/api/order/list")
@@ -142,7 +142,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 전체 주문 삭제 
+	 * 전체 주문 삭제 body : order order_id
 	 * @param order_id
 	 * @return
 	 */
@@ -172,7 +172,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 단일 주문 삭제
+	 * 단일 주문 삭제 body : order id
 	 * @param id
 	 * @return
 	 */
@@ -202,7 +202,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 주문 정보 수정
+	 * 주문 정보 수정 body order dto
 	 * @param dto
 	 * @return
 	 */
