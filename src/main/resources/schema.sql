@@ -9,21 +9,16 @@ CREATE TABLE kiosk
 -- 키오스크 id 시퀀스 생성
 CREATE SEQUENCE seq_kiosk_id;
 
--- 주문 테이블 생성 
-CREATE TABLE CART
+--주문 테이블 생성
+CREATE TABLE cart
 (
-	order_id NUMBER NOT NULL, --전체 주문 id
-	id NUMBER PRIMARY KEY, -- 단일 주문 id 
+	id NUMBER NOT NULL, --주문 id
 	kiosk_id NUMBER NOT NULL, -- 키오스크 id
 	menu_name VARCHAR2(100) NOT NULL, --메뉴 이름
 	menu_price NUMBER NOT NULL, --메뉴 가격
 	menu_count NUMBER NOT NULL, -- 메뉴 갯수
-	OPTIONS VARCHAR2(500), -- 메뉴 옵션
-	regdate DATE -- 주문등록 시간
+	OPTIONS VARCHAR2(500) -- 메뉴 옵션
 );
-
--- 단일 주문 id 시퀀스 생성
-CREATE SEQUENCE seq_order_id;
 
 -- 주문 테이블 id 전용 테이블 생성
 CREATE TABLE cart_id
@@ -53,23 +48,10 @@ CREATE TABLE menu
 	category_id	NUMBER NOT NULL
 );
 
+
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
 ALTER TABLE menu
 ADD FOREIGN KEY (category_id) REFERENCES COMMON(code_id);
-
---사용자 테이블 생성
-CREATE TABLE USER_MANAGE (
-	ID VARCHAR2(100) PRIMARY KEY,
-	PASSWORD VARCHAR2(100) NOT NULL,
-	USERNAME VARCHAR2(100) NOT NULL,
-	RANK NUMBER NOT NULL,
-	ROLE VARCHAR2(100) NOT NULL,
-	REGDATE VARCHAR2(100) NOT NULL
-);
-
---외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK) 사용)
-ALTER TABLE USER_MANAGE 
-ADD FOREIGN KEY (rank) REFERENCES COMMON(code_id);
 
 --공통 테이블 생성
 CREATE TABLE COMMON

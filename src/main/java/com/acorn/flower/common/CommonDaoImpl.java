@@ -17,4 +17,22 @@ public class CommonDaoImpl implements CommonDao {
 		return list;
 	}
 
+	@Override
+	public int insert(CommonDto dto) {
+		int result = session.insert("common.insert", dto);
+		return result;
+		
+	}
+
+	@Override
+	public int update(CommonDto dto) {
+		int result = session.update("common.update", dto);
+		return result;
+	}
+
+	@Override
+	public int delete(int code_id) {
+		int result = session.delete("common.delete", code_id);
+		return result;
+	}
 }
