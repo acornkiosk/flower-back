@@ -11,7 +11,7 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>0</x>
+	<x>20</x>
 	<y>0</y>
 	<default_color>
 		<r>255</r>
@@ -89,7 +89,7 @@
 				<is_open_after_saved>true</is_open_after_saved>
 			</export_html_setting>
 			<export_image_setting>
-				<output_file_path></output_file_path>
+				<output_file_path>flowerDB.png</output_file_path>
 				<category_dir_path></category_dir_path>
 				<with_category_image>true</with_category_image>
 				<is_open_after_saved>true</is_open_after_saved>
@@ -135,7 +135,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2024-02-19 14:29:38</creation_date>
-			<updated_date>2024-02-23 09:36:27</updated_date>
+			<updated_date>2024-02-23 10:00:27</updated_date>
 			<model_property>
 				<name>프로젝트명</name>
 				<value></value>
@@ -1786,8 +1786,25 @@
 				<schema>SCOTT</schema>
 			</table_properties>
 		</table>
-		<table>
+		<note>
 			<id>5</id>
+			<height>45</height>
+			<width>190</width>
+				<font_name>맑은 고딕</font_name>
+				<font_size>9</font_size>
+			<x>1212</x>
+			<y>528</y>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+			<connections>
+			</connections>
+			<text>전체 주문 번호를 위한 테이블</text>
+		</note>
+		<table>
+			<id>6</id>
 			<height>65</height>
 			<width>107</width>
 				<font_name>맑은 고딕</font_name>
@@ -1800,6 +1817,20 @@
 				<b>192</b>
 			</color>
 			<connections>
+				<comment_connection>
+					<id>3</id>
+					<source>5</source>
+					<target>6</target>
+						<source_xp>-1</source_xp>
+						<source_yp>-1</source_yp>
+						<target_xp>-1</target_xp>
+						<target_yp>-1</target_yp>
+						<color>
+							<r>0</r>
+							<g>0</g>
+							<b>0</b>
+						</color>
+				</comment_connection>
 			</connections>
 			<physical_name>CART_ID</physical_name>
 			<logical_name>CART_ID</logical_name>

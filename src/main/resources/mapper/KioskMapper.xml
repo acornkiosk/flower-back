@@ -9,6 +9,7 @@
 	<select id="getList" resultType="kioskDto">
 		SELECT ID , LOCATION , POWER 
 		FROM KIOSK 
+		ORDER BY ID ASC 
 	</select>
 	
 	<select id="getKiosk" parameterType="int" resultType="kioskDto">

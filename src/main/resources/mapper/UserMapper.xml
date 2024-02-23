@@ -25,9 +25,7 @@
             (
                 ID,
                 PASSWORD,
-                <if test="userName != null">
-                    USERNAME,
-                </if>
+                USERNAME,
                 RANK,
                 ROLE,
                 REGDATE
@@ -36,9 +34,7 @@
             (
                 #{id},
                 #{password},
-                <if test="userName != null">
-                    #{userName},
-                </if>
+                #{userName},
                 #{rank},
                 '[4004]',
                 SYSDATE
@@ -56,8 +52,6 @@
     <update id="update" parameterType="userDto">
         UPDATE USER_MANAGE
         SET
-            username = #{userName},
-            password = #{password},
             RANK = #{rank},
             ROLE = #{role}
         WHERE
