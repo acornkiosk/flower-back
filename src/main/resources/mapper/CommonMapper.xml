@@ -45,6 +45,7 @@
 		WHERE
 		code_id = #{code_id}
 	</delete>
+
 	
 	<select id="getCommon" parameterType="int" resultType="commonDto">
 		SELECT
