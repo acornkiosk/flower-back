@@ -9,12 +9,23 @@
 	<select id="getList" resultType="kioskDto">
 		SELECT ID , LOCATION , POWER 
 		FROM KIOSK 
+		ORDER BY ID ASC 
 	</select>
 	
 	<select id="getKiosk" parameterType="int" resultType="kioskDto">
 		SELECT ID , LOCATION , POWER
 		FROM KIOSK
 		WHERE id = #{id}
+	</select>
+	
+	<select id="getLast" resultType="kioskDto">
+		SELECT ID, LOCATION, POWER
+			FROM (
+				SELECT ID ,LOCATION ,POWER 
+				FROM KIOSK 	
+				ORDER BY id desc
+			)
+		WHERE ROWNUM = 1
 	</select>
 	
 	<delete id="delete" parameterType="int">

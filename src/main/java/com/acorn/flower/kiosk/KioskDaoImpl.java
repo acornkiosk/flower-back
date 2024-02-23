@@ -36,6 +36,12 @@ public class KioskDaoImpl implements KioskDao {
 		KioskDto dto = session.selectOne("kiosk.getKiosk", id);
 		return dto;
 	}
+	
+	@Override
+	public KioskDto getLast() {
+		KioskDto dto = session.selectOne("kiosk.getLast");
+		return dto;
+	}
 
 	@Override
 	public int turnOn(int id) {
