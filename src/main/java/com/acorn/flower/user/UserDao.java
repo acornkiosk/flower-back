@@ -1,5 +1,4 @@
 package com.acorn.flower.user;
-
 import java.util.List;
 
 public interface UserDao {
@@ -9,3 +8,4 @@ public interface UserDao {
     public int delete(String id);
     public int update(UserDto dto);
 }
+

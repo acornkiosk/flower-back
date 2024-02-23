@@ -4,9 +4,11 @@ import lombok.Builder;
 import org.apache.ibatis.type.Alias;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.http.HttpStatus;
+
 
 @Alias("userDto")
 @Builder
@@ -21,3 +23,4 @@ public class UserDto {
 	private String role;
 	private String regdate;
 }
+
