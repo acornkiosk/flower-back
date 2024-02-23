@@ -18,6 +18,7 @@ public class CommonServiceImpl implements CommonService {
 
 	@Override
 	public boolean insertRow(CommonDto dto) {
+		System.out.println(dto);
 		int result = dao.insert(dto);
 		
 		if(result != 1) return false;
@@ -40,9 +41,18 @@ public class CommonServiceImpl implements CommonService {
 	public boolean deleteRow(int code_id) {
 		int result = dao.delete(code_id);
 		
-		if(result != 1)return false;
+		if(result != 1) return false;
 		
 		return true;
 		
+	}
+
+	@Override
+	public CommonDto getCommon(int code_id) {
+		CommonDto dto = dao.getCommon(code_id);
+		
+		if(dto == null) return null;
+		
+		return dto;
 	}
 }

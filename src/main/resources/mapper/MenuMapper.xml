@@ -5,8 +5,26 @@
 	<!-- 등록 -->
    <insert id="insert" parameterType="menuDto">
       INSERT INTO menu
-      (id,name,price <if test="img_name != null">,img_name</if>,summary,description,is_sold,category_id)
-      VALUES(seq_menu_id.NEXTVAL,#{name},#{price}<if test="img_name != null">,#{img_name}</if>,#{summary},#{description},'false',#{category_id})
+      (
+      	id,
+      	name,
+      	price 
+      	<if test="img_name != null">,img_name</if>,
+      	summary,
+      	description,
+      	is_sold,
+      	category_id
+      )
+      VALUES
+      (
+      seq_menu_id.NEXTVAL,
+      #{name},
+      #{price}
+      <if test="img_name != null">,#{img_name}</if>,
+      #{summary},
+      #{description},
+      'false',
+      #{category_id})
    </insert>
    
    <!-- 마지막꺼 가져오기 -->

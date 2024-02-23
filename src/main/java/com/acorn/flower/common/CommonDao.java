@@ -10,4 +10,6 @@ public interface CommonDao {
 	public int update(CommonDto dto);
 
 	public int delete(int code_id);
+	
+	public CommonDto getCommon(int code_id);
 }
