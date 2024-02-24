@@ -22,36 +22,20 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderDto getOrder(int id) {
-		OrderDto dto = dao.getOrder(id);
-		return dto;
+	public OrderDto getOrder(OrderDto dto) {
+		OrderDto result = dao.getOrder(dto);
+		return result;
 	}
 
 	@Override
-	public List<OrderDto> getOrders(int order_id) {
-		List<OrderDto> list = dao.getOrders(order_id);
+	public List<OrderDto> getOrders(OrderDto dto) {
+		List<OrderDto> list = dao.getOrders(dto);
 		return list;
 	}
 
 	@Override
-	public List<OrderDto> getAllOrders() {
-		List<OrderDto> list = dao.getAllOrders();
-		return list;
-	}
-
-	@Override
-	public boolean deleteAll(int order_id) {
-		int result = dao.deleteAll(order_id);
-
-		if (result == 0)
-			return false;
-
-		return true;
-	}
-
-	@Override
-	public boolean delete(int id) {
-		int result = dao.delete(id);
+	public boolean delete(OrderDto dto) {
+		int result = dao.delete(dto);
 
 		if (result == 0)
 			return false;

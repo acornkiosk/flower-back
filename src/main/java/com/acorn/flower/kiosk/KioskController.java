@@ -37,7 +37,7 @@ public class KioskController {
 			isSuccess = service.insert(dto);
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
-				//최근 추가한 dto를 얻어오는 로직 작성
+				// 최근 추가한 dto를 얻어오는 로직 작성
 				response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
@@ -155,7 +155,7 @@ public class KioskController {
 			isSuccess = service.update(dto);
 			KioskDto changedDto = service.getKiosk(dto);
 			if (isSuccess) {
-				log.info("kioskDto = {}",dto);
+				log.info("kioskDto = {}", dto);
 				response.setDto(changedDto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
