@@ -64,17 +64,17 @@ public class UserController {
      * @return
      */
     @PostMapping("/api/user/get")
-    public ResponseEntity<UserResponse> getUser(@RequestBody String id) {
+    public ResponseEntity<UserResponse> getUser(@RequestBody UserDto dto) {
         UserResponse response = new UserResponse();
         try {
-            UserDto dto = service.getUser(id);
-            if (dto != null) {
-                log.info("user = {}", dto.toString());
-                response.setDto(dto);
+            UserDto result = service.getUser(dto.getId());
+            if (result != null) {
+                log.info("user = {}", result.toString());
+                response.setDto(result);
                 response.setStatus(HttpStatus.OK);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
-                log.error(id + "번 직원은 없습니다.");
+                log.error(dto.getId() + "번 직원은 없습니다.");
                 response.setStatus(HttpStatus.BAD_REQUEST);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
@@ -121,19 +121,19 @@ public class UserController {
      * @return
      */
     @PostMapping("/api/user/delete")
-    public ResponseEntity<UserResponse> userDelete(@RequestBody String id) {
+    public ResponseEntity<UserResponse> userDelete(@RequestBody UserDto dto) {
         boolean isSuccess;
         UserResponse response = new UserResponse();
         try {
-            UserDto dto = service.getUser(id);
-            isSuccess = service.delete(id);
+            UserDto result = service.getUser(dto.getId());
+            isSuccess = service.delete(dto);
             if (isSuccess) {
-                log.info(id + "번 삭제되었습니다.");
-                response.setDto(dto);
+                log.info(dto.getId() + "번 삭제되었습니다.");
+                response.setDto(result);
                 response.setStatus(HttpStatus.OK);
                 return new ResponseEntity<>(response, HttpStatus.OK);
             } else {
-                log.error(id + "번은 없는 데이터입니다.");
+                log.error(dto.getId() + "번은 없는 데이터입니다.");
                 response.setStatus(HttpStatus.BAD_REQUEST);
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }

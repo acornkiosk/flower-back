@@ -12,8 +12,8 @@ public class CommonDaoImpl implements CommonDao {
 	private SqlSession session;
 	
 	@Override
-	public List<CommonDto> getChild(int code_id) {
-		List<CommonDto> list = session.selectList("common.getChild",code_id);
+	public List<CommonDto> getChild(CommonDto dto) {
+		List<CommonDto> list = session.selectList("common.getChild",dto);
 		return list;
 	}
 
@@ -32,14 +32,14 @@ public class CommonDaoImpl implements CommonDao {
 	}
 
 	@Override
-	public int delete(int code_id) {
-		int result = session.delete("common.delete", code_id);
+	public int delete(CommonDto dto) {
+		int result = session.delete("common.delete", dto);
 		return result;
 	}
 
 	@Override
-	public CommonDto getCommon(int code_id) {
-		CommonDto dto = session.selectOne("common.getCommon", code_id);
-		return dto;
+	public CommonDto getCommon(CommonDto dto) {
+		CommonDto dto2 = session.selectOne("common.getCommon", dto);
+		return dto2;
 	}
 }

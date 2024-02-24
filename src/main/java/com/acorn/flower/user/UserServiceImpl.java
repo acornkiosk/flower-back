@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto getUser(String id) {
+    public UserDto getUser(String id) { // UserDetails 때문에 유일하게 dto 안함 
         UserDto dto = dao.getUser(id);
         return dto;
     }
@@ -33,8 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(String id) {
-        int result = dao.delete(id);
+    public boolean delete(UserDto dto) {
+        int result = dao.delete(dto);
 
         if(result != 1) return false;
 
