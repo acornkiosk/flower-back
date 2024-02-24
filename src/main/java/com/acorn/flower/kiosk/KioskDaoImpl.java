@@ -39,10 +39,8 @@ public class KioskDaoImpl implements KioskDao {
 
 	@Override
 	public int update(KioskDto dto) {
-		int result = session.update("kiosk.update",dto);
+		int result = session.update("kiosk.update", dto);
 		return result;
 	}
-	
-	
 
 }

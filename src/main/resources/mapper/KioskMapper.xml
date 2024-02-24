@@ -33,8 +33,12 @@
 	</delete>
 	
 	<update id="update" parameterType="kioskDto">
-		UPDATE KIOSK
-		SET LOCATION = #{location}, POWER = #{power}
-		WHERE id = #{id}
+		UPDATE 
+			KIOSK
+		SET 
+			LOCATION = #{location}
+			,POWER = #{power}
+		WHERE
+			id = #{id}
 	</update>
 </mapper>
