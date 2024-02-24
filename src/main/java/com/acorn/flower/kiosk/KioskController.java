@@ -35,10 +35,12 @@ public class KioskController {
 		try {
 			dto.setPower("off");
 			isSuccess = service.insert(dto);
+			List<KioskDto> list = service.getList();
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
 				// 최근 추가한 dto를 얻어오는 로직 작성
 				response.setDto(dto);
+				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -93,10 +95,10 @@ public class KioskController {
 	public ResponseEntity<KioskResponse> getKiosk(@RequestBody KioskDto dto) {
 		KioskResponse response = new KioskResponse();
 		try {
-			KioskDto reulst = service.getKiosk(dto);
+			KioskDto result = service.getKiosk(dto);
 			if (dto != null) {
-				log.info("kiosk = {}", reulst.toString());
-				response.setDto(reulst);
+				log.info("kiosk = {}", result.toString());
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
