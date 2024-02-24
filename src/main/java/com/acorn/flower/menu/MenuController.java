@@ -30,7 +30,7 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu/update")
-	public ResponseEntity<MenuResponse> updateMenu(@ModelAttribute MenuDto dto) {
+	public ResponseEntity<MenuResponse> updateMenu(@RequestBody MenuDto dto) {
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
 		try {
