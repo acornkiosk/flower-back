@@ -166,6 +166,7 @@ public class MenuController {
 		try {
 			isSuccess = menuService.insert(dto);
 		
+			
 			if (isSuccess) {
 				
 				log.info("menu = {}", dto.toString());
