@@ -144,7 +144,7 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 위치 변경 body: kiosk id, location, power
+	 * 키오스크 정보 변경 body: kiosk id, location, power
 	 * 
 	 * @param dto
 	 * @return
