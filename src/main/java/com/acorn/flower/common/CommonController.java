@@ -27,13 +27,13 @@ public class CommonController {
 	 * @return
 	 */
 	@PostMapping("/api/common/child")
-	public ResponseEntity<CommonResponse> getChild(@RequestBody int code_id) {
+	public ResponseEntity<CommonResponse> getChild(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
 		try {
-			List<CommonDto> list = service.getChild(code_id);
+			List<CommonDto> list = service.getChild(dto);
 			if (!list.isEmpty()) {
-				for (CommonDto dto : list) {
-					log.info("category = {}", dto.toString());
+				for (CommonDto dto2 : list) {
+					log.info("category = {}", dto2.toString());
 				}
 				response.setList(list);
 				response.setStatus(HttpStatus.OK);
@@ -57,17 +57,17 @@ public class CommonController {
 	 * @return
 	 */
 	@PostMapping("/api/common/get")
-	public ResponseEntity<CommonResponse> getCommon(@RequestBody int code_id) {
+	public ResponseEntity<CommonResponse> getCommon(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
 		try {
-			CommonDto dto = service.getCommon(code_id);
-			if (dto != null) {
-				log.info("category = {}", dto.toString());
-				response.setDto(dto);
+			CommonDto dto2 = service.getCommon(dto);
+			if (dto2 != null) {
+				log.info("category = {}", dto2.toString());
+				response.setDto(dto2);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error(code_id + "번 데이터가 없습니다");		
+				log.error(dto.getCode_id() + "번 데이터가 없습니다");		
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -126,14 +126,14 @@ public class CommonController {
 	}
 
 	@PostMapping("/api/common/delete")
-	public ResponseEntity<CommonResponse> deleteCommon(@RequestBody int code_id) {
+	public ResponseEntity<CommonResponse> deleteCommon(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
 		try {
-			CommonDto dto = service.getCommon(code_id);
-			boolean isSuccess = service.deleteRow(code_id);
+			CommonDto dto2 = service.getCommon(dto);
+			boolean isSuccess = service.deleteRow(dto);
 			if (isSuccess) {
-				log.info("common = {}", dto);
-				response.setDto(dto);
+				log.info("common = {}", dto2);
+				response.setDto(dto2);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<CommonResponse>(response, HttpStatus.OK);
 			} else {

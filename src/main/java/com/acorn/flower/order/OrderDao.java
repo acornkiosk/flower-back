@@ -9,6 +9,10 @@ public interface OrderDao {
 
 	public List<OrderDto> getOrders(OrderDto dto);
 
+	public List<OrderDto> getAllOrders();
+
+	public int deleteAll(OrderDto dto);
+
 	public int delete(OrderDto dto);
 
 	public int update(OrderDto dto);

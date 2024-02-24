@@ -26,31 +26,15 @@
 		)
 	</insert>
 
-	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
-		SELECT 
-			ORDER_ID
-			,ID
-			,KIOSK_ID
-			,MENU_NAME
-			,MENU_PRICE
-			,MENU_COUNT
-			,OPTIONS
-			,REGDATE
-		FROM 
-			CART
-		WHERE 
-			ID = #{id}
-	</select>
-	
 	<select id="getOrders" parameterType="orderDto" resultType="orderDto">
 		SELECT 
-			ORDER_ID
-			,ID
-			,KIOSK_ID
-			,MENU_NAME
-			,MENU_PRICE
-			,MENU_COUNT
-			,OPTIONS
+			ORDER_ID 
+			,ID 
+			,KIOSK_ID 
+			,MENU_NAME 
+			,MENU_PRICE 
+			,MENU_COUNT 
+			,OPTIONS 
 			,REGDATE
 		FROM 
 			CART
@@ -60,8 +44,48 @@
 		</if>
 	</select>
 	
+	<select id="getAllOrders" resultType="orderDto">
+		SELECT
+			ORDER_ID
+			,ID 
+			,KIOSK_ID 
+			,MENU_NAME 
+			,MENU_PRICE 
+			,MENU_COUNT 
+			,OPTIONS 
+			,REGDATE
+		FROM 
+			CART
+		WHERE 
+			ID = #{id}
+	</select>
+	
+	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
+		SELECT 
+			ORDER_ID 
+			,ID 
+			,KIOSK_ID 
+			,MENU_NAME 
+			,MENU_PRICE 
+			,MENU_COUNT 
+			,OPTIONS 
+			,REGDATE 
+		FROM 
+			CART 
+		WHERE ID = #{id}
+	</select>
+	
+	<delete id="deleteAll" parameterType="orderDto">
+		DELETE 
+		FROM 
+			CART
+		WHERE ORDER_ID = #{order_id}	
+	</delete>
+	
 	<delete id="delete" parameterType="orderDto">
-		DELETE FROM CART
+		DELETE 
+		FROM 
+			CART
 		WHERE id= #{id}
 	</delete>
 	

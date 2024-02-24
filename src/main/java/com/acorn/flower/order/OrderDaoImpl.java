@@ -31,6 +31,18 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
+	public List<OrderDto> getAllOrders() {
+		List<OrderDto> list = session.selectList("order.getAllOrders");
+		return list;
+	}
+
+	@Override
+	public int deleteAll(OrderDto dto) {
+		int result = session.delete("order.deleteAll", dto);
+		return result;
+	}
+
+	@Override
 	public int delete(OrderDto dto) {
 		int result = session.delete("order.delete", dto);
 		return result;

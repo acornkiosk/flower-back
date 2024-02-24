@@ -95,10 +95,10 @@ public class KioskController {
 	public ResponseEntity<KioskResponse> getKiosk(@RequestBody KioskDto dto) {
 		KioskResponse response = new KioskResponse();
 		try {
-			KioskDto reulst = service.getKiosk(dto);
+			KioskDto result = service.getKiosk(dto);
 			if (dto != null) {
-				log.info("kiosk = {}", reulst.toString());
-				response.setDto(reulst);
+				log.info("kiosk = {}", result.toString());
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {

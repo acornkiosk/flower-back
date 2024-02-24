@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="menu">
+
+	<!-- 등록 -->
+   <insert id="insert" parameterType="menuDto">
+      INSERT INTO menu
+      (
+      	id,
+      	name,
+      	price 
+      	<if test="img_name != null">,img_name</if>,
+      	summary,
+      	description,
+      	is_sold,
+      	category_id
+      )
+      VALUES
+      (
+      seq_menu_id.NEXTVAL,
+      #{name},
+      #{price}
+      <if test="img_name != null">,#{img_name}</if>,
+      #{summary},
+      #{description},
+      'false',
+      #{category_id})
+   </insert>
+   
+   <!-- 마지막꺼 가져오기 -->
+	<select id="getLast" resultType="menuDto">
+		SELECT *
+		FROM
+			(SELECT  *
+			FROM menu
+			ORDER BY id DESC) 
+		WHERE ROWNUM=1
+	</select>
+	
+	<!-- 전체 or 카테고리별 메뉴 리스트-->
+   <select id="getList" parameterType="menuDto" resultType="menuDto">
+       SELECT m.id AS id, m.name AS name,m.price AS price,m.img_name AS img_name,
+		      m.summary AS summary,m.description as description, m.is_sold AS is_sold,
+		      m.category_id AS category_id,c.CODE_NAME AS category
+		      FROM menu m 
+		      JOIN common c ON m.CATEGORY_ID =c.CODE_ID 
+      <if test="category_id != 0">
+	    WHERE m.category_id = #{category_id}
+	  </if>
+   </select>
+   
+   <select id="getMenu" parameterType="int" resultType="menuDto">
+   	  SELECT
+		  m.ID AS id,
+		  m.NAME AS name,
+		  m.PRICE AS price,
+		  m.IMG_NAME AS img_name,
+		  m.SUMMARY AS summary ,
+		  m.DESCRIPTION AS description, 
+		  m.IS_SOLD AS is_sold,
+		  m.CATEGORY_ID AS category_id,
+		  c.CODE_NAME AS category
+	  FROM
+		  menu m
+	  JOIN common c ON
+		  m.CATEGORY_ID = c.CODE_ID
+	  WHERE
+		  m.id = #{id}
+   	  
+   </select>
+   
+   <update id="update" parameterType="menuDto">
+   	  UPDATE 
+   	      menu 
+   	  SET 
+   	  	  name=#{name}, 
+   	 	  price=#{price}, 
+   	 	  <if test="img_name != null">img_name=#{img_name},</if>
+   	  	  summary=#{summary}, 
+   	  	  description=#{description},
+   	  	  is_sold=#{is_sold},
+   	  	  category_id=#{category_id}
+   	  WHERE 
+   	  	  id=#{id}
+   	 
+   </update>
+   
+   <delete id="delete" parameterType="int">
+   	  DELETE 
+   	  FROM 
+   	  		menu
+   	  WHERE 
+   	  		id=#{id} 
+   </delete>
+   
+   
+   
+   
+  
+
+</mapper>
