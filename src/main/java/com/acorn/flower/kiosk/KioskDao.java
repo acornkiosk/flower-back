@@ -7,19 +7,9 @@ public interface KioskDao {
 
 	public List<KioskDto> getList();
 
-	public KioskDto getKiosk(int id);
+	public KioskDto getKiosk(KioskDto dto);
 
-	public KioskDto getLast();
+	public int delete(KioskDto dto);
 
-	public int delete(int id);
-
-	public int turnOn(int id);
-
-	public int turnOff(int id);
-
-	public int turnOnAll();
-
-	public int turnOffAll();
-
-	public int updateLocation(KioskDto dto);
+	public int update(KioskDto dto);
 }

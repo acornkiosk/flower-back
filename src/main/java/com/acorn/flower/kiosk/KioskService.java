@@ -7,19 +7,9 @@ public interface KioskService {
 
 	public List<KioskDto> getList();
 
-	public KioskDto getKiosk(int id);
+	public KioskDto getKiosk(KioskDto dto);
 
-	public KioskDto getLast();
+	public boolean delete(KioskDto dto);
 
-	public boolean delete(int id);
-
-	public boolean turnOn(int id);
-
-	public boolean turnOff(int id);
-
-	public boolean turnOnAll();
-
-	public boolean turnOffAll();
-
-	public boolean updateLocation(KioskDto dto);
+	public boolean update(KioskDto dto);
 }
