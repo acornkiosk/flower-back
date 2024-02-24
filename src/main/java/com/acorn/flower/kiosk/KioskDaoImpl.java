@@ -26,51 +26,23 @@ public class KioskDaoImpl implements KioskDao {
 	}
 
 	@Override
-	public int delete(int id) {
-		int result = session.delete("kiosk.delete", id);
+	public int delete(KioskDto dto) {
+		int result = session.delete("kiosk.delete", dto);
 		return result;
 	}
 
 	@Override
-	public KioskDto getKiosk(int id) {
-		KioskDto dto = session.selectOne("kiosk.getKiosk", id);
-		return dto;
-	}
-	
-	@Override
-	public KioskDto getLast() {
-		KioskDto dto = session.selectOne("kiosk.getLast");
-		return dto;
+	public KioskDto getKiosk(KioskDto dto) {
+		KioskDto result = session.selectOne("kiosk.getKiosk", dto);
+		return result;
 	}
 
 	@Override
-	public int turnOn(int id) {
-		int result = session.update("kiosk.turnOn", id);
+	public int update(KioskDto dto) {
+		int result = session.update("kiosk.update",dto);
 		return result;
 	}
 	
-	@Override
-	public int turnOff(int id) {
-		int result = session.update("kiosk.turnOff", id);
-		return result;
-	}
-
-	@Override
-	public int turnOnAll() {
-		int result = session.update("kiosk.turnOnAll");
-		return result;
-	}
-
-	@Override
-	public int turnOffAll() {
-		int result = session.update("kiosk.turnOffAll");
-		return result;
-	}
-
-	@Override
-	public int updateLocation(KioskDto dto) {
-		int result = session.update("kiosk.updateLocation",dto);
-		return result;
-	}
+	
 
 }
