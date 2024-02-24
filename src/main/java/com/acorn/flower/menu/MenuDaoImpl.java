@@ -24,9 +24,9 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public MenuDto getMenu(int id) {
-		MenuDto dto = session.selectOne("menu.getMenu", id);
-		return dto;
+	public MenuDto getMenu(MenuDto dto) {
+		MenuDto result = session.selectOne("menu.getMenu", dto);
+		return result;
 	}
 
 	@Override
@@ -36,14 +36,10 @@ public class MenuDaoImpl implements MenuDao {
 	}
 
 	@Override
-	public int delete(int id) {
-		int result= session.delete("menu.delete",id);
+	public int delete(MenuDto dto) {
+		int result= session.delete("menu.delete",dto);
 		return result;
 	}
 
-	@Override
-	public MenuDto getLast() {
-		MenuDto dto=session.selectOne("menu.getLast");
-		return dto;
-	}
+	
 }
