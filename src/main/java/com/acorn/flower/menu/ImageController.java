@@ -12,17 +12,19 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 //이미지 데이터를 응답할 컨트롤러
-@Controller
+@RestController
 public class ImageController {
 	@Value("${file.location}")
 	private String fileLocation;
 	
 	
-	@ResponseBody
-	@GetMapping(
+	
+	@PostMapping(
 	value = "/upload/images/{imageName}", 
 	//jpg, png, gif 이미지 데이터를 응답할 수 있도록 produces에 배열로 연결한다.
 	produces= {MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE,

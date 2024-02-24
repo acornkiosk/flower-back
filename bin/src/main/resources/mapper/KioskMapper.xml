@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kiosk">
+	<insert id="insert" parameterType="kioskDto">
+		INSERT INTO KIOSK (ID,LOCATION,POWER)
+		VALUES (seq_kiosk_id.NEXTVAL,#{location},'off')
+	</insert>
+	
+	<select id="getList" resultType="kioskDto">
+		SELECT ID , LOCATION , POWER 
+		FROM KIOSK 
+		ORDER BY ID ASC 
+	</select>
+	
+	<select id="getKiosk" parameterType="int" resultType="kioskDto">
+		SELECT ID , LOCATION , POWER
+		FROM KIOSK
+		WHERE id = #{id}
+	</select>
+	
+	<select id="getLast" resultType="kioskDto">
+		SELECT ID, LOCATION, POWER
+			FROM (
+				SELECT ID ,LOCATION ,POWER 
+				FROM KIOSK 	
+				ORDER BY id desc
+			)
+		WHERE ROWNUM = 1
+	</select>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM KIOSK
+		WHERE id = #{id}
+	</delete>
+	
+	<update id="turnOn" parameterType="int">
+		UPDATE KIOSK
+		SET POWER = 'on'
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="turnOff" parameterType="int">
+		UPDATE KIOSK
+		SET POWER = 'off'
+		WHERE ID = #{id}
+	</update>
+	
+	<update id="turnOnAll">
+		UPDATE KIOSK
+		SET POWER = 'on'
+	</update>
+	
+	<update id="turnOffAll">
+		UPDATE KIOSK
+		SET POWER = 'off'
+	</update>
+	
+	<update id="updateLocation" parameterType="kioskDto">
+		UPDATE KIOSK
+		SET LOCATION = #{location}
+		WHERE id = #{id}
+	</update>
+</mapper>
