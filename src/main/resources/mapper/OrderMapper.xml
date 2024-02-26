@@ -56,8 +56,6 @@
 			,REGDATE
 		FROM 
 			CART
-		WHERE 
-			ID = #{id}
 	</select>
 	
 	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
