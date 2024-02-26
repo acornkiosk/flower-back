@@ -38,7 +38,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		// 권한은 1개 이지만 List 에 담아서
 		List<GrantedAuthority> authList = new ArrayList<>();
 		// Authority 는 role 앞에 "ROLE_" 를 붙여주여야 한다.
-
 		authList.add(new SimpleGrantedAuthority("ROLE_" + dto.getRole()));
 
 		// Spring Security 가 제공하는 User 클래스는 UserDetails 인터페이스를 구현한 클래스 이다.
