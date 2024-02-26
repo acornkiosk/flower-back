@@ -19,6 +19,7 @@ CREATE TABLE CART
 	menu_price NUMBER NOT NULL, --메뉴 가격
 	menu_count NUMBER NOT NULL, -- 메뉴 갯수
 	OPTIONS VARCHAR2(500), -- 메뉴 옵션
+	is_completed VARCHAR2(50) CHECK (is_completed IN ('true', 'false')) NOT NULL, --주문 완료 
 	regdate DATE -- 주문등록 시간
 );
 

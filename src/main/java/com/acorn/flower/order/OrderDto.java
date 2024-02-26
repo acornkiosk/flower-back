@@ -18,5 +18,6 @@ public class OrderDto {
 	private int menu_price;
 	private int menu_count;
 	private String options;
+	private String is_completed;
 	private String regdate;
 }

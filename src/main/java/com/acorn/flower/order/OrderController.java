@@ -81,7 +81,7 @@ public class OrderController {
 	}
 
 	/**
-	 * 주문번호 주문 리스트 조회 body order order_id
+	 * 주문번호 주문 리스트 조회 body order order_id = 0 이면 전체 조회
 	 * @param order_id
 	 * @return
 	 */
@@ -94,36 +94,6 @@ public class OrderController {
 			if (!list.isEmpty()) {
 				for (OrderDto item : list) {
 					log.info("order = {}", item.toString());
-				}
-				response.setList(list);
-				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			} else {
-				log.error("주문 조회 실패");
-				response.setList(list);
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("서버에 문제가 있습니다.");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * 전체 주문 리스트 조회 param x
-	 * @return
-	 */
-	@GetMapping("/api/order/list")
-	public ResponseEntity<OrderResponse> getAllOrderList() {
-
-		OrderResponse response = new OrderResponse();
-		try {
-			List<OrderDto> list = service.getAllOrders();
-			if (!list.isEmpty()) {
-				for (OrderDto dto : list) {
-					log.info("order = {}", dto.toString());
 				}
 				response.setList(list);
 				response.setStatus(HttpStatus.OK);
