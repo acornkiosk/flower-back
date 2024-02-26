@@ -5,15 +5,15 @@ import java.util.List;
 public interface OrderService {
 	public boolean insert(OrderDto dto);
 
-	public OrderDto getOrder(int id);
+	public OrderDto getOrder(OrderDto dto);
 
-	public List<OrderDto> getOrders(int order_id);
+	public List<OrderDto> getOrders(OrderDto dto);
 
 	public List<OrderDto> getAllOrders();
 
-	public boolean deleteAll(int order_id);
+	public boolean deleteAll(OrderDto dto);
 
-	public boolean delete(int id);
+	public boolean delete(OrderDto dto);
 
 	public boolean update(OrderDto dto);
 }

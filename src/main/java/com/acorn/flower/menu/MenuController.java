@@ -5,9 +5,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
+import com.acorn.flower.common.CommonService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -16,7 +21,6 @@ import lombok.extern.slf4j.Slf4j;
 public class MenuController {
 	@Autowired
 	private MenuService menuService;
-
 	/**
 	 * 메뉴 수정
 	 * 
@@ -55,20 +59,19 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu/delete")
-	public ResponseEntity<MenuResponse> deleteMenu(@RequestBody int id) {
+	public ResponseEntity<MenuResponse> deleteMenu(@RequestBody MenuDto dto) {
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
 		try {
-			MenuDto dto = menuService.getMenu(id);
-			isSuccess = menuService.delete(id);
+			MenuDto result = menuService.getMenu(dto);
+			isSuccess = menuService.delete(dto);
 			if (isSuccess) {
-				log.info("menu = {}", dto.toString());
-				response.setDto(dto);
+				log.info(dto.getId()+ "번 삭제됨");
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("menu데이터 delete 실패");
-				response.setDto(dto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -87,18 +90,17 @@ public class MenuController {
 	 * @return dto
 	 */
 	@PostMapping("/api/menu/get")
-	public ResponseEntity<MenuResponse> getMenu(@RequestBody int id) {
+	public ResponseEntity<MenuResponse> getMenu(@RequestBody MenuDto dto) {
 		MenuResponse response = new MenuResponse();
 		try {
-			MenuDto dto = menuService.getMenu(id);
-			System.out.println(dto);
+			MenuDto result = menuService.getMenu(dto);
 			if (dto != null) {
-				log.info("menu = {}", dto.toString());
-				response.setDto(dto);
+				log.info("menu = {}", result.toString());
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error(id + "번 데이터는 없습니다.");
+				log.error(dto.getId() + "번 데이터는 없습니다.");
 				response.setDto(dto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
@@ -155,22 +157,23 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu")
-	public ResponseEntity<MenuResponse> addMenu(@RequestBody MenuDto dto) {
+	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute	MenuDto dto) { 
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
-	
+		System.out.println(dto);
 		try {
 			isSuccess = menuService.insert(dto);
-			MenuDto insertDto= menuService.getLast();
+		
+			
 			if (isSuccess) {
 				
-				log.info("menu = {}", insertDto.toString());
-				response.setDto(insertDto);
+				log.info("menu = {}", dto.toString());
+				response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("menu데이터 insert 실패");
-				response.setDto(insertDto);
+				response.setDto(dto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -181,5 +184,4 @@ public class MenuController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 }

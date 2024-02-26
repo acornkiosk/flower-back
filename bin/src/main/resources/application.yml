@@ -29,5 +29,18 @@ mybatis:
 springdoc:
     swagger-ui:
       path: /swagger
+<<<<<<< HEAD
     api-docs:
       path: /api-docs
+=======
+      csrf:
+        enabled: true
+    api-docs:
+      path: /api-docs
+
+
+logging:
+  level:
+    kiosk: TRACE
+    users: TRACE
+>>>>>>> origin

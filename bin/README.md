@@ -2,6 +2,10 @@
 
 **팀 프로젝트의 백엔드 Repository 입니다.**
 
+<<<<<<< HEAD
+=======
+[프론트 Repositroy](https://github.com/acornkiosk/flower_front)
+>>>>>>> origin
 ## 프로젝트 특징
 
 * React, Spring Boot을 기반으로 꽃을 판매하는 키오스크 서비스
@@ -37,7 +41,10 @@
 	* 사용자 관리 : 추가, 조회, 수정, 삭제 
 	* 주문 관리 : 추가, 조회, 수정 , 삭제
 	* 로그인 관리 : 로그인 role 설정, Jwt를 이용한 로그인 상태 유지
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 	
 * 개발 환경 : Springboot 3.2.2, java 17, Oracle
 
@@ -46,7 +53,11 @@
 * 협업 툴 : Notion  
 
 ## 테이블 설계
+<<<<<<< HEAD
 
+=======
+![flowerDB](https://github.com/acornkiosk/Flower_back/assets/94777814/cc380112-85fa-40b6-9dc2-4ae849308a3c)
+>>>>>>> origin
 
 ## API 설계
 
@@ -54,20 +65,31 @@
 ![image](https://github.com/acornkiosk/flower_back/assets/94777814/274685fe-30ef-4878-9007-9bfea86ccdac)
 ![image](https://github.com/acornkiosk/flower_back/assets/94777814/56872714-d87b-4eb9-a54f-cf07016160d7)
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 ## 개발 역할분담 (백엔드)
 
 | 이름       | 진행 목록                                                    |
 | ------------ | ------------------------------------------------------------- |
 | 김동주         | 주문관리 키오스크 관리 테이블 설계, 주문관리 테이블관리 API설계, 초기 프로젝트 셋팅 |  |                          
+<<<<<<< HEAD
                       
+=======
+>>>>>>> origin
 
 
 | 이름       | 진행 목록                                                    |
 | ------------ | ------------------------------------------------------------- |
+<<<<<<< HEAD
 | 김대원         | 메뉴관리 화면설계, DB설계 |  |                         
 | 이승우         | 메뉴관리 요구사항 기능분석, 메뉴관리 흐름설계, 메뉴관리 화면설계, DB설계 |     
 
+=======
+| 김대원         | CRUD API와 예외처리, 테이블 관계설정, 화면설계도 보충, DB설계  |  |                         
+| 이승우         | 요구사항 기능분석, 메뉴관리 흐름도 및 화면설계, DB설계 |     
+>>>>>>> origin
 
 
 | 이름       | 진행 목록                                                    |
@@ -76,13 +98,19 @@
 | 오영찬         | 사용자관리 테이블 설계, 초기 프로젝트 셋팅 |   |                                                            
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 | 이름       | 진행 목록                                                    |
 | ------------ | ------------------------------------------------------------- |
 | 정도경         | security, CustomUserDetailService |  |                         
 | 이안철         | JwtToken, Exception |                                                                
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin
 ## 개발 타임라인(백엔드, 프론트 공통)
 
 | 일자       | 진행 목록                                                    |
@@ -90,4 +118,8 @@
 | 2024.02.17 | [ 프로젝트 화면계획서 V0.1 작성](https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl) <br />프론트/백엔드 Repository 생성 |
 | 2024.02.19 | [ 프로젝트 화면계획서 V0.3 작성](https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl) |
 | 2024.02.20 | [ 프로젝트 화면계획서 V0.5 작성](https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl) <br/> 키오스크 관리 DB, API 추가|
+<<<<<<< HEAD
 
+=======
+| 2024.02.21 | [ 프로젝트 화면계획서 V0.6 작성](https://drive.google.com/drive/folders/19cVOkx5jpWMl9KqFia3Dd_BrflqpRaVl) <br/> 주문 관리 DB, API 추가<br/> 프론트 Repository 생성|
+>>>>>>> origin

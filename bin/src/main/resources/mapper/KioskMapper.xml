@@ -9,6 +9,10 @@
 	<select id="getList" resultType="kioskDto">
 		SELECT ID , LOCATION , POWER 
 		FROM KIOSK 
+<<<<<<< HEAD
+=======
+		ORDER BY ID ASC 
+>>>>>>> origin
 	</select>
 	
 	<select id="getKiosk" parameterType="int" resultType="kioskDto">
@@ -17,6 +21,19 @@
 		WHERE id = #{id}
 	</select>
 	
+<<<<<<< HEAD
+=======
+	<select id="getLast" resultType="kioskDto">
+		SELECT ID, LOCATION, POWER
+			FROM (
+				SELECT ID ,LOCATION ,POWER 
+				FROM KIOSK 	
+				ORDER BY id desc
+			)
+		WHERE ROWNUM = 1
+	</select>
+	
+>>>>>>> origin
 	<delete id="delete" parameterType="int">
 		DELETE FROM KIOSK
 		WHERE id = #{id}
@@ -49,5 +66,9 @@
 		SET LOCATION = #{location}
 		WHERE id = #{id}
 	</update>
+<<<<<<< HEAD
 </mapper>
 
+=======
+</mapper>
+>>>>>>> origin

@@ -19,14 +19,14 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public OrderDto getOrder(int id) {
-		OrderDto dto = session.selectOne("order.getOrder", id);
-		return dto;
+	public OrderDto getOrder(OrderDto dto) {
+		OrderDto result = session.selectOne("order.getOrder", dto);
+		return result;
 	}
 
 	@Override
-	public List<OrderDto> getOrders(int order_id) {
-		List<OrderDto> list = session.selectList("order.getOrders", order_id);
+	public List<OrderDto> getOrders(OrderDto dto) {
+		List<OrderDto> list = session.selectList("order.getOrders", dto);
 		return list;
 	}
 
@@ -37,14 +37,14 @@ public class OrderDaoImpl implements OrderDao {
 	}
 
 	@Override
-	public int deleteAll(int order_id) {
-		int result = session.delete("order.deleteAll", order_id);
+	public int deleteAll(OrderDto dto) {
+		int result = session.delete("order.deleteAll", dto);
 		return result;
 	}
 
 	@Override
-	public int delete(int id) {
-		int result = session.delete("order.delete", id);
+	public int delete(OrderDto dto) {
+		int result = session.delete("order.delete", dto);
 		return result;
 	}
 

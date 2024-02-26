@@ -66,5 +66,5 @@ public class SecurityConfig {
 					.passwordEncoder(bCryptPasswordEncoder).and().build();	
 		}
 		
-}
 
+}

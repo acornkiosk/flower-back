@@ -12,4 +12,5 @@ public interface UserService {
 	public boolean delete(String id);
 
 	public boolean updateUser(UserDto dto);
+
 }

@@ -11,13 +11,14 @@ public class CommonServiceImpl implements CommonService {
 	private CommonDao dao;
 
 	@Override
-	public List<CommonDto> getChild(int code_id) {
-		List<CommonDto> list = dao.getChild(code_id);
+	public List<CommonDto> getChild(CommonDto dto) {
+		List<CommonDto> list = dao.getChild(dto);
 		return list;
 	}
 
 	@Override
 	public boolean insertRow(CommonDto dto) {
+		System.out.println(dto);
 		int result = dao.insert(dto);
 		
 		if(result != 1) return false;
@@ -30,6 +31,16 @@ public class CommonServiceImpl implements CommonService {
 	public boolean updateRow(CommonDto dto) {
 		int result = dao.update(dto);
 		
+		if(result == 0) return false;
+		
+		return true;
+		
+	}
+
+	@Override
+	public boolean deleteRow(CommonDto dto) {
+		int result = dao.delete(dto);
+		
 		if(result != 1) return false;
 		
 		return true;
@@ -37,12 +48,9 @@ public class CommonServiceImpl implements CommonService {
 	}
 
 	@Override
-	public boolean deleteRow(int code_id) {
-		int result = dao.delete(code_id);
+	public CommonDto getCommon(CommonDto dto) {
+		CommonDto dto2 = dao.getCommon(dto);
 		
-		if(result != 1)return false;
-		
-		return true;
-		
+		return dto2;
 	}
 }

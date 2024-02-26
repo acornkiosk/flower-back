@@ -33,19 +33,19 @@ public class OrderController {
 		OrderResponse response = new OrderResponse();
 		try {
 			isSuccess = service.insert(dto);
-			List<OrderDto> list = service.getOrders(dto.getOrder_id());
+			List<OrderDto> list = service.getOrders(dto);
 			if (isSuccess) {
 				log.info("order = {}", dto.toString());
-				response.setList(list);
+				response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("주문 추가 실패");
-				response.setList(list);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.error("서버에 문제가 있습니다.");
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -58,18 +58,18 @@ public class OrderController {
 	 * @return
 	 */
 	@PostMapping("/api/order/get")
-	public ResponseEntity<OrderResponse> getOrder(@RequestBody int id) {
+	public ResponseEntity<OrderResponse> getOrder(@RequestBody OrderDto dto) {
 		OrderResponse response = new OrderResponse();
 
 		try {
-			OrderDto dto = service.getOrder(id);
-			if (dto != null) {
+			OrderDto result = service.getOrder(dto);
+			if (result != null) {
 				log.info("order = {}", dto.toString());
-				response.setDto(dto);
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error(id + "번 주문은 없습니다");
+				log.error(dto.getId() + "번 주문은 없습니다");
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 			}
@@ -86,14 +86,14 @@ public class OrderController {
 	 * @return
 	 */
 	@PostMapping("/api/order/list")
-	public ResponseEntity<OrderResponse> getOrderList(@RequestBody int order_id) {
+	public ResponseEntity<OrderResponse> getOrderList(@RequestBody OrderDto dto) {
 
 		OrderResponse response = new OrderResponse();
 		try {
-			List<OrderDto> list = service.getOrders(order_id);
+			List<OrderDto> list = service.getOrders(dto);
 			if (!list.isEmpty()) {
-				for (OrderDto dto : list) {
-					log.info("order = {}", dto.toString());
+				for (OrderDto item : list) {
+					log.info("order = {}", item.toString());
 				}
 				response.setList(list);
 				response.setStatus(HttpStatus.OK);
@@ -147,14 +147,14 @@ public class OrderController {
 	 * @return
 	 */
 	@PostMapping("/api/order/deleteAll")
-	public ResponseEntity<OrderResponse> deleteAllOrders(@RequestBody int order_id) {
+	public ResponseEntity<OrderResponse> deleteAllOrders(@RequestBody OrderDto dto) {
 		boolean isSuccess;
 		OrderResponse response = new OrderResponse();
 		try {
-			List<OrderDto> list = service.getOrders(order_id);
-			isSuccess = service.deleteAll(order_id);
+			List<OrderDto> list = service.getOrders(dto);
+			isSuccess = service.deleteAll(dto);
 			if (isSuccess) {
-				log.info("주문번호 " + order_id + "번이 삭제 되었습니다.");
+				log.info("주문번호 " + dto.getOrder_id() + "번이 삭제 되었습니다.");
 				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
@@ -177,20 +177,19 @@ public class OrderController {
 	 * @return
 	 */
 	@PostMapping("/api/order/delete")
-	public ResponseEntity<OrderResponse> deleteOrders(@RequestBody int id) {
+	public ResponseEntity<OrderResponse> deleteOrders(@RequestBody OrderDto dto) {
 		boolean isSuccess;
 		OrderResponse response = new OrderResponse();
 		try {
-			OrderDto dto = service.getOrder(id);
-			isSuccess = service.delete(id);
+			OrderDto result = service.getOrder(dto);
+			isSuccess = service.delete(dto);
 			if (isSuccess) {
-				log.info(id + "번이 삭제 되었습니다.");
-				response.setDto(dto);
+				log.info(dto.getId() + "번이 삭제 되었습니다.");
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("주문 삭제 실패");
-				response.setDto(dto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -212,7 +211,7 @@ public class OrderController {
 		OrderResponse response = new OrderResponse();
 		try {
 			isSuccess = service.update(dto);
-			OrderDto tmp = service.getOrder(dto.getId());
+			OrderDto tmp = service.getOrder(dto);
 			if (isSuccess) {
 				log.info(dto.getId() + "번이 변경 되었습니다.");
 				response.setDto(tmp);
