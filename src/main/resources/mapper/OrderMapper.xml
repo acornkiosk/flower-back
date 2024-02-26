@@ -45,6 +45,10 @@
 		WHERE 
 			ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
 		</if>
+		<if test="order_id == 0">
+		WHERE
+			IS_COMPLETED = 'false'
+		</if>
 		
 	</select>
 	
@@ -84,7 +88,9 @@
 			MENU_PRICE = #{menu_price}
 			,MENU_COUNT = #{menu_count}
 			,IS_COMPLETED = #{is_completed}
+			<if test="options != null">
 			,OPTIONS =  #{options}
+			</if>
 		WHERE id=#{id}
 	</update>
 </mapper>
