@@ -11,8 +11,11 @@
 			,CODE_IMG
 		FROM 
 			COMMON
+		<if test="code_id != 0">
 		WHERE 
 			P_CODE_ID = #{code_id}
+		</if>
+		
 	</select>
 
 	<insert id="insert" parameterType="commonDto">
@@ -63,7 +66,8 @@
 			,CODE_IMG
 		FROM 
 			COMMON
-		WHERE CODE_ID = #{code_id}
+		WHERE 
+			CODE_ID = #{code_id}
 	</select>
 
 </mapper>

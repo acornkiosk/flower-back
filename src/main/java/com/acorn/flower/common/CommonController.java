@@ -72,6 +72,7 @@ public class CommonController {
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			log.error("서버에 문제가 있습니다.");
 			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
