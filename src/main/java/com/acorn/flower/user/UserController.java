@@ -209,4 +209,26 @@ public class UserController {
 	public String ping() {
 		return "pong";
 	}
+	
+	@PostMapping("/super/ownerInsert")
+	public String ownerInsert(@RequestBody UserDto dto) {
+		boolean isSuccess=service.ownerInsert(dto);
+		if(isSuccess) {
+			return "성공";
+		}else {
+			return "실패";
+		}
+	}
+	
+	@PostMapping("/superInsert")
+	public String supernsert(@RequestBody UserDto dto) {
+		boolean isSuccess=service.superInsert(dto);
+		if(isSuccess) {
+			return "성공";
+		}else {
+			return "실패";
+		}
+	}
+	
+	
 }

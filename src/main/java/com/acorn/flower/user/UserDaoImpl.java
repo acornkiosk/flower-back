@@ -43,4 +43,16 @@ public class UserDaoImpl implements UserDao {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int ownerInsert(UserDto dto) {
+		int result = session.insert("users.ownerInsert",dto);
+		return result;
+	}
+
+	@Override
+	public int superInsert(UserDto dto) {
+		int result = session.insert("users.superInsert",dto);
+		return 0;
+	}
 }

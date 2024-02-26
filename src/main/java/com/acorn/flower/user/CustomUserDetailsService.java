@@ -32,8 +32,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		// 2. UserDetails 객체에 해당정보를 담아서 리턴해 주어야 한다
 		// DB 비밀번호(1234) 이기때문에 아래 해시화 해야한다. test임
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String pwd = encoder.encode(dto.getPassword());
+		
 
 		// 권한은 1개 이지만 List 에 담아서
 		List<GrantedAuthority> authList = new ArrayList<>();
@@ -42,7 +41,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		authList.add(new SimpleGrantedAuthority("ROLE_" + dto.getRole()));
 
 		// Spring Security 가 제공하는 User 클래스는 UserDetails 인터페이스를 구현한 클래스 이다.
-		UserDetails ud = new User(dto.getId(), pwd, authList);
+		UserDetails ud = new User(dto.getId(), dto.getPassword(), authList);
 
 		// 암호화
 

@@ -12,5 +12,9 @@ public interface UserService {
 	public boolean delete(String id);
 
 	public boolean updateUser(UserDto dto);
+	
+	public boolean ownerInsert(UserDto dto);
+	
+	public boolean superInsert(UserDto dto);
 
 }
