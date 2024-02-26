@@ -23,7 +23,7 @@ public class MenuServiceImpl implements MenuService {
 		// 선택된 이미지 파일을 가져와서		
 		MultipartFile image=dto.getImage();
 		//image.getSize()!=0
-		if(image!=null){
+		if(image.getSize()!=0){
 			//fileLocation에 원본이미지 이름의 형태로 저장한다.
 			//그럼 확장자는 어떻게? , 같은 이름의 이미지는 중복해서 넣을 수 없다
 			String saveFileName=dto.getImage().getOriginalFilename();
@@ -42,6 +42,7 @@ public class MenuServiceImpl implements MenuService {
 		int result =menuDao.insert(dto);
 		if(result!=1) return false;
 		return true;
+		
 	}
 
 	@Override
@@ -54,13 +55,13 @@ public class MenuServiceImpl implements MenuService {
 	public MenuDto getMenu(MenuDto dto) {
 		MenuDto result= menuDao.getMenu(dto);
 		if(result ==null) return null;
-		return dto;
+		return result;
 	}
 
 	@Override
 	public boolean update(MenuDto dto) {
 		MultipartFile image=dto.getImage();
-		if(image!=null){
+		if(image.getSize()!=0){
 			//fileLocation에 원본이미지 이름의 형태로 저장한다.
 			//그럼 확장자는 어떻게? , 같은 이름의 이미지는 중복해서 넣을 수 없다
 			String saveFileName=dto.getImage().getOriginalFilename();

@@ -1,5 +1,6 @@
 package com.acorn.flower.menu;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.http.HttpStatusCode;
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MenuResponse {
+public class MenuResponse{
 	private MenuDto dto;
 	private List<MenuDto> list;
 	private HttpStatusCode status;
