@@ -15,87 +15,46 @@ public class KioskServiceImpl implements KioskService {
 	public boolean insert(KioskDto dto) {
 		int result = dao.insert(dto);
 
-		if (result != 1) return false;
-		
+		if (result != 1)
+			return false;
+
 		return true;
 	}
 
 	@Override
 	public List<KioskDto> getList() {
 		List<KioskDto> list = dao.getList();
-		
+
 		return list;
 	}
 
 	@Override
-	public boolean delete(int id) {
-		int result = dao.delete(id);
-		
-		if(result != 1) return false;
-		
+	public boolean delete(KioskDto dto) {
+		int result = dao.delete(dto);
+
+		if (result != 1)
+			return false;
+
 		return true;
 	}
 
 	@Override
-	public KioskDto getKiosk(int id) {
-		KioskDto dto = dao.getKiosk(id);
-		
-		if(dto == null) return null;
-		
-		return dto;
-	}
-	
-	@Override
-	public KioskDto getLast() {
-		KioskDto dto = dao.getLast();
-		
-		if(dto == null) return null;
-		
-		return dto;
+	public KioskDto getKiosk(KioskDto dto) {
+		KioskDto result = dao.getKiosk(dto);
+
+		if (result == null)
+			return null;
+
+		return result;
 	}
 
 	@Override
-	public boolean turnOn(int id) {
-		int result =  dao.turnOn(id);
-		
-		if(result != 1) return false;
-		
-		return true;
-	}
-	
-	@Override
-	public boolean turnOff(int id) {
-		int result =  dao.turnOff(id);
-		
-		if(result != 1) return false;
-		
-		return true;
-	}
+	public boolean update(KioskDto dto) {
+		int result = dao.update(dto);
 
-	@Override
-	public boolean turnOnAll() {
-		int result = dao.turnOnAll();
-		
-		if(result == 0) return false;
-		
-		return true;
-	}
+		if (result == 0)
+			return false;
 
-	@Override
-	public boolean turnOffAll() {
-		int result = dao.turnOffAll();
-		
-		if(result == 0) return false;
-		
-		return true;
-	}
-
-	@Override
-	public boolean updateLocation(KioskDto dto) {
-		int result = dao.updateLocation(dto);
-		
-		if(result == 0) return false;
-		
 		return true;
 	}
 

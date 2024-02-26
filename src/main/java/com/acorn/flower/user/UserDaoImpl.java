@@ -30,6 +30,7 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+
 	@Override
 	public int insert(UserDto dto) {
 		int result = session.insert("users.insert", dto);
@@ -40,5 +41,11 @@ public class UserDaoImpl implements UserDao {
 	public int update(UserDto dto) {
 		int result = session.update("users.update", dto);
 		return result;
+	}
+
+	@Override
+	public int delete(UserDto dto) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

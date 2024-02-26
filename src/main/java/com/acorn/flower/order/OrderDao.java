@@ -5,15 +5,15 @@ import java.util.List;
 public interface OrderDao {
 	public int insert(OrderDto dto);
 
-	public OrderDto getOrder(int id);
+	public OrderDto getOrder(OrderDto dto);
 
-	public List<OrderDto> getOrders(int order_id);
+	public List<OrderDto> getOrders(OrderDto dto);
 
 	public List<OrderDto> getAllOrders();
 
-	public int deleteAll(int order_id);
+	public int deleteAll(OrderDto dto);
 
-	public int delete(int id);
+	public int delete(OrderDto dto);
 
 	public int update(OrderDto dto);
 }

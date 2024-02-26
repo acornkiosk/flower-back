@@ -6,58 +6,39 @@
 		VALUES (seq_kiosk_id.NEXTVAL,#{location},'off')
 	</insert>
 	
-	<select id="getList" resultType="kioskDto">
-		SELECT ID , LOCATION , POWER 
-		FROM KIOSK 
+	<select id="getList" parameterType="kioskDto" resultType="kioskDto">
+		SELECT 
+			ID
+			,LOCATION
+			,POWER 
+		FROM KIOSK
+		<if test="power != null">
+		WHERE power = #{power}
+		</if> 
 		ORDER BY ID ASC 
 	</select>
 	
-	<select id="getKiosk" parameterType="int" resultType="kioskDto">
-		SELECT ID , LOCATION , POWER
+	<select id="getKiosk" parameterType="kioskDto" resultType="kioskDto">
+		SELECT 
+			ID
+			,LOCATION
+			,POWER
 		FROM KIOSK
 		WHERE id = #{id}
 	</select>
 	
-	<select id="getLast" resultType="kioskDto">
-		SELECT ID, LOCATION, POWER
-			FROM (
-				SELECT ID ,LOCATION ,POWER 
-				FROM KIOSK 	
-				ORDER BY id desc
-			)
-		WHERE ROWNUM = 1
-	</select>
-	
-	<delete id="delete" parameterType="int">
+	<delete id="delete" parameterType="kioskDto">
 		DELETE FROM KIOSK
 		WHERE id = #{id}
 	</delete>
 	
-	<update id="turnOn" parameterType="int">
-		UPDATE KIOSK
-		SET POWER = 'on'
-		WHERE ID = #{id}
-	</update>
-	
-	<update id="turnOff" parameterType="int">
-		UPDATE KIOSK
-		SET POWER = 'off'
-		WHERE ID = #{id}
-	</update>
-	
-	<update id="turnOnAll">
-		UPDATE KIOSK
-		SET POWER = 'on'
-	</update>
-	
-	<update id="turnOffAll">
-		UPDATE KIOSK
-		SET POWER = 'off'
-	</update>
-	
-	<update id="updateLocation" parameterType="kioskDto">
-		UPDATE KIOSK
-		SET LOCATION = #{location}
-		WHERE id = #{id}
+	<update id="update" parameterType="kioskDto">
+		UPDATE 
+			KIOSK
+		SET 
+			LOCATION = #{location}
+			,POWER = #{power}
+		WHERE
+			id = #{id}
 	</update>
 </mapper>

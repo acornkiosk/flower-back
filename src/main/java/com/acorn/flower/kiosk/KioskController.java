@@ -33,11 +33,14 @@ public class KioskController {
 		boolean isSuccess;
 		KioskResponse response = new KioskResponse();
 		try {
+			dto.setPower("off");
 			isSuccess = service.insert(dto);
+			List<KioskDto> list = service.getList();
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
-				KioskDto insertedDto = service.getLast();
-				response.setDto(insertedDto);
+				// 최근 추가한 dto를 얻어오는 로직 작성
+				response.setDto(dto);
+				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -89,17 +92,17 @@ public class KioskController {
 	 * @return
 	 */
 	@PostMapping("/api/kiosk/get")
-	public ResponseEntity<KioskResponse> getKiosk(@RequestBody int id) {
+	public ResponseEntity<KioskResponse> getKiosk(@RequestBody KioskDto dto) {
 		KioskResponse response = new KioskResponse();
 		try {
-			KioskDto dto = service.getKiosk(id);
+			KioskDto result = service.getKiosk(dto);
 			if (dto != null) {
-				log.info("kiosk = {}", dto.toString());
-				response.setDto(dto);
+				log.info("kiosk = {}", result.toString());
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error(id + "번 데이터는 없습니다.");
+				log.error(dto.getId() + "번 데이터는 없습니다.");
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -117,19 +120,19 @@ public class KioskController {
 	 * @return
 	 */
 	@PostMapping("/api/kiosk/delete")
-	public ResponseEntity<KioskResponse> delete(@RequestBody int id) {
+	public ResponseEntity<KioskResponse> delete(@RequestBody KioskDto dto) {
 		boolean isSuccess;
 		KioskResponse response = new KioskResponse();
 		try {
-			KioskDto dto = service.getKiosk(id);
-			isSuccess = service.delete(id);
+			KioskDto result = service.getKiosk(dto);
+			isSuccess = service.delete(dto);
 			if (isSuccess) {
-				log.info(id + "번 삭제됨");
-				response.setDto(dto);
+				log.info(dto.getId() + "번 삭제됨");
+				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error(id + "번은 없는 데이터 입니다.");
+				log.error(dto.getId() + "번은 없는 데이터 입니다.");
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 			}
@@ -141,147 +144,25 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 전원 켜기 body : kiosk id
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@PostMapping("/api/kiosk/turnOn")
-	public ResponseEntity<KioskResponse> turnOn(@RequestBody int id) {
-		boolean isSuccess;
-		KioskResponse response = new KioskResponse();
-		try {
-			isSuccess = service.turnOn(id);
-			KioskDto dto = service.getKiosk(id);
-			if (isSuccess) {
-				log.info(id + "번 전원 켜짐");
-				response.setDto(dto);
-				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			} else {
-				log.error(id + "번 전원이 이미 켜져있거나 오류가 있습니다.");
-				response.setDto(dto);
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("서버에 문제가 있습니다.");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * 키오스크 전원 끄기 body : kiosk id
-	 * 
-	 * @param id
-	 * @return
-	 */
-	@PostMapping("/api/kiosk/turnOff")
-	public ResponseEntity<KioskResponse> turnOff(@RequestBody int id) {
-		boolean isSuccess;
-		KioskResponse response = new KioskResponse();
-		try {
-			isSuccess = service.turnOff(id);
-			KioskDto dto = service.getKiosk(id);
-			if (isSuccess) {
-				log.info(id + "번 전원 꺼짐");
-				response.setDto(dto);
-				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			} else {
-				log.error(id + "번 전원이 이미 꺼져있거나 오류가 있습니다.");
-				response.setDto(dto);
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("서버에 문제가 있습니다.");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * 키오스크 전체 전원 켜기 body x
-	 * 
-	 * @return
-	 */
-	@PostMapping("/api/kiosk/turnOnAll")
-	public ResponseEntity<KioskResponse> turnOnAll() {
-		boolean isSuccess;
-		KioskResponse response = new KioskResponse();
-		try {
-			isSuccess = service.turnOnAll();
-			List<KioskDto> list = service.getList();
-			if (isSuccess) {
-				log.info("전체 전원 켜짐");
-				response.setList(list);
-				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			} else {
-				log.error("전체 전원이 다 켜져 있거나 오류가 있습니다.");
-				response.setList(list);
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("서버에 문제가 있습니다.");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * 키오스크 전체 전원 끄기 body x
-	 * 
-	 * @return
-	 */
-	@PostMapping("/api/kiosk/turnOffAll")
-	public ResponseEntity<KioskResponse> turnOffAll() {
-		boolean isSuccess;
-		KioskResponse response = new KioskResponse();
-		try {
-			isSuccess = service.turnOffAll();
-			List<KioskDto> list = service.getList();
-			if (isSuccess) {
-				log.info("전체 전원 꺼짐");
-				response.setList(list);
-				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
-			} else {
-				log.error("전체 전원이 다 꺼져 있거나 오류가 있습니다.");
-				response.setList(list);
-				response.setStatus(HttpStatus.BAD_REQUEST);
-				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-			}
-		} catch (Exception e) {
-			log.error("서버에 문제가 있습니다.");
-			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
-			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-
-	/**
-	 * 키오스크 위치 변경 body: kiosk id, location
+	 * 키오스크 정보 변경 body: kiosk id, location, power
 	 * 
 	 * @param dto
 	 * @return
 	 */
-	@PostMapping("/api/kiosk/update/location")
-	public ResponseEntity<KioskResponse> updateLocation(@RequestBody KioskDto dto) {
+	@PostMapping("/api/kiosk/update")
+	public ResponseEntity<KioskResponse> updateKiosk(@RequestBody KioskDto dto) {
 		boolean isSuccess;
 		KioskResponse response = new KioskResponse();
 		try {
-			isSuccess = service.updateLocation(dto);
-			KioskDto changedDto = service.getKiosk(dto.getId());
+			isSuccess = service.update(dto);
+			KioskDto changedDto = service.getKiosk(dto);
 			if (isSuccess) {
-				log.info(dto.getId() + "번 위치 " + dto.getLocation() + "로 바뀜");
+				log.info("kioskDto = {}", dto);
 				response.setDto(changedDto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
-				log.error("위치가 변경되지 않았습니다.");
+				log.error("정보가 변경되지 않았습니다.");
 				response.setDto(dto);
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
