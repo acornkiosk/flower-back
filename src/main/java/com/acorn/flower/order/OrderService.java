@@ -9,8 +9,6 @@ public interface OrderService {
 
 	public List<OrderDto> getOrders(OrderDto dto);
 
-	public List<OrderDto> getAllOrders();
-
 	public boolean deleteAll(OrderDto dto);
 
 	public boolean delete(OrderDto dto);
