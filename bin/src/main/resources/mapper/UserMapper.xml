@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
+<mapper namespace="mapper.UserMapper"></mapper>
+=======
 <mapper namespace="users">
     <select id="getUserList" resultType="userDto">
         SELECT ID, PASSWORD, USERNAME, RANK, ROLE, REGDATE
@@ -58,3 +61,4 @@
             id = #{id}
     </update>
 </mapper>
+>>>>>>> origin

@@ -1,52 +1,94 @@
 package com.acorn.flower.user;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserDao dao;
+	@Autowired
+	private UserDao dao;
 
-    @Override
-    public List<UserDto> getUserList() {
-        List<UserDto> list = dao.getUserList();
-        return list;
-    }
+	@Override
+	public List<UserDto> getUserList() {
+		List<UserDto> list = dao.getUserList();
+		return list;
+	}
 
-    @Override
-    public UserDto getUser(String id) { // UserDetails 때문에 유일하게 dto 안함 
-        UserDto dto = dao.getUser(id);
-        return dto;
-    }
+	@Override
+	public UserDto getUser(String id) {
+		UserDto dto = dao.getUser(id);
+		return dto;
+	}
 
-    @Override
-    public boolean insert(UserDto dto) {
-        int result = dao.insert(dto);
+	@Override
+	public boolean insert(UserDto dto) {
+		int result = dao.insert(dto);
 
-        if (result != 1) return false;
+		if (result != 1)
+			return false;
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public boolean delete(UserDto dto) {
-        int result = dao.delete(dto);
 
-        if(result != 1) return false;
+	@Override
+	public boolean delete(String id) {
+		int result = dao.delete(id);
 
-        return true;
-    }
+		if (result != 1)
+			return false;
 
-    @Override
-    public boolean updateUser(UserDto dto) {
-        int result = dao.update(dto);
+		return true;
+	}
 
-        if(result == 0) return false;
+	@Override
+	public boolean updateUser(UserDto dto) {
+		int result = dao.update(dto);
 
-        return true;
-    }
+		if (result == 0)
+			return false;
+
+		return true;
+	}
+
+
+	@Override
+	public boolean ownerInsert(UserDto dto) {
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		dto.setPassword(encoder.encode(dto.getPassword()));
+		
+		int result = dao.ownerInsert(dto);
+
+		if (result == 0)
+			return false;
+
+		return true;
+	}
+
+
+	@Override
+	public boolean superInsert(UserDto dto) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		dto.setPassword(encoder.encode(dto.getPassword()));
+		
+		int result = dao.superInsert(dto);
+
+	
+		if (result == 0)
+			return false;
+
+		return true;
+	}
+
+
+	@Override
+	public List<UserDto> getOwnerList() {
+		List<UserDto> list = dao.getOwnerList();
+		return list;
+	}
 }

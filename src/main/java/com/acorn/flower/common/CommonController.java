@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,6 +27,11 @@ public class CommonController {
 	 * @param code_id
 	 * @return
 	 */
+	@GetMapping("/test")
+	public String test() {
+		return "testgood";
+	}
+	
 	@PostMapping("/api/common/child")
 	public ResponseEntity<CommonResponse> getChild(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
