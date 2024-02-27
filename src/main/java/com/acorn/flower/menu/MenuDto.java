@@ -1,5 +1,7 @@
 package com.acorn.flower.menu;
 
+import java.io.Serializable;
+
 import org.apache.ibatis.type.Alias;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class MenuDto {
+public class MenuDto implements Serializable{
 	private int id;
 	private String name;
 	private String img_name;
@@ -24,5 +26,5 @@ public class MenuDto {
 	private int category_id;
 	
 	private String category;
-	private MultipartFile image; //이미지 파일 업로드 처리를 위한 필드
+	private transient MultipartFile image; //이미지 파일 업로드 처리를 위한 필드
 }

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,14 +29,15 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu/update")
-	public ResponseEntity<MenuResponse> updateMenu(@RequestBody MenuDto dto) {
+	public ResponseEntity<MenuResponse> updateMenu(@ModelAttribute MenuDto dto) {
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
+		System.out.println("updateTest"+dto);
 		try {
 			isSuccess = menuService.update(dto);
 			if (isSuccess) {
 				log.info("menu = {}", dto.toString());
-				response.setDto(dto);
+				//response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -92,6 +94,7 @@ public class MenuController {
 	@PostMapping("/api/menu/get")
 	public ResponseEntity<MenuResponse> getMenu(@RequestBody MenuDto dto) {
 		MenuResponse response = new MenuResponse();
+		System.out.println(dto);
 		try {
 			MenuDto result = menuService.getMenu(dto);
 			if (dto != null) {
@@ -157,20 +160,20 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu")
-	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute	MenuDto dto) { 
+	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute MenuDto dto) { 
 		boolean isSuccess;
+		
 		MenuResponse response = new MenuResponse();
 		System.out.println(dto);
 		try {
+			dto.setIs_sold("false");
 			isSuccess = menuService.insert(dto);
-		
-			
 			if (isSuccess) {
 				
 				log.info("menu = {}", dto.toString());
-				response.setDto(dto);
+				//response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<>(response, HttpStatus.OK);
+				return new ResponseEntity<MenuResponse>(response,HttpStatus.OK); 
 			} else {
 				log.error("menu데이터 insert 실패");
 				response.setDto(dto);

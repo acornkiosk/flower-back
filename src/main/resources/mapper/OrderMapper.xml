@@ -11,6 +11,7 @@
 			,MENU_PRICE
 			,MENU_COUNT
 			,OPTIONS
+			,IS_COMPLETED
 			,REGDATE
 		)
 		VALUES
@@ -22,6 +23,7 @@
 			,#{menu_price}
 			,#{menu_count}
 			,#{options}
+			,'false'
 			,SYSDATE
 		)
 	</insert>
@@ -34,28 +36,20 @@
 			,MENU_NAME 
 			,MENU_PRICE 
 			,MENU_COUNT 
-			,OPTIONS 
+			,OPTIONS
+			,IS_COMPLETED
 			,REGDATE
 		FROM 
 			CART
 		<if test="order_id != 0">
 		WHERE 
-			ORDER_ID = #{order_id}
+			ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
 		</if>
-	</select>
-	
-	<select id="getAllOrders" resultType="orderDto">
-		SELECT
-			ORDER_ID
-			,ID 
-			,KIOSK_ID 
-			,MENU_NAME 
-			,MENU_PRICE 
-			,MENU_COUNT 
-			,OPTIONS 
-			,REGDATE
-		FROM 
-			CART
+		<if test="order_id == 0">
+		WHERE
+			IS_COMPLETED = 'false'
+		</if>
+		
 	</select>
 	
 	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
@@ -66,7 +60,8 @@
 			,MENU_NAME 
 			,MENU_PRICE 
 			,MENU_COUNT 
-			,OPTIONS 
+			,OPTIONS
+			,IS_COMPLETED 
 			,REGDATE 
 		FROM 
 			CART 
@@ -92,7 +87,10 @@
 		SET 
 			MENU_PRICE = #{menu_price}
 			,MENU_COUNT = #{menu_count}
+			,IS_COMPLETED = #{is_completed}
+			<if test="options != null">
 			,OPTIONS =  #{options}
+			</if>
 		WHERE id=#{id}
 	</update>
 </mapper>
