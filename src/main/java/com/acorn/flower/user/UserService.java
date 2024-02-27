@@ -16,5 +16,7 @@ public interface UserService {
 	public boolean ownerInsert(UserDto dto);
 	
 	public boolean superInsert(UserDto dto);
+	
+	public List<UserDto> getOwnerList();
 
 }

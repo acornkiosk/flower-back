@@ -9,5 +9,6 @@ public interface UserDao {
     public int update(UserDto dto);
     public int ownerInsert(UserDto dto);
     public int superInsert(UserDto dto);
+    public List<UserDto> getOwnerList();
 }
 

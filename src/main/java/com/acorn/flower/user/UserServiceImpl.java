@@ -77,13 +77,19 @@ public class UserServiceImpl implements UserService {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		dto.setPassword(encoder.encode(dto.getPassword()));
 		
-		int result = dao.ownerInsert(dto);
-
 		int result = dao.superInsert(dto);
 
+	
 		if (result == 0)
 			return false;
 
 		return true;
+	}
+
+
+	@Override
+	public List<UserDto> getOwnerList() {
+		List<UserDto> list = dao.getOwnerList();
+		return list;
 	}
 }

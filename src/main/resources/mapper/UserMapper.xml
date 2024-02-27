@@ -90,4 +90,13 @@
                 ,SYSDATE
             )
     </insert>
+    
+        <select id="getOwnerList" resultType="userDto">
+        SELECT
+        	<include refid="query"/> 
+        FROM 
+        	USER_MANAGE
+        where rank=3002
+    </select>
+    
 </mapper>

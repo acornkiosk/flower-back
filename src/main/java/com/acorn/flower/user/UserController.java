@@ -214,21 +214,30 @@ public class UserController {
 	public String ownerInsert(@RequestBody UserDto dto) {
 		boolean isSuccess=service.ownerInsert(dto);
 		if(isSuccess) {
-			return "성공";
+			return dto.getId();
 		}else {
 			return "실패";
 		}
 	}
 	
 	@PostMapping("/superInsert")
-	public String supernsert(@RequestBody UserDto dto) {
+	public String superInsert(@RequestBody UserDto dto) {
 		boolean isSuccess=service.superInsert(dto);
 		if(isSuccess) {
-			return "성공";
+			return dto.getId();
 		}else {
 			return "실패";
 		}
 	}
-	
+	@GetMapping("/super/ownerList")
+	public List<UserDto> ownerList() {
+		List<UserDto> list=service.getOwnerList();
+		System.out.println(list);
+		if(list !=null) {
+			return list;
+		}else {
+			return null;
+		}
+	}
 	
 }

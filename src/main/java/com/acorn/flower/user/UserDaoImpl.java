@@ -53,6 +53,12 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int superInsert(UserDto dto) {
 		int result = session.insert("users.superInsert",dto);
-		return 0;
+		return result;
+	}
+
+	@Override
+	public List<UserDto> getOwnerList() {
+		List<UserDto> list = session.selectList("users.getOwnerList");
+		return list;
 	}
 }
