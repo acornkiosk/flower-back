@@ -45,6 +45,7 @@
       <if test="category_id != 0">
 	    WHERE m.category_id = #{category_id}
 	  </if>
+	  ORDER_BY m.category_id ASC
    </select>
    
    <select id="getMenu" parameterType="menuDto" resultType="menuDto">
