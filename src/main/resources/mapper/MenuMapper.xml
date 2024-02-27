@@ -73,7 +73,7 @@
    	  SET 
    	  	  name=#{name} 
    	 	  ,price=#{price} 
-   	 	  <if test="img_name != null">,img_name=#{img_name}</if>
+   	 	  ,img_name=#{img_name}
    	  	  ,summary=#{summary} 
    	  	  ,description=#{description}
    	  	  ,is_sold=#{is_sold}
