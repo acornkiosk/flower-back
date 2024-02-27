@@ -33,6 +33,7 @@ public class UserController {
 	
 	@Autowired
 	private JwtUtil jwtUtil;
+
 	
     @Autowired
     private UserService service;
@@ -179,6 +180,10 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
+    
+    
     /**
      * token
      * @param dto
@@ -187,6 +192,8 @@ public class UserController {
 	//JSON 문자열이 전송되면 @RequestBody 어노테이션을 이용해서 추출해야 한다 
 	@PostMapping("/api/auth")
 	public String auth(@RequestBody UserDto dto) throws Exception {
+		System.out.println(dto.getId());
+		System.out.println(dto.getPassword());
 		try {
 			//입력한 username 과 password 를 인증토큰 객체에 담아서 
 			UsernamePasswordAuthenticationToken authToken=
@@ -195,7 +202,7 @@ public class UserController {
 			//인증 메니저 객체를 이용해서 인증을 진행한다 
 			authManager.authenticate(authToken);
 		}catch(Exception e) {
-			//예외가 발생하면 인증실패(아이디 혹은 비밀번호 틀림 등등...)
+			//예외가 발생하면 인증실패(아이디 혹은 비	밀번호 틀림 등등...)
 			e.printStackTrace();
 			throw new Exception("아이디 혹은 비밀번호가 틀려요!");
 		}

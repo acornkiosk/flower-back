@@ -25,6 +25,13 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
+	@Override
+	public int delete(String id) {
+		int result = session.delete("users.delete", id);
+		return result;
+	}
+
+
 
 	@Override
 	public int insert(UserDto dto) {
@@ -38,11 +45,6 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
-	@Override
-	public int delete(String id) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public int ownerInsert(UserDto dto) {

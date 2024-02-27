@@ -3,6 +3,7 @@ package com.acorn.flower.user;
 import java.util.List;
 
 public interface UserService {
+
 	public List<UserDto> getUserList();
 
 	public UserDto getUser(String id);
@@ -18,5 +19,6 @@ public interface UserService {
 	public boolean superInsert(UserDto dto);
 	
 	public List<UserDto> getOwnerList();
+
 
 }
