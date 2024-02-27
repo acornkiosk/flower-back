@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -217,34 +219,5 @@ public class UserController {
 		return "pong";
 	}
 	
-	@PostMapping("/super/ownerInsert")
-	public String ownerInsert(@RequestBody UserDto dto) {
-		boolean isSuccess=service.ownerInsert(dto);
-		if(isSuccess) {
-			return dto.getId();
-		}else {
-			return "실패";
-		}
-	}
-	
-	@PostMapping("/superInsert")
-	public String superInsert(@RequestBody UserDto dto) {
-		boolean isSuccess=service.superInsert(dto);
-		if(isSuccess) {
-			return dto.getId();
-		}else {
-			return "실패";
-		}
-	}
-	@GetMapping("/super/ownerList")
-	public List<UserDto> ownerList() {
-		List<UserDto> list=service.getOwnerList();
-		System.out.println(list);
-		if(list !=null) {
-			return list;
-		}else {
-			return null;
-		}
-	}
-	
+
 }
