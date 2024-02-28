@@ -46,7 +46,8 @@ public class SuperServiceImpl implements SuperService{
 
 	@Override
 	public List<UserDto> getOwnerList() {
-		List<UserDto> list = dao.getOwnerList();
+		int rank=3002;
+		List<UserDto> list = dao.getOwnerList(rank);
 		return list;
 	}
 
@@ -59,6 +60,24 @@ public class SuperServiceImpl implements SuperService{
 			return false;
 
 		return true;
+	}
+
+
+	@Override
+	public boolean update(UserDto dto) {
+		int result = dao.update(dto);
+
+		if (result != 1)
+			return false;
+
+		return true;
+	}
+
+
+	@Override
+	public UserDto getOwner(String id) {
+		UserDto dto=dao.getOwner(id);
+		return dto;
 	}
 
 }

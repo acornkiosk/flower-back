@@ -12,4 +12,8 @@ public interface SuperService {
 	public List<UserDto> getOwnerList();
 	
 	public boolean delete(String id);
+	
+	public UserDto getOwner(String id);
+	
+	public boolean update(UserDto dto);
 }

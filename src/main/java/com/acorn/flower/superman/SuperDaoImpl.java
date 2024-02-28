@@ -26,8 +26,8 @@ public class SuperDaoImpl implements SuperDao{
 	}
 
 	@Override
-	public List<UserDto> getOwnerList() {
-		List<UserDto> list = session.selectList("users.getOwnerList");
+	public List<UserDto> getOwnerList(int rank) {
+		List<UserDto> list = session.selectList("users.getOwnerList",rank);
 		return list;
 	}
 
@@ -35,5 +35,17 @@ public class SuperDaoImpl implements SuperDao{
 	public int delete(String id) {
 		int result = session.delete("users.delete", id);
 		return result;
+	}
+
+	@Override
+	public int update(UserDto dto) {
+		int result = session.update("users.ownerUpdate", dto);
+		return result;
+	}
+
+	@Override
+	public UserDto getOwner(String id) {
+		UserDto dto=session.selectOne("users.getUser",id);
+		return dto;
 	}
 }
