@@ -22,5 +22,6 @@ public class UserDto {
 	private int rank;
 	private String role;
 	private String regdate;
+	private String newId;
 }
 

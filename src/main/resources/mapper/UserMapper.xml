@@ -9,11 +9,14 @@
 	        ,ROLE
 	        ,REGDATE
 	</sql>
-    <select id="getUserList" resultType="userDto">
+    <select id="getUserList" resultType="userDto" parameterType="int">
         SELECT
         	<include refid="query"/> 
         FROM 
         	USER_MANAGE
+    	<if test="rank==3002">
+    		where rank=#{rank}
+    	</if>        
     </select>
 
     <select id="getUser" parameterType="String" resultType="userDto">
@@ -99,4 +102,12 @@
         where rank=3002
     </select>
     
+    <update id="ownerUpdate" parameterType="userDto">
+        UPDATE 
+        	USER_MANAGE
+        SET
+           USERNAME=#{userName}  <if test="newId!=null"> ,id=#{newId}</if>
+        WHERE
+            ID= #{id}
+    </update>
 </mapper>
