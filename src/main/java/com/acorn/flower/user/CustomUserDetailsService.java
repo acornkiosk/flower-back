@@ -32,7 +32,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		// 2. UserDetails 객체에 해당정보를 담아서 리턴해 주어야 한다
 		// DB 비밀번호(1234) 이기때문에 아래 해시화 해야한다. test임
-		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		dto.setPassword(encoder.encode(dto.getPassword()));
 
 		// 권한은 1개 이지만 List 에 담아서
 		List<GrantedAuthority> authList = new ArrayList<>();
