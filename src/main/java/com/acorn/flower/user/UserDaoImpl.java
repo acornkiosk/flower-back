@@ -12,6 +12,7 @@ public class UserDaoImpl implements UserDao {
 	@Autowired
 	private SqlSession session;
 
+
 	@Override
 	public List<UserDto> getUserList() {
 		List<UserDto> list = session.selectList("users.getUserList");
@@ -46,21 +47,5 @@ public class UserDaoImpl implements UserDao {
 	}
 
 
-	@Override
-	public int ownerInsert(UserDto dto) {
-		int result = session.insert("users.ownerInsert",dto);
-		return result;
-	}
-
-	@Override
-	public int superInsert(UserDto dto) {
-		int result = session.insert("users.superInsert",dto);
-		return result;
-	}
-
-	@Override
-	public List<UserDto> getOwnerList() {
-		List<UserDto> list = session.selectList("users.getOwnerList");
-		return list;
-	}
+	
 }
