@@ -13,7 +13,6 @@ public interface SuperService {
 	
 	public boolean delete(String id);
 	
-	public UserDto getOwner(String id);
 	
 	public boolean update(UserDto dto);
 }

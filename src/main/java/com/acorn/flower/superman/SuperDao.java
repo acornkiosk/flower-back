@@ -9,6 +9,5 @@ public interface SuperDao {
 	    public int superInsert(UserDto dto);
 	    public List<UserDto> getOwnerList(int rank);
 	    public int delete(String id);
-	    public UserDto getOwner(String id);
 	    public int update(UserDto dto);
 }

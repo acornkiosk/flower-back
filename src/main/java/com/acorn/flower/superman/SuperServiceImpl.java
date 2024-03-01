@@ -73,11 +73,4 @@ public class SuperServiceImpl implements SuperService{
 		return true;
 	}
 
-
-	@Override
-	public UserDto getOwner(String id) {
-		UserDto dto=dao.getOwner(id);
-		return dto;
-	}
-
 }

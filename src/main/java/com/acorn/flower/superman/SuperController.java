@@ -107,18 +107,6 @@ public class SuperController {
 		}
 	}
 	
-	
-	@PostMapping("/super/getOwner")
-	public UserDto getOwenr(@RequestBody String id) {
-		System.out.println(id);
-		UserDto dto=service.getOwner(id);
-		
-		if(dto !=null) {
-			return dto;
-		}else {
-			return null;
-		}
-	}
 
 	@PutMapping("/super/ownerUpdate/{id}")
 	public String ownerUpdate(@RequestBody UserDto dto) {

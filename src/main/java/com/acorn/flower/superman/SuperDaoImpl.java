@@ -43,9 +43,4 @@ public class SuperDaoImpl implements SuperDao{
 		return result;
 	}
 
-	@Override
-	public UserDto getOwner(String id) {
-		UserDto dto=session.selectOne("users.getUser",id);
-		return dto;
-	}
 }
