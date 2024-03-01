@@ -42,17 +42,17 @@ ADD FOREIGN KEY (kiosk_id) REFERENCES kiosk(id);
 CREATE SEQUENCE seq_menu_id;
 
 --메뉴 테이블 생성
-CREATE TABLE menu
-(
-	id 	NUMBER PRIMARY KEY,
-	name VARCHAR2(50) NOT NULL,
-	price NUMBER NOT NULL, 
-	img_name VARCHAR2(2000),
-	summary	VARCHAR2(50) NOT NULL,
-	description	VARCHAR2(2000) NOT NULL,
-	is_sold	VARCHAR2(50) CHECK (is_sold IN ('true', 'false')) NOT NULL,
-	category_id	NUMBER NOT NULL
+CREATE TABLE menu (
+    id NUMBER PRIMARY KEY,
+    name VARCHAR2(50) NOT NULL,
+    price NUMBER NOT NULL,
+    img_name VARCHAR2(200),
+    summary VARCHAR2(50) NOT NULL,
+    description VARCHAR2(200) NOT NULL,
+    is_sold VARCHAR2(50) CHECK (is_sold IN ('true', 'false')) NOT NULL,
+    category_id NUMBER NOT NULL
 );
+
 
 --외래키 추가(COMMON(부모)의 pk를 일반 필드로(FK)로 사용)
 ALTER TABLE menu
@@ -76,7 +76,7 @@ ADD FOREIGN KEY (rank) REFERENCES COMMON(code_id);
 CREATE TABLE COMMON
 (
 	code_id NUMBER	PRIMARY KEY,
-	p_code_id NUMBER,
+	p_code_id NUMBER ,
 	code_name VARCHAR2(50) NOT NULL,
 	code_value VARCHAR2(50),
 	code_img VARCHAR2(2000) 

@@ -40,7 +40,7 @@ public class SuperController {
      */
 	//JSON 문자열이 전송되면 @RequestBody 어노테이션을 이용해서 추출해야 한다 
 	@PostMapping("/api/auth")
-	public String auth(@RequestBody UserDto dto) throws Exception {
+	public String auth(@RequestBody SuperDto dto) throws Exception {
 		System.out.println(dto.getId());
 		System.out.println(dto.getPassword());
 		try {
@@ -67,7 +67,7 @@ public class SuperController {
 	}
     
 	@PostMapping("/super/ownerInsert")
-	public String ownerInsert(@RequestBody UserDto dto) {
+	public String ownerInsert(@RequestBody SuperDto dto) {
 		boolean isSuccess=service.ownerInsert(dto);
 		if(isSuccess) {
 			return dto.getId();
@@ -77,7 +77,7 @@ public class SuperController {
 	}
 	
 	@PostMapping("/superInsert")
-	public String superInsert(@RequestBody UserDto dto) {
+	public String superInsert(@RequestBody SuperDto dto) {
 		boolean isSuccess=service.superInsert(dto);
 		if(isSuccess) {
 			return dto.getId();
@@ -86,8 +86,8 @@ public class SuperController {
 		}
 	}
 	@GetMapping("/super/ownerList")
-	public List<UserDto> ownerList() {
-		List<UserDto> list=service.getOwnerList();
+	public List<SuperDto> ownerList() {
+		List<SuperDto> list=service.getOwnerList();
 		System.out.println(list);
 		if(list !=null) {
 			return list;
@@ -109,7 +109,7 @@ public class SuperController {
 	
 
 	@PutMapping("/super/ownerUpdate/{id}")
-	public String ownerUpdate(@RequestBody UserDto dto) {
+	public String ownerUpdate(@RequestBody SuperDto dto) {
 		System.out.println("아이디"+dto.getId()+"이름"+dto.getUserName()+"new"+dto.getNewId());
 		//mapper 삭제 처리하기
 		boolean isSuccess=service.update(dto);

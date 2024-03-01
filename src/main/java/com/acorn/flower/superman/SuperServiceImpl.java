@@ -15,7 +15,7 @@ public class SuperServiceImpl implements SuperService{
 	private SuperDao dao;
 
 	@Override
-	public boolean ownerInsert(UserDto dto) {
+	public boolean ownerInsert(SuperDto dto) {
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		dto.setPassword(encoder.encode(dto.getPassword()));
@@ -30,7 +30,7 @@ public class SuperServiceImpl implements SuperService{
 
 
 	@Override
-	public boolean superInsert(UserDto dto) {
+	public boolean superInsert(SuperDto dto) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		dto.setPassword(encoder.encode(dto.getPassword()));
 		
@@ -45,9 +45,8 @@ public class SuperServiceImpl implements SuperService{
 
 
 	@Override
-	public List<UserDto> getOwnerList() {
-		int rank=3002;
-		List<UserDto> list = dao.getOwnerList(rank);
+	public List<SuperDto> getOwnerList() {
+		List<SuperDto> list = dao.getOwnerList();
 		return list;
 	}
 
@@ -64,13 +63,20 @@ public class SuperServiceImpl implements SuperService{
 
 
 	@Override
-	public boolean update(UserDto dto) {
+	public boolean update(SuperDto dto) {
 		int result = dao.update(dto);
 
 		if (result != 1)
 			return false;
 
 		return true;
+	}
+
+
+	@Override
+	public SuperDto getOwner(String id) {
+		SuperDto dto=dao.getOwner(id);
+		return dto;
 	}
 
 }
