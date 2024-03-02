@@ -62,4 +62,10 @@ public class OrderServiceImpl implements OrderService {
 
 		return true;
 	}
+
+	@Override
+	public int getCartId() {
+		int cartId = dao.getCartId();
+		return cartId;
+	}
 }
