@@ -200,4 +200,29 @@ public class OrderController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
+	@GetMapping("/api/order/cartId")
+	public ResponseEntity<OrderResponse> getCartId() {
+		OrderResponse response = new OrderResponse();
+		OrderDto dto = new OrderDto();
+		try {
+			int cartId = service.getCartId();
+			if (cartId != 0) {
+				log.info("cartId : " + cartId);
+				dto.setOrder_id(cartId);
+				response.setDto(dto);
+				response.setStatus(HttpStatus.OK);
+				return new ResponseEntity<>(response, HttpStatus.OK);
+			} else {
+				log.error("주문번호 획득 실패");
+				response.setDto(dto);
+				response.setStatus(HttpStatus.BAD_REQUEST);
+				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			log.error("서버에 문제가 있습니다.");
+			response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 }

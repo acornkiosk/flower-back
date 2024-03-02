@@ -14,4 +14,6 @@ public interface OrderService {
 	public boolean delete(OrderDto dto);
 
 	public boolean update(OrderDto dto);
+	
+	public int getCartId();
 }

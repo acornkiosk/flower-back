@@ -93,4 +93,11 @@
 			</if>
 		WHERE id=#{id}
 	</update>
+	
+	<select id="getCartId" resultType="int">
+		SELECT 
+			SEQ_CART_ID.NEXTVAL
+		FROM 
+			DUAL 
+	</select>
 </mapper>
