@@ -7,6 +7,14 @@
 	        ,USERNAME
 	        ,RANK
 	        ,ROLE
+	        ,TO_CHAR(REGDATE, 'YYYY/MM/DD') AS REGDATE
+	</sql>
+	<sql id="query_insert">
+			ID
+	        ,PASSWORD
+	        ,USERNAME
+	        ,RANK
+	        ,ROLE
 	        ,REGDATE
 	</sql>
     <select id="getUserList" resultType="userDto" parameterType="int">
@@ -31,7 +39,7 @@
     <insert id="insert" parameterType="userDto">
         INSERT INTO USER_MANAGE
             (
-               <include refid="query"/>
+               <include refid="query_insert"/>
             )
         VALUES
             (
@@ -39,8 +47,8 @@
                 ,#{password}
                 ,#{userName}
                 ,#{rank}
-                ,'[4004]'
-                ,SYSDATE
+                ,'4004'
+                ,TO_DATE(#{regdate}, 'YYYY-MM-DD')
             )
     </insert>
 
