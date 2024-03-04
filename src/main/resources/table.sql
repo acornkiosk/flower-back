@@ -74,7 +74,7 @@ ADD FOREIGN KEY (rank) REFERENCES COMMON(code_id);
 --공통 테이블 생성
 CREATE TABLE COMMON
 (
-	code_id NUMBER	PRIMARY KEY,
+	code_id NUMBER PRIMARY KEY,
 	p_code_id NUMBER ,
 	code_name VARCHAR2(50) NOT NULL,
 	code_value VARCHAR2(50),
