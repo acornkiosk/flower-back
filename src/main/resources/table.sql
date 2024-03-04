@@ -26,11 +26,8 @@ CREATE TABLE CART
 -- 단일 주문 id 시퀀스 생성
 CREATE SEQUENCE seq_order_id;
 
--- 주문 테이블 id 전용 테이블 생성
-CREATE TABLE cart_id
-(
-	id NUMBER NOT NULL
-);
+-- 주문 테이블 id 전용 시퀀스 생성
+CREATE SEQUENCE seq_cart_id;
 
 
 --외래키 추가(kiosk(부모)의 pk를 일반 필드로(FK)로 사용)

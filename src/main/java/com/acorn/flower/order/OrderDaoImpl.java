@@ -48,4 +48,10 @@ public class OrderDaoImpl implements OrderDao {
 		return result;
 	}
 
+	@Override
+	public int getCartId() {
+		int cartId = session.selectOne("order.getCartId");
+		return cartId;
+	}
+
 }
