@@ -5,10 +5,10 @@ import java.util.List;
 import com.acorn.flower.user.UserDto;
 
 public interface SuperDao {
-	  public int ownerInsert(UserDto dto);
-	    public int superInsert(UserDto dto);
-	    public List<UserDto> getOwnerList(int rank);
+	  public int ownerInsert(SuperDto dto);
+	    public int superInsert(SuperDto dto);
+	    public List<SuperDto> getOwnerList();
 	    public int delete(String id);
-	    public UserDto getOwner(String id);
-	    public int update(UserDto dto);
+	    public SuperDto getOwner(String id);
+	    public int update(SuperDto dto);
 }

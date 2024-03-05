@@ -14,38 +14,39 @@ public class SuperDaoImpl implements SuperDao{
 	private SqlSession session;
 	
 	@Override
-	public int ownerInsert(UserDto dto) {
-		int result = session.insert("users.ownerInsert",dto);
+	public int ownerInsert(SuperDto dto) {
+		int result = session.insert("super.ownerInsert",dto);
 		return result;
 	}
 
 	@Override
-	public int superInsert(UserDto dto) {
-		int result = session.insert("users.superInsert",dto);
+	public int superInsert(SuperDto dto) {
+		int result = session.insert("super.superInsert",dto);
 		return result;
 	}
 
 	@Override
-	public List<UserDto> getOwnerList(int rank) {
-		List<UserDto> list = session.selectList("users.getOwnerList",rank);
+	public List<SuperDto> getOwnerList() {
+		List<SuperDto> list = session.selectList("super.getOwnerList");
 		return list;
 	}
 
 	@Override
 	public int delete(String id) {
-		int result = session.delete("users.delete", id);
+		int result = session.delete("super.delete", id);
 		return result;
 	}
 
 	@Override
-	public int update(UserDto dto) {
-		int result = session.update("users.update", dto);
+
+	public int update(SuperDto dto) {
+		int result = session.update("super.ownerUpdate", dto);
 		return result;
 	}
 
 	@Override
-	public UserDto getOwner(String id) {
-		UserDto dto=session.selectOne("users.getUser",id);
+	public SuperDto getOwner(String id) {
+		SuperDto dto=session.selectOne("super.getOwner",id);
 		return dto;
 	}
 }
