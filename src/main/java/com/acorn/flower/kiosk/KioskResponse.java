@@ -15,5 +15,9 @@ import lombok.NoArgsConstructor;
 public class KioskResponse {
 	private KioskDto dto;
 	private List<KioskDto> list;
+	private int startPageNum;
+	private int endPageNum;
+	private int totalPageCount;
+	private int pageNum;
 	private HttpStatusCode status;
 }	

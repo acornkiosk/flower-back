@@ -73,7 +73,7 @@
     <insert id="ownerInsert" parameterType="userDto">
         INSERT INTO USER_MANAGE
             (
-               <include refid="query"/>
+               <include refid="query_insert"/>
             )
         VALUES
             (
@@ -89,7 +89,7 @@
     <insert id="superInsert" parameterType="userDto">
         INSERT INTO USER_MANAGE
             (
-               <include refid="query"/>
+               <include refid="query_insert"/>
             )
         VALUES
             (
@@ -97,14 +97,14 @@
                 ,#{password}
                 ,#{userName}
                 ,3001
-                ,'[4001,4002,4003,4004]'
+                ,'4001,4002,4003,4004'
                 ,SYSDATE
             )
     </insert>
     
         <select id="getOwnerList" resultType="userDto">
         SELECT
-        	<include refid="query"/> 
+        	<include refid="query_insert"/> 
         FROM 
         	USER_MANAGE
         where rank=3002

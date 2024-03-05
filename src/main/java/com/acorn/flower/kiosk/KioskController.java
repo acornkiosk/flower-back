@@ -35,7 +35,7 @@ public class KioskController {
 		try {
 			dto.setPower("off");
 			isSuccess = service.insert(dto);
-			List<KioskDto> list = service.getList();
+			List<KioskDto> list = service.getList(dto);
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
 				// 최근 추가한 dto를 얻어오는 로직 작성
@@ -61,16 +61,15 @@ public class KioskController {
 	 * 
 	 * @return
 	 */
-	@GetMapping("/api/kiosk/list")
-	public ResponseEntity<KioskResponse> getList() {
+	@PostMapping("/api/kiosk/list")
+	public ResponseEntity<KioskResponse> getList(@RequestBody int pageNum) {
 		KioskResponse response = new KioskResponse();
 		try {
-			List<KioskDto> list = service.getList();
-			if (!list.isEmpty()) {
-				for (KioskDto dto : list) {
+			response = service.selectPage(pageNum);
+			if (!response.getList().isEmpty()) {
+				for (KioskDto dto : response.getList()) {
 					log.info("kiosk = {}", dto.toString());
 				}
-				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
