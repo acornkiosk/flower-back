@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn.flower.jwt.JwtUtil;
 import com.acorn.flower.user.UserDto;
+import com.acorn.flower.user.UserResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @RestController
 public class SuperController {
 	
@@ -59,76 +63,5 @@ public class SuperController {
 
 		String token=jwtUtil.generateToken(dto.getId());
 		return token;
-	}
-	
-	@GetMapping("/pingtest")
-	public String ping() {
-		return "pong";
-	}
-    
-	@PostMapping("/super/ownerInsert")
-	public String ownerInsert(@RequestBody UserDto dto) {
-		boolean isSuccess=service.ownerInsert(dto);
-		if(isSuccess) {
-			return dto.getId();
-		}else {
-			return "실패";
-		}
-	}
-	
-	@PostMapping("/superInsert")
-	public String superInsert(@RequestBody UserDto dto) {
-		boolean isSuccess=service.superInsert(dto);
-		if(isSuccess) {
-			return dto.getId();
-		}else {
-			return "실패";
-		}
-	}
-	@GetMapping("/super/ownerList")
-	public List<UserDto> ownerList() {
-		List<UserDto> list=service.getOwnerList();
-		System.out.println(list);
-		if(list !=null) {
-			return list;
-		}else {
-			return null;
-		}
-	}
-	
-	@DeleteMapping("/super/ownerDelete/{id}")
-	public String ownerDelete(@PathVariable String id) {
-		//mapper 삭제 처리하기
-		boolean isSuccess=service.delete(id);
-		if(isSuccess) {
-			return id;
-		}else {
-			return "실패";
-		}
-	}
-	
-	
-	@PostMapping("/super/getOwner")
-	public UserDto getOwenr(@RequestBody String id) {
-		System.out.println(id);
-		UserDto dto=service.getOwner(id);
-		
-		if(dto !=null) {
-			return dto;
-		}else {
-			return null;
-		}
-	}
-
-	@PutMapping("/super/ownerUpdate/{id}")
-	public String ownerUpdate(@RequestBody UserDto dto) {
-		System.out.println("아이디"+dto.getId()+"이름"+dto.getUserName()+"new"+dto.getNewId());
-		//mapper 삭제 처리하기
-		boolean isSuccess=service.update(dto);
-		if(isSuccess) {
-			return "수정";
-		}else {
-			return "실패";
-		}
 	}
 }

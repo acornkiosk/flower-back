@@ -16,5 +16,7 @@ public class KioskDto {
 	private int id;
 	private String location;
 	private String power;
+	private int startRowNum;
+	private int endRowNum;
 }
 
