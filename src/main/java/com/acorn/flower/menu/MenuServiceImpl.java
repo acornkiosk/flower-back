@@ -2,6 +2,7 @@ package com.acorn.flower.menu;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,12 @@ import org.springframework.web.multipart.MultipartFile;
 public class MenuServiceImpl implements MenuService {
 	@Autowired
 	private MenuDao menuDao;
+	
+	//한 페이지에 몇개씩 표시할 것인지
+	final int PAGE_ROW_COUNT=5;
+	//하단 페이지를 몇개씩 표시할 것인지
+	final int PAGE_DISPLAY_COUNT=5;
+	
 	
 	/** 파일을 저장할 위치 */
 	@Value("${file.location}") 
@@ -46,9 +53,42 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public List<MenuDto> getList(MenuDto dto) {
+	public Map<String,Object> getList(MenuDto dto) {
+		int pageNum= dto.getPageNum();
+		//보여줄 페이지의 시작 ROWNUM
+		int startRowNum = 1 + (pageNum-1) * PAGE_ROW_COUNT;
+		//보여줄 페이지의 끝 ROWNUM
+		int endRowNum = pageNum * PAGE_ROW_COUNT;
+		
+		//startRowNum 과 endRowNum  을 MenuDto 객체에 담고
+		dto.setStartRowNum(startRowNum);
+		dto.setEndRowNum(endRowNum);
+		
 		List<MenuDto> list= menuDao.getList(dto);
-		return list;
+		
+		//하단 시작 페이지 번호 
+		int startPageNum = 1 + ((pageNum-1)/PAGE_DISPLAY_COUNT) * PAGE_DISPLAY_COUNT;
+		//하단 끝 페이지 번호
+		int endPageNum = startPageNum + PAGE_DISPLAY_COUNT - 1;
+		
+		//전체 row 의 갯수
+		int totalRow = menuDao.getCount(dto);
+		//전체 페이지의 갯수 구하기
+		int totalPageCount = (int)Math.ceil(totalRow / (double)PAGE_ROW_COUNT);
+		//끝 페이지 번호가 이미 전체 페이지 갯수보다 크게 계산되었다면 잘못된 값이다.
+		if(endPageNum > totalPageCount){
+			endPageNum = totalPageCount; //보정해 준다. 
+		}
+		
+		//react frontend에서 필요한 데이터를 Map에 담는다.
+		Map<String,Object> map= Map.of("list", list,
+				"startPageNum",startPageNum,
+				"endPageNum", endPageNum,
+				"totalPageCount", totalPageCount,
+				"pageNum",pageNum);
+		return map;
+		
+		
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package com.acorn.flower.menu;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -125,10 +126,12 @@ public class MenuController {
 	 */
 	@PostMapping("/api/menu/list")
 	public ResponseEntity<MenuResponse> getMenuList(@RequestBody MenuDto dto) {
-
+		
 		MenuResponse response = new MenuResponse();
 		try {
-			List<MenuDto> list = menuService.getList(dto);
+			//List<MenuDto> list = menuService.getList(dto).;
+			Map<String,Object> map=menuService.getList(dto);
+			List<MenuDto> list =(List<MenuDto>)map.get("list");
 			System.out.println(list);
 			if (!list.isEmpty()) {
 				for (MenuDto dto2 : list) {
@@ -136,6 +139,10 @@ public class MenuController {
 				}
 
 				response.setList(list);
+				response.setPageNum((int)map.get("pageNum"));
+				response.setStartPageNum((int)map.get("startPageNum"));
+				response.setEndPageNum((int)map.get("endPageNum"));
+				response.setTotalPageCount((int)map.get("totalPageCount"));
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {

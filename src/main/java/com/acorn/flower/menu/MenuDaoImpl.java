@@ -41,5 +41,11 @@ public class MenuDaoImpl implements MenuDao {
 		return result;
 	}
 
+	@Override
+	public int getCount(MenuDto dto) {
+		int result=session.selectOne("menu.getCount",dto);
+		return result;
+	}
+
 	
 }

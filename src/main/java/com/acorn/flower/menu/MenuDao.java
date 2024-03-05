@@ -8,5 +8,6 @@ public interface MenuDao {
 	public MenuDto getMenu(MenuDto dto);
 	public int update(MenuDto dto);
 	public int delete(MenuDto dto);
+	public int getCount(MenuDto dto);
 	
 }
