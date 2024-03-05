@@ -64,8 +64,7 @@ public class SuperController {
 		String token=jwtUtil.generateToken(dto.getId());
 		return token;
 	}
-<<<<<<< HEAD
-	
+
 	@GetMapping("/pingtest")
 	public String ping() {
 		return "pong";
@@ -124,6 +123,5 @@ public class SuperController {
 			return "실패";
 		}
 	}
-=======
->>>>>>> origin
+
 }
