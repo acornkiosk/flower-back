@@ -84,6 +84,7 @@ public class UserController {
             }
         } catch (Exception e) {
             log.error("서버에 문제가 있습니다.");
+            e.printStackTrace();
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
