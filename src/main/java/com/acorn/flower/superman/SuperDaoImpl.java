@@ -38,6 +38,7 @@ public class SuperDaoImpl implements SuperDao{
 	}
 
 	@Override
+
 	public int update(SuperDto dto) {
 		int result = session.update("super.ownerUpdate", dto);
 		return result;

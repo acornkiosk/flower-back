@@ -13,15 +13,15 @@ public class UserServiceImpl implements UserService {
 	private UserDao dao;
 
 	@Override
-	public List<UserDto> getUserList() {
-		List<UserDto> list = dao.getUserList();
+	public List<UserDto> getUserList(UserDto dto) {
+		List<UserDto> list = dao.getUserList(dto);
 		return list;
 	}
 
 	@Override
 	public UserDto getUser(String id) {
-		UserDto dto = dao.getUser(id);
-		return dto;
+		UserDto result = dao.getUser(id);
+		return result;
 	}
 
 	@Override
@@ -36,8 +36,8 @@ public class UserServiceImpl implements UserService {
 
 
 	@Override
-	public boolean delete(String id) {
-		int result = dao.delete(id);
+	public boolean delete(UserDto dto) {
+		int result = dao.delete(dto);
 
 		if (result != 1)
 			return false;

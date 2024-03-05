@@ -15,8 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.acorn.flower.jwt.JwtUtil;
 import com.acorn.flower.user.UserDto;
+import com.acorn.flower.user.UserResponse;
+
+import lombok.extern.slf4j.Slf4j;
 
 
+@Slf4j
 @RestController
 public class SuperController {
 	
@@ -60,6 +64,7 @@ public class SuperController {
 		String token=jwtUtil.generateToken(dto.getId());
 		return token;
 	}
+<<<<<<< HEAD
 	
 	@GetMapping("/pingtest")
 	public String ping() {
@@ -119,4 +124,6 @@ public class SuperController {
 			return "실패";
 		}
 	}
+=======
+>>>>>>> origin
 }
