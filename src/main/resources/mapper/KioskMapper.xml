@@ -41,7 +41,7 @@
 						ORDER BY ID ASC	
 					) result1
 			)
-		<if test="startRowNum != null">
+		<if test="startRowNum != 0">
 		WHERE 
 			rnum BETWEEN #{startRowNum} AND #{endRowNum}
 		</if>
