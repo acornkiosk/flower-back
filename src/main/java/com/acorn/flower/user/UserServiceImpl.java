@@ -26,6 +26,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean insert(UserDto dto) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+	    dto.setPassword(encoder.encode(dto.getPassword()));
 		int result = dao.insert(dto);
 
 		if (result != 1)

@@ -5,9 +5,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
+
+import com.acorn.flower.superman.SuperDao;
+import com.acorn.flower.superman.SuperDto;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -21,6 +25,9 @@ public class JwtUtil {
 		private String secret;
 	@Value("${jwt.expiration}")
 		private long expiration;
+	
+	@Autowired
+		private SuperDao dao;
 	
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -44,8 +51,9 @@ public class JwtUtil {
     //토큰을 만들어서 리턴해주는 메소드
     public String generateToken(String id) {
     	Map<String, Object> claims=new HashMap<String, Object>();
-    	//테스트로 추가 정보도 담아보기
-    	claims.put("role", "emp");
+    	//테스트로 추가 정보도 담아보
+    	SuperDto dto=dao.getOwner(id);
+    	claims.put("rank", dto.getRank());
     	return createToken(claims,id);
     }
     

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="super">
+	<sql id="query">
+			ID
+	        ,PASSWORD
+	        ,USERNAME
+	        ,RANK
+	        ,ROLE
+	        ,REGDATE
+	</sql>
+  
+
+    <delete id="delete" parameterType="superDto">
+        DELETE
+        FROM
+            USER_MANAGE
+        WHERE
+            id = #{id}
+    </delete>
+
+    <select id="getOwner" parameterType="String" resultType="superDto">
+        SELECT
+            <include refid="query"/>
+        FROM
+            USER_MANAGE
+        WHERE
+            ID = #{id}
+    </select>
+    
+    <insert id="ownerInsert" parameterType="superDto">
+        INSERT INTO USER_MANAGE
+            (
+               <include refid="query"/>
+            )
+        VALUES
+            (
+                #{id}
+                ,#{password}
+                ,#{userName}
+                ,3002
+                ,'[4001,4002,4003,4004]'
+                ,SYSDATE
+            )
+    </insert>
+    
+    <insert id="superInsert" parameterType="superDto">
+        INSERT INTO USER_MANAGE
+            (
+               <include refid="query"/>
+            )
+        VALUES
+            (
+                #{id}
+                ,#{password}
+                ,#{userName}
+                ,3001
+                ,'[4001,4002,4003,4004]'
+                ,SYSDATE
+            )
+    </insert>
+    
+        <select id="getOwnerList" resultType="superDto">
+        SELECT
+        	<include refid="query"/> 
+        FROM 
+        	USER_MANAGE
+        where rank=3002
+    </select>
+    
+    <update id="ownerUpdate" parameterType="superDto">
+        UPDATE 
+        	USER_MANAGE
+        SET
+           USERNAME=#{userName}  <if test="newId!=null"> ,id=#{newId}</if>
+        WHERE
+            ID= #{id}
+    </update>
+</mapper>
