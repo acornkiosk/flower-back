@@ -2,30 +2,48 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
 	<insert id="insert" parameterType="kioskDto">
-		INSERT INTO KIOSK (ID,LOCATION,POWER)
-		VALUES (seq_kiosk_id.NEXTVAL,#{location},'off')
+		INSERT INTO KIOSK 
+			(
+				ID
+				,LOCATION
+				,POWER
+			)
+		VALUES 
+			(
+				seq_kiosk_id.NEXTVAL
+				,#{location}
+				,'off'
+			)
 	</insert>
 	
 	<select id="getList" parameterType="kioskDto" resultType="kioskDto">
-		SELECT ID,LOCATION, POWER, ROWNUM
+		SELECT 
+			ID
+			,LOCATION
+			,POWER
 		FROM
 			(
-				SELECT result1.*, ROWNUM AS rnum
+				SELECT 
+					result1.*
+					,ROWNUM AS rnum
 				FROM
 					(
 						SELECT 
 							ID
 							,LOCATION
 							,POWER 
-						FROM KIOSK
+						FROM 
+							KIOSK
 						<if test="power != null">
-						WHERE power = #{power}
+						WHERE 
+							power = #{power}
 						</if> 
 						ORDER BY ID ASC	
 					) result1
 			)
 		<if test="startRowNum != null">
-		WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+		WHERE 
+			rnum BETWEEN #{startRowNum} AND #{endRowNum}
 		</if>
 				 
 	</select>
@@ -35,13 +53,18 @@
 			ID
 			,LOCATION
 			,POWER
-		FROM KIOSK
-		WHERE id = #{id}
+		FROM 
+			KIOSK
+		WHERE 
+			id = #{id}
 	</select>
 	
 	<delete id="delete" parameterType="kioskDto">
-		DELETE FROM KIOSK
-		WHERE id = #{id}
+		DELETE 
+		FROM 
+			KIOSK
+		WHERE 
+			id = #{id}
 	</delete>
 	
 	<update id="update" parameterType="kioskDto">
