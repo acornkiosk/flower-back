@@ -20,8 +20,8 @@ public class KioskDaoImpl implements KioskDao {
 	}
 
 	@Override
-	public List<KioskDto> getList() {
-		List<KioskDto> list = session.selectList("kiosk.getList");
+	public List<KioskDto> getList(KioskDto dto) {
+		List<KioskDto> list = session.selectList("kiosk.getList",dto);
 		return list;
 	}
 
@@ -40,6 +40,12 @@ public class KioskDaoImpl implements KioskDao {
 	@Override
 	public int update(KioskDto dto) {
 		int result = session.update("kiosk.update", dto);
+		return result;
+	}
+
+	@Override
+	public int getCount() {
+		int result = session.selectOne("kiosk.getCount");
 		return result;
 	}
 
