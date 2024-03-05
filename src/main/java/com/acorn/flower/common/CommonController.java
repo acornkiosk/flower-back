@@ -23,15 +23,11 @@ public class CommonController {
 
 	/**
 	 * 하위 정보 리스트 조회
-	 * 
+	 * code_id = 0 이면 전체 조회 
+	 * code_id != 0 이면 P_CODE_ID = code_id 조회
 	 * @param code_id
 	 * @return
-	 */
-	@GetMapping("/test")
-	public String test() {
-		return "testgood";
-	}
-	
+	 */	
 	@PostMapping("/api/common/child")
 	public ResponseEntity<CommonResponse> getChild(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
@@ -60,6 +56,7 @@ public class CommonController {
 
 	/**
 	 * 단일 정보 조회
+	 * code_id 필요
 	 * @param code_id
 	 * @return
 	 */
@@ -85,7 +82,13 @@ public class CommonController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
+	
+	/**
+	 * 공통코드 추가
+	 * code_id,p_code_id,code_name,code_value,code_img 필요
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/common/insert")
 	public ResponseEntity<CommonResponse> addCommon(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
@@ -111,6 +114,12 @@ public class CommonController {
 		}
 	}
 
+	/**
+	 * 공통코드 수정
+	 * 
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/common/update")
 	public ResponseEntity<CommonResponse> updateCommon(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();
@@ -133,6 +142,12 @@ public class CommonController {
 		}
 	}
 
+	/**
+	 * 공통코드 삭제
+	 * code_id 필요
+	 * @param dto
+	 * @return
+	 */
 	@PostMapping("/api/common/delete")
 	public ResponseEntity<CommonResponse> deleteCommon(@RequestBody CommonDto dto) {
 		CommonResponse response = new CommonResponse();

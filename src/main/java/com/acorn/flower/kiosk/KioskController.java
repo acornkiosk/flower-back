@@ -24,7 +24,7 @@ public class KioskController {
 
 	/**
 	 * 키오스크 추가 body: 키오스크 dto
-	 * 
+	 * location 필요
 	 * @param dto
 	 * @return
 	 */
@@ -57,8 +57,8 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 리스트 조회 param x
-	 * 
+	 * 키오스크 페이지 리스트 조회
+	 * pageNum 필요
 	 * @return
 	 */
 	@PostMapping("/api/kiosk/page")
@@ -84,8 +84,8 @@ public class KioskController {
 		}
 	}
 	/**
-	 * 키오스크 조회 body : kiosk id
-	 * 
+	 * 키오스크 조회
+	 * id 필요
 	 * @param id
 	 * @return
 	 */
@@ -112,8 +112,8 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 삭제 body : kiosk id
-	 * 
+	 * 키오스크 삭제
+	 * id 필요
 	 * @param id
 	 * @return
 	 */
@@ -142,8 +142,8 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 정보 변경 body: kiosk id, location, power
-	 * 
+	 * 키오스크 정보 변경
+	 * id, location, power 필요
 	 * @param dto
 	 * @return
 	 */
