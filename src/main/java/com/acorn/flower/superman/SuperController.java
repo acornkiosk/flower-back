@@ -30,13 +30,7 @@ public class SuperController {
 	private AuthenticationManager authManager;
 	
 	@Autowired
-	private JwtUtil jwtUtil;
-
-	
-    @Autowired
-    private SuperService service;
-    
-    
+	private JwtUtil jwtUtil;  
     /**
      * token
      * @param dto
