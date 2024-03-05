@@ -35,13 +35,6 @@ public class SecurityConfig {
 		httpSecurity.csrf(csrf -> csrf.disable())
 		.authorizeHttpRequests(config->
 		config
-
-//		.requestMatchers(whiteList).permitAll() //whiteList 요청은 로그인과 상관없이 모두 허용
-//		.requestMatchers("/super/**").hasRole("super") //슈퍼계정
-//		.requestMatchers("/owner/**").hasAnyRole("owner","super")  //사장
-//		.requestMatchers("/manager/**").hasAnyRole("owner","super","manager")  //사장
-//		.requestMatchers("/emp/**").hasAnyRole("owner","emp","super","manager")  //사장+사원
-
 		.requestMatchers("/**").permitAll()
 		.requestMatchers("/super/**").hasRole("super") //슈퍼계정
 		.requestMatchers("/owner/**").hasAnyRole("owner","super")  //사장

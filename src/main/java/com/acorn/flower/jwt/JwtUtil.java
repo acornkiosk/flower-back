@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import com.acorn.flower.superman.SuperDao;
-import com.acorn.flower.superman.SuperDto;
+import com.acorn.flower.user.UserDao;
+import com.acorn.flower.user.UserDto;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -27,7 +27,7 @@ public class JwtUtil {
 		private long expiration;
 	
 	@Autowired
-		private SuperDao dao;
+	private UserDao dao;
 	
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -52,7 +52,7 @@ public class JwtUtil {
     public String generateToken(String id) {
     	Map<String, Object> claims=new HashMap<String, Object>();
     	//테스트로 추가 정보도 담아보
-    	SuperDto dto=dao.getOwner(id);
+    	UserDto dto=dao.getUser(id);
     	claims.put("rank", dto.getRank());
     	return createToken(claims,id);
     }

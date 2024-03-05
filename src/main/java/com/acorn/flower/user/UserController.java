@@ -35,7 +35,9 @@ public class UserController {
     private UserService service;
 
     /**
-     * list all members of user
+     * list all members of user 
+     * rank = 0 이면 전체 리스트 
+     * rank != 0 이면 특정 rank만
      * @return
      */
     @PostMapping("/api/user/list")
@@ -92,6 +94,7 @@ public class UserController {
 
     /**
      * create a new user, find a user by dto
+     * id, password,userName, rank 필요
      * @param dto
      * @return
      */
@@ -152,6 +155,7 @@ public class UserController {
 
     /**
      * update user, find a user by dto
+     * id, userName, rank, role 필요
      * @param dto
      * @return
      */
