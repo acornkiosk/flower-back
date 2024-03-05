@@ -38,14 +38,14 @@ public class UserController {
      * list all members of user
      * @return
      */
-    @GetMapping("/api/user/list")
-    public ResponseEntity<UserResponse> getUserList() {
+    @PostMapping("/api/user/list")
+    public ResponseEntity<UserResponse> getUserList(@RequestBody UserDto dto) {
         UserResponse response = new UserResponse();
         try {
-            List<UserDto> list = service.getUserList();
+            List<UserDto> list = service.getUserList(dto);
             if (!list.isEmpty()) {
-                for (UserDto dto : list) {
-                    log.info("user = {}", dto.toString());
+                for (UserDto tmp : list) {
+                    log.info("user = {}", tmp.toString());
                 }
                 response.setList(list);
                 response.setStatus(HttpStatus.OK);
@@ -131,7 +131,7 @@ public class UserController {
         UserResponse response = new UserResponse();
         try {
             UserDto result = service.getUser(dto.getId());
-            isSuccess = service.delete(dto.getId());
+            isSuccess = service.delete(dto);
             if (isSuccess) {
                 log.info(dto.getId() + "번 삭제되었습니다.");
                 response.setDto(result);
