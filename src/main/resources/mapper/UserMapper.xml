@@ -19,12 +19,28 @@
 	</sql>
     <select id="getUserList" resultType="userDto" parameterType="userDto">
         SELECT
-        	<include refid="query"/> 
-        FROM 
-        	USER_MANAGE
-    	<if test="rank != 0">
-    		where rank=#{rank}
-    	</if>        
+            <include refid="query"/>
+        FROM
+        (
+            SELECT
+                result1.*
+                ,ROWNUM AS rnum
+            FROM
+            (
+                SELECT
+                    <include refid="query_insert"/>
+                FROM
+                    USER_MANAGE
+                <if test="rank != 0">
+                WHERE
+                        RANK=#{rank}
+                </if>
+            ) result1
+        )
+        <if test="startRowNum != 0">
+        WHERE
+            rnum BETWEEN #{startRowNum} AND #{endRowNum}
+        </if>
     </select>
 
     <select id="getUser" parameterType="String" resultType="userDto">
@@ -81,4 +97,11 @@
         WHERE
             id = #{id}
     </update>
+
+    <select id="getCount" resultType="Integer">
+        SELECT
+            NVL(MAX(ROWNUM),0)
+        FROM
+            USER_MANAGE
+    </select>
 </mapper>
