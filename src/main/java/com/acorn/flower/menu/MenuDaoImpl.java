@@ -19,7 +19,7 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public List<MenuDto> getList(MenuDto dto) {
-		List<MenuDto> list = session.selectList("menu.getList",dto);
+		List<MenuDto> list = session.selectList("menu.getList", dto);
 		return list;
 	}
 
@@ -31,21 +31,20 @@ public class MenuDaoImpl implements MenuDao {
 
 	@Override
 	public int update(MenuDto dto) {
-		int result=session.update("menu.update",dto);
+		int result = session.update("menu.update", dto);
 		return result;
 	}
 
 	@Override
 	public int delete(MenuDto dto) {
-		int result= session.delete("menu.delete",dto);
+		int result = session.delete("menu.delete", dto);
 		return result;
 	}
 
 	@Override
 	public int getCount(MenuDto dto) {
-		int result=session.selectOne("menu.getCount",dto);
+		int result = session.selectOne("menu.getCount", dto);
 		return result;
 	}
 
-	
 }
