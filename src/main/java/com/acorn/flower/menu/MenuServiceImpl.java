@@ -54,15 +54,17 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public MenuResponse getList(MenuDto dto) {
 		int pageNum = dto.getPageNum();
-		// 보여줄 페이지의 시작 ROWNUM
-		int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
-		// 보여줄 페이지의 끝 ROWNUM
-		int endRowNum = pageNum * PAGE_ROW_COUNT;
+		System.out.println(pageNum);
+		if(pageNum != 0) {
+			// 보여줄 페이지의 시작 ROWNUM
+			int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
+			// 보여줄 페이지의 끝 ROWNUM
+			int endRowNum = pageNum * PAGE_ROW_COUNT;
 
-		// startRowNum 과 endRowNum 을 MenuDto 객체에 담고
-		dto.setStartRowNum(startRowNum);
-		dto.setEndRowNum(endRowNum);
-
+			// startRowNum 과 endRowNum 을 MenuDto 객체에 담고
+			dto.setStartRowNum(startRowNum);
+			dto.setEndRowNum(endRowNum);
+		}
 		List<MenuDto> list = menuDao.getList(dto);
 
 		// 하단 시작 페이지 번호
