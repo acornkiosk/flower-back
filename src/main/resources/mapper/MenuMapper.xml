@@ -76,10 +76,17 @@
 				    WHERE 
 				    	m.category_id = #{category_id}
 				   </if>
+			       <if test ="sort=='asc'">
+				   ORDER BY price asc
+				   </if>
+				   <if test ="sort=='desc'">
+				   ORDER BY price desc
+				   </if>		
 			   ) result1
 			)
 	   WHERE 
 	   		rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	  
 
    </select>
    
