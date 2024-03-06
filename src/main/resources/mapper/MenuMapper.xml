@@ -30,34 +30,56 @@
    
 
    	<select id="getCount" parameterType="menuDto" resultType="int">
-		SELECT NVL(MAX(ROWNUM),0)
-		FROM menu
+		SELECT 
+			NVL(MAX(ROWNUM),0)
+		FROM 
+			menu
 		<if test="category_id != 0">
-	    WHERE category_id=#{category_id}
+	    WHERE 
+	    	category_id=#{category_id}
 	    </if>
 	</select>
 	
 	<!-- 전체 or 카테고리별 메뉴 리스트-->
    <select id="getList" parameterType="menuDto" resultType="menuDto">
-       SELECT *
+       SELECT 
+       		ID
+       		,NAME
+       		,PRICE
+       		,IMG_NAME
+       		,SUMMARY
+       		,DESCRIPTION
+       		,IS_SOLD
+       		,CATEGORY_ID
+       		,CATEGORY
        FROM
-       (SELECT result1.*, ROWNUM AS rnum
-       	FROM
-	       (SELECT m.id AS id
-	       		  ,m.name AS name
-	       		  ,m.price AS price
-	       		  ,m.img_name AS img_name
-			      ,m.summary AS summary
-			      ,m.description as description
-			      ,m.is_sold AS is_sold
-			      ,m.category_id AS category_id
-			      ,c.CODE_NAME AS category
-	       FROM menu m 
-	       JOIN common c ON m.CATEGORY_ID =c.CODE_ID 
-	       <if test="category_id != 0">
-		    WHERE m.category_id = #{category_id}
-		   </if>) result1)
-	   WHERE rnum BETWEEN #{startRowNum} AND #{endRowNum}
+	       (
+	       	SELECT 
+	       		result1.*, ROWNUM AS rnum
+	       	FROM
+		       (
+			       SELECT 
+			       		m.id AS id
+		       		    ,m.name AS name
+		       		    ,m.price AS price
+		       		    ,m.img_name AS img_name
+				        ,m.summary AS summary
+				        ,m.description as description
+				        ,m.is_sold AS is_sold
+				        ,m.category_id AS category_id
+				        ,c.CODE_NAME AS category
+			       FROM 
+			       		menu m 
+			       JOIN 
+			       		common c ON m.CATEGORY_ID =c.CODE_ID 
+			       <if test="category_id != 0">
+				    WHERE 
+				    	m.category_id = #{category_id}
+				   </if>
+			   ) result1
+			)
+	   WHERE 
+	   		rnum BETWEEN #{startRowNum} AND #{endRowNum}
 
    </select>
    
