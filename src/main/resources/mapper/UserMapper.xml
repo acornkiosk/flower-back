@@ -17,14 +17,34 @@
 	        ,ROLE
 	        ,REGDATE
 	</sql>
-    <select id="getUserList" resultType="userDto" parameterType="int">
+    <select id="getUserList" parameterType="userDto" resultType="userDto">
         SELECT
-        	<include refid="query"/> 
-        FROM 
-        	USER_MANAGE
-    	<if test="rank==3002">
-    		where rank=#{rank}
-    	</if>        
+            USERNAME,
+            ID,
+            PASSWORD,
+            RANK,
+            ROLE,
+            REGDATE
+        FROM
+            (
+                SELECT
+                    result1.*
+                    ,ROWNUM AS rnum
+                FROM
+                    (
+                        SELECT
+                             ID
+                             ,PASSWORD
+                             ,USERNAME
+                             ,RANK
+                             ,ROLE
+                             ,REGDATE
+                        FROM
+                            USER_MANAGE
+                    ) result1
+            )
+        WHERE
+            rnum BETWEEN #{startRowNum} AND #{endRowNum}
     </select>
 
     <select id="getUser" parameterType="String" resultType="userDto">
@@ -118,4 +138,10 @@
         WHERE
             ID= #{id}
     </update>
+    <select id="getCount" resultType="Integer">
+        SELECT
+            NVL(MAX(ROWNUM), 0)
+        FROM
+            USER_MANAGE
+    </select>
 </mapper>

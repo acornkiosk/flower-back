@@ -1,13 +1,10 @@
 package com.acorn.flower.user;
 
-import lombok.Builder;
-import org.apache.ibatis.type.Alias;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.apache.ibatis.type.Alias;
 
 
 @Alias("userDto")
@@ -18,10 +15,12 @@ import org.springframework.http.HttpStatus;
 public class UserDto {
 	private String userName;
 	private String id;
+	private int startRowNum;
+	private int endRowNum;
 	private String password;
 	private int rank;
 	private String role;
 	private String regdate;
-	private String newId;
+
 }
 

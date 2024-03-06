@@ -122,7 +122,7 @@ public class SuperController {
 
 	@PutMapping("/super/ownerUpdate/{id}")
 	public String ownerUpdate(@RequestBody UserDto dto) {
-		System.out.println("아이디"+dto.getId()+"이름"+dto.getUserName()+"new"+dto.getNewId());
+		System.out.println("아이디"+dto.getId()+"이름"+dto.getUserName());
 		//mapper 삭제 처리하기
 		boolean isSuccess=service.update(dto);
 		if(isSuccess) {

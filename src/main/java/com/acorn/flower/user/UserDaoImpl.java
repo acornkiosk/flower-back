@@ -1,10 +1,10 @@
 package com.acorn.flower.user;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -14,7 +14,7 @@ public class UserDaoImpl implements UserDao {
 
 
 	@Override
-	public List<UserDto> getUserList() {
+	public List<UserDto> getUserList(UserDto dto) {
 		List<UserDto> list = session.selectList("users.getUserList");
 		return list;
 	}
@@ -46,6 +46,11 @@ public class UserDaoImpl implements UserDao {
 		return result;
 	}
 
+	@Override
+	public int getCount() {
+		int result = session.selectOne("users.getCount");
+		return result;
+	}
 
-	
+
 }
