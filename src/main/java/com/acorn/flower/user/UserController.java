@@ -28,8 +28,7 @@ public class UserController {
 
     /**
      * list all members of user 
-     * rank = 0 이면 전체 리스트 
-     * rank != 0 이면 특정 rank만
+     * pageNum 필요
      * @return
      */
     @PostMapping("/api/user/list")
@@ -58,6 +57,7 @@ public class UserController {
 
     /**
      * find a user by id
+     * id 필요
      * @param id
      * @return
      */
@@ -118,6 +118,7 @@ public class UserController {
 
     /**
      * delete user, find a user by id
+     * id 필요
      * @param id
      * @return
      */
