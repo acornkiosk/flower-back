@@ -13,9 +13,9 @@ import java.util.List;
 public class UserResponse {
     private List<UserDto> list;
     private UserDto dto;
-    private HttpStatus status;
     private int startPageNum;
     private int endPageNum;
     private int totalPageCount;
     private int pageNum;
+    private HttpStatus status;
 }

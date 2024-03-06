@@ -1,6 +1,7 @@
 package com.acorn.flower.menu;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 public class MenuController {
 	@Autowired
 	private MenuService menuService;
+
 	/**
 	 * 메뉴 수정
 	 * 
@@ -32,12 +34,12 @@ public class MenuController {
 	public ResponseEntity<MenuResponse> updateMenu(@ModelAttribute MenuDto dto) {
 		boolean isSuccess;
 		MenuResponse response = new MenuResponse();
-		System.out.println("updateTest"+dto);
+		System.out.println("updateTest" + dto);
 		try {
 			isSuccess = menuService.update(dto);
 			if (isSuccess) {
 				log.info("menu = {}", dto.toString());
-				//response.setDto(dto);
+				// response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -68,7 +70,7 @@ public class MenuController {
 			MenuDto result = menuService.getMenu(dto);
 			isSuccess = menuService.delete(dto);
 			if (isSuccess) {
-				log.info(dto.getId()+ "번 삭제됨");
+				log.info(dto.getId() + "번 삭제됨");
 				response.setDto(result);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
@@ -128,21 +130,17 @@ public class MenuController {
 
 		MenuResponse response = new MenuResponse();
 		try {
-			List<MenuDto> list = menuService.getList(dto);
-			System.out.println(list);
-			if (!list.isEmpty()) {
-				for (MenuDto dto2 : list) {
+			response = menuService.getList(dto);
+			if (!response.getList().isEmpty()) {
+				for (MenuDto dto2 : response.getList()) {
 					log.info("menu = {}", dto2.toString());
 				}
-
-				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
 				log.error("menu데이터 getList 실패");
 				response.setStatus(HttpStatus.BAD_REQUEST);
 				return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -160,20 +158,20 @@ public class MenuController {
 	 * @return
 	 */
 	@PostMapping("/api/menu")
-	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute MenuDto dto) { 
+	public ResponseEntity<MenuResponse> addMenu(@ModelAttribute MenuDto dto) {
 		boolean isSuccess;
-		
+
 		MenuResponse response = new MenuResponse();
 		System.out.println(dto);
 		try {
 			dto.setIs_sold("false");
 			isSuccess = menuService.insert(dto);
 			if (isSuccess) {
-				
+
 				log.info("menu = {}", dto.toString());
-				//response.setDto(dto);
+				// response.setDto(dto);
 				response.setStatus(HttpStatus.OK);
-				return new ResponseEntity<MenuResponse>(response,HttpStatus.OK); 
+				return new ResponseEntity<MenuResponse>(response, HttpStatus.OK);
 			} else {
 				log.error("menu데이터 insert 실패");
 				response.setDto(dto);

@@ -15,12 +15,11 @@ import org.apache.ibatis.type.Alias;
 public class UserDto {
 	private String userName;
 	private String id;
-	private int startRowNum;
-	private int endRowNum;
 	private String password;
 	private int rank;
 	private String role;
 	private String regdate;
-
+	private int startRowNum;
+	private int endRowNum;
 }
 

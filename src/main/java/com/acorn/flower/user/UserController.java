@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  *  user management
  *  @author "Younchan Oh", "Junho Lee"
@@ -25,7 +27,9 @@ public class UserController {
     private UserService service;
 
     /**
-     * list all members of user
+     * list all members of user 
+     * rank = 0 이면 전체 리스트 
+     * rank != 0 이면 특정 rank만
      * @return
      */
     @PostMapping("/api/user/list")
@@ -34,8 +38,8 @@ public class UserController {
         try {
             response = service.selectPage(pageNum);
             if (!response.getList().isEmpty()) {
-                for (UserDto dto : response.getList()) {
-                    log.info("user = {}", dto.toString());
+                for (UserDto tmp : response.getList()) {
+                    log.info("user = {}", tmp.toString());
                 }
                 response.setStatus(HttpStatus.OK);
                 return new ResponseEntity<>(response, HttpStatus.OK);
@@ -74,6 +78,7 @@ public class UserController {
             }
         } catch (Exception e) {
             log.error("서버에 문제가 있습니다.");
+            e.printStackTrace();
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -81,6 +86,7 @@ public class UserController {
 
     /**
      * create a new user, find a user by dto
+     * id, password,userName, rank 필요
      * @param dto
      * @return
      */
@@ -103,7 +109,7 @@ public class UserController {
                 return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
             }
         } catch (Exception e) {
-        	e.printStackTrace();
+            e.printStackTrace();
             log.error("서버에 문제가 있습니다.");
             response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -121,7 +127,7 @@ public class UserController {
         UserResponse response = new UserResponse();
         try {
             UserDto result = service.getUser(dto.getId());
-            isSuccess = service.delete(dto.getId());
+            isSuccess = service.delete(dto);
             if (isSuccess) {
                 log.info(dto.getId() + "번 삭제되었습니다.");
                 response.setDto(result);
@@ -141,6 +147,7 @@ public class UserController {
 
     /**
      * update user, find a user by dto
+     * id, userName, rank, role 필요
      * @param dto
      * @return
      */
@@ -167,10 +174,4 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-    
-
-	
-
 }

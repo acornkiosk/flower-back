@@ -65,21 +65,24 @@
 			,REGDATE 
 		FROM 
 			CART 
-		WHERE ID = #{id}
+		WHERE 
+			ID = #{id}
 	</select>
 	
 	<delete id="deleteAll" parameterType="orderDto">
 		DELETE 
 		FROM 
 			CART
-		WHERE ORDER_ID = #{order_id}	
+		WHERE 
+			ORDER_ID = #{order_id}	
 	</delete>
 	
 	<delete id="delete" parameterType="orderDto">
 		DELETE 
 		FROM 
 			CART
-		WHERE id= #{id}
+		WHERE 
+			id= #{id}
 	</delete>
 	
 	<update id="update" parameterType="orderDto">
@@ -91,7 +94,8 @@
 			<if test="options != null">
 			,OPTIONS =  #{options}
 			</if>
-		WHERE id=#{id}
+		WHERE 
+			id=#{id}
 	</update>
 	
 	<select id="getCartId" resultType="int">

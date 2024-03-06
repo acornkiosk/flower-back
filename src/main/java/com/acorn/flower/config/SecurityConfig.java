@@ -27,6 +27,7 @@ public class SecurityConfig {
 		@Autowired
 		private JwtFilter jwtFilter;
 		
+		
 	@Bean // 메소드에서 리턴되는 SecurityFilterChain 을 bean 으로 만들어준다.
 	public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
 		// 화이트 리스트를 미리 배열에 넣어두기
@@ -34,19 +35,18 @@ public class SecurityConfig {
 		httpSecurity.csrf(csrf -> csrf.disable())
 		.authorizeHttpRequests(config->
 		config
-		.requestMatchers("/**").permitAll() //whiteList 요청은 로그인과 상관없이 모두 허용
+		.requestMatchers("/**").permitAll()
 		.requestMatchers("/super/**").hasRole("super") //슈퍼계정
 		.requestMatchers("/owner/**").hasAnyRole("owner","super")  //사장
 		.requestMatchers("/manager/**").hasAnyRole("owner","super","manager")  //사장
 		.requestMatchers("/emp/**").hasAnyRole("owner","emp","super","manager")  //사장+사원
-
 		.anyRequest().authenticated()
-		)	
-		.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+		)
+	
+		.sessionManagement(config -> config.sessionCreationPolicy(SessionCreationPolicy.STATELESS))	
 		//토큰을 검사하는 필터를 security filter 가 동작하기 이전에 동작하도록 설정 한다.
 		.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 				
-
 		// 설정된 정보대로 SecurityFilterChain 객체를 만들어서 반환한다
 		return httpSecurity.build();
 	}

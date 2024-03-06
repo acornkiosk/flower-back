@@ -24,7 +24,7 @@ public class KioskController {
 
 	/**
 	 * 키오스크 추가 body: 키오스크 dto
-	 * 
+	 * location 필요
 	 * @param dto
 	 * @return
 	 */
@@ -35,7 +35,7 @@ public class KioskController {
 		try {
 			dto.setPower("off");
 			isSuccess = service.insert(dto);
-			List<KioskDto> list = service.getList();
+			List<KioskDto> list = service.getList(dto);
 			if (isSuccess) {
 				log.info("kiosk = {}", dto.toString());
 				// 최근 추가한 dto를 얻어오는 로직 작성
@@ -57,20 +57,19 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 리스트 조회 param x
-	 * 
+	 * 키오스크 페이지 리스트 조회
+	 * pageNum 필요
 	 * @return
 	 */
-	@GetMapping("/api/kiosk/list")
-	public ResponseEntity<KioskResponse> getList() {
+	@PostMapping("/api/kiosk/page")
+	public ResponseEntity<KioskResponse> getList(@RequestBody int pageNum) {
 		KioskResponse response = new KioskResponse();
 		try {
-			List<KioskDto> list = service.getList();
-			if (!list.isEmpty()) {
-				for (KioskDto dto : list) {
+			response = service.selectPage(pageNum);
+			if (!response.getList().isEmpty()) {
+				for (KioskDto dto : response.getList()) {
 					log.info("kiosk = {}", dto.toString());
 				}
-				response.setList(list);
 				response.setStatus(HttpStatus.OK);
 				return new ResponseEntity<>(response, HttpStatus.OK);
 			} else {
@@ -84,10 +83,9 @@ public class KioskController {
 			return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-
 	/**
-	 * 키오스크 조회 body : kiosk id
-	 * 
+	 * 키오스크 조회
+	 * id 필요
 	 * @param id
 	 * @return
 	 */
@@ -114,8 +112,8 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 삭제 body : kiosk id
-	 * 
+	 * 키오스크 삭제
+	 * id 필요
 	 * @param id
 	 * @return
 	 */
@@ -144,8 +142,8 @@ public class KioskController {
 	}
 
 	/**
-	 * 키오스크 정보 변경 body: kiosk id, location, power
-	 * 
+	 * 키오스크 정보 변경
+	 * id, location, power 필요
 	 * @param dto
 	 * @return
 	 */
