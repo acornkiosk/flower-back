@@ -29,4 +29,5 @@ public class MenuDto implements Serializable {
 	private int pageNum; // 페이지 번호를 나타내는 필드
 	private int startRowNum; // 페이지 네이션 처리를 위한 필드
 	private int endRowNum; // 페이지 네이션 처리를 위한 필드
+	private String sort; //가격별로 정렬을 위한 필드
 }
