@@ -53,7 +53,13 @@
                 <if test="rank == 3003 || rank == 3004">
                 ,'4004'
                 </if>
+                <if test="regdate == null">
                 ,TO_DATE(SYSDATE, 'YYYY-MM-DD')
+                </if>
+                <if test="regdate != null">
+                ,TO_DATE(#{regdate}, 'YYYY-MM-DD')
+                </if>
+                
             )
     </insert>
 
