@@ -47,7 +47,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throw new UsernameNotFoundException("존재하지 않는 사용자 입니다");
 		}
 
-
+		
 		// 권한은 1개 이지만 List 에 담아서
 		List<GrantedAuthority> authList = new ArrayList<>();
 		// Authority 는 role 앞에 "ROLE_" 를 붙여주여야 한다.
