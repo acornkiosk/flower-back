@@ -3,7 +3,7 @@ os: linux
 
 files:
   - source:  /
-    destination: /home/ubuntu/Flower_back
+    destination: /home/ubuntu/spring-github-action
     overwrite: yes
 
 permissions:
