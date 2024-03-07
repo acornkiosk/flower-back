@@ -58,7 +58,7 @@ public class MenuController {
 
 	/**
 	 * menu 삭제
-	 * 
+	 * id 필요
 	 * @param id
 	 * @return
 	 */
@@ -89,7 +89,7 @@ public class MenuController {
 
 	/**
 	 * menu 가져오기
-	 * 
+	 * id 필요
 	 * @param id
 	 * @return dto
 	 */

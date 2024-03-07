@@ -54,8 +54,7 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public MenuResponse getList(MenuDto dto) {
 		int pageNum = dto.getPageNum();
-		System.out.println(pageNum);
-		if(pageNum != 0) {
+		if (pageNum != 0) {
 			// 보여줄 페이지의 시작 ROWNUM
 			int startRowNum = 1 + (pageNum - 1) * PAGE_ROW_COUNT;
 			// 보여줄 페이지의 끝 ROWNUM
@@ -89,7 +88,6 @@ public class MenuServiceImpl implements MenuService {
 		response.setTotalPageCount(totalPageCount);
 
 		return response;
-
 	}
 
 	@Override
