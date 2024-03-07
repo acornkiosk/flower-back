@@ -24,9 +24,6 @@ public class ImageController {
 	@Value("${file.location}")
 	private String fileLocation;
 	
-	
-	
-	
 	@PostMapping(
 	value = "/upload/images", 
 	//jpg, png, gif 이미지 데이터를 응답할 수 있도록 produces에 배열로 연결한다.

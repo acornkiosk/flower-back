@@ -6,11 +6,9 @@ server:
       tracking-modes: cookie
 
 spring:
-  datasource:
-    driver-class-name: oracle.jdbc.OracleDriver
-    url: jdbc:oracle:thin:@localhost:1521:xe
-    username: scott
-    password: tiger
+  profiles:
+    active:
+    - database
   servlet:
     multipart:
       max-request-size: 60MB
