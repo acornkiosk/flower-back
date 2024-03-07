@@ -3,7 +3,7 @@ run-name: Running
 on:
   push:
     branches:
-      - dongju
+      - main
       - 'releases/**'
 
 env:
