@@ -50,12 +50,13 @@
 ![flowerDB](https://github.com/acornkiosk/Flower_back/assets/94777814/cc380112-85fa-40b6-9dc2-4ae849308a3c)
 
 ## API 설계
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/6824e7d2-e84c-4a5a-99f8-be109596d44d)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/7d834a8d-638b-46da-a27e-f31ef82be611)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/1bc0943a-ff3a-4432-a1fb-cfd4982b3fe7)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/aabaf8a9-3c89-4055-a831-a19ddbef72dd)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/32aa5b4c-6eb5-4137-aecd-375539b26f7c)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/9e72a990-f936-4132-bc4f-ff6d0fead894)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/9009d22c-debf-45c1-9502-144bbc5a843e)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/e7564ea9-07cb-4164-b72a-0dce3870981f)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/0734253a-81c6-4287-8f1c-b72decbc88fb)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/6cc545d5-9c34-42bd-801a-a726668b17e3)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/25801c98-c4d8-4412-ac83-8e2f92960691)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/6cf3f077-8d32-4299-ac7f-a5696261be1b)
+![image](https://github.com/acornkiosk/Flower_back/assets/94777814/81dad43d-1cbe-48e9-817a-631494b2b34e)
 
 ## 로그인 프로세스
 ![image](https://github.com/acornkiosk/Flower_back/assets/94777814/769b7e44-8d16-45f4-808d-7af70177fd63)
@@ -84,7 +85,7 @@
 | 이름       | 진행 목록                                                    |
 | ------------ | ------------------------------------------------------------- |
 | 정도경         | security, CustomUserDetailService |  |                         
-| 이안철         | JwtToken, Exception |                                                                
+| 이안철         | JwtToken, Exception, 로그인 관리 api |                                                                
 
 ## 개발 타임라인(백엔드, 프론트 공통)
 
@@ -100,3 +101,4 @@
 | 2024.02.28 | 사이드바 기능 완료|
 | 2024.03.03 | 키오스크 메인 화면 레포 이전|
 | 2024.03.04 | 웹소켓 기능 완료|
+| 2024.03.06 | 키오스크, 메뉴, 사용자 페이징 처리 API 기능 완료|
