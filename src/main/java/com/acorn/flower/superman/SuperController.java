@@ -15,8 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 
-
-@Slf4j
 @RestController
 public class SuperController {
 
@@ -36,9 +34,7 @@ public class SuperController {
      */
     //JSON 문자열이 전송되면 @RequestBody 어노테이션을 이용해서 추출해야 한다
     @PostMapping("/api/auth")
-    public String auth(@RequestBody UserDto dto,HttpServletResponse response,HttpServletRequest request) throws Exception {
-        System.out.println(dto.getSave());
-    	
+    public String auth(@RequestBody UserDto dto,HttpServletResponse response,HttpServletRequest request) throws Exception {	
         try {
             //입력한 username 과 password 를 인증토큰 객체에 담아서
             UsernamePasswordAuthenticationToken authToken =
