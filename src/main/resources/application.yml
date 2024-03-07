@@ -13,7 +13,11 @@ spring:
     multipart:
       max-request-size: 60MB
       max-file-size: 50MB
- 
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:xe
+    username: scott
+    password: tiger
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.acorn.flower.**

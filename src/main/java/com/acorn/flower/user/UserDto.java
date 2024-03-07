@@ -21,5 +21,6 @@ public class UserDto {
 	private String regdate;
 	private int startRowNum;
 	private int endRowNum;
+	private String save;
 }
 
