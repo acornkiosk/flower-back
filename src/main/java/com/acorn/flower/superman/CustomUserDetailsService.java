@@ -32,12 +32,9 @@ public class CustomUserDetailsService implements UserDetailsService {
 			// 예외를 발생시킨다
 			throw new UsernameNotFoundException("존재하지 않는 사용자 입니다");
 		}
-		// 2. UserDetails 객체에 해당정보를 담아서 리턴해 주어야 한다
-		// DB 비밀번호(1234) 이기때문에 아래 해시화 해야한다. test임
 
 		String rank=null;
 		
-		rank = null;
 		if(dto.getRank()==3001) {
 			rank="super";
 		}else if(dto.getRank()==3002) {

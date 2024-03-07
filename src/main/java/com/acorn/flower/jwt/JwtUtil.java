@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,6 +17,7 @@ import com.acorn.flower.user.UserDto;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.Cookie;
 
 @Service
 public class JwtUtil {
@@ -51,6 +53,7 @@ public class JwtUtil {
     //토큰을 만들어서 리턴해주는 메소드
     public String generateToken(String id) {
     	Map<String, Object> claims=new HashMap<String, Object>();
+
     	//테스트로 추가 정보도 담아보
     	UserDto dto=dao.getUser(id);
     	claims.put("rank", dto.getRank());
