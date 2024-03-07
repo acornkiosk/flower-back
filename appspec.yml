@@ -2,16 +2,19 @@ version: 0.0
 os: linux
 
 files:
-  - source: /
-    destination: /home/ubuntu
+  - source:  /
+    destination: /home/ubuntu/spring-github-action
+    overwrite: yes
+
 permissions:
   - object: /
-    pattern: "**"
     owner: ubuntu
     group: ubuntu
-    mode: 755
+
 hooks:
   AfterInstall:
-    - location: deploy.sh
+    - location: scripts/stop.sh
       timeout: 60
-      runas: root
+  ApplicationStart:
+    - location: scripts/start.sh
+      timeout: 60
