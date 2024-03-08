@@ -26,6 +26,7 @@ public class OrderDaoImpl implements OrderDao {
 
 	@Override
 	public List<OrderDto> getOrders(OrderDto dto) {
+		System.out.println("test: " +dto);
 		List<OrderDto> list = session.selectList("order.getOrders", dto);
 		return list;
 	}
