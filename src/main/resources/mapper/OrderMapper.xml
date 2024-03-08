@@ -28,36 +28,50 @@
 		)
 	</insert>
 
-	 <select id="getOrders" parameterType="orderDto" resultType="orderDto">
-      SELECT 
-         c.ORDER_ID AS order_id
-         ,c.ID AS id
-         ,c.KIOSK_ID AS kiosk_id 
-         ,c.MENU_NAME AS menu_name
-         ,c.MENU_PRICE AS menu_price
-         ,c.MENU_COUNT AS menu_count
-         ,c.OPTIONS AS options
-         ,c.IS_COMPLETED AS is_completed
-         ,c.REGDATE AS regdate
-         ,m.category_id AS category_id
-      FROM 
-         CART c
-      JOIN 
-         menu m on c.MENU_NAME = m.NAME
-      <if test="order_id > 0">
+	<select id="getOrders" parameterType="orderDto" resultType="orderDto">
+      SELECT
+      	al.ORDER_ID AS order_id
+      	,al.ID AS id
+      	,al.KIOSK_ID AS kiosk_id 
+      	,al.MENU_NAME AS menu_name
+      	,al.MENU_PRICE AS menu_price
+      	,al.MENU_COUNT AS menu_count
+      	,al.OPTIONS AS options
+      	,al.IS_COMPLETED AS is_completed
+      	,al.REGDATE AS regdate
+      	,al.category_id AS category_id
+      	,cm.code_name AS category_name
+      FROM
+      (
+	      SELECT 
+	         c.ORDER_ID AS order_id
+	         ,c.ID AS id
+	         ,c.KIOSK_ID AS kiosk_id 
+	         ,c.MENU_NAME AS menu_name
+	         ,c.MENU_PRICE AS menu_price
+	         ,c.MENU_COUNT AS menu_count
+	         ,c.OPTIONS AS options
+	         ,c.IS_COMPLETED AS is_completed
+	         ,c.REGDATE AS regdate
+	         ,m.category_id AS category_id
+	      FROM 
+	         CART c
+	      JOIN 
+	         menu m on c.MENU_NAME = m.NAME
+      ) al
+      JOIN
+      	 common cm on al.category_id = cm.code_id
+      <if test="order_id>0">
       WHERE 
          ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
       </if>
-      <if test="order_id == 0">
+      <if test="order_id==0">
       WHERE
          IS_COMPLETED = 'false'
       </if>
-       <if test="order_id == -1"> 
+       <if test="order_id==-1"> 
       WHERE
          IS_COMPLETED = 'true'
-      </if>
-      <if test="category_id != 0">
-         AND m.category_id = #{category_id}
       </if>
       <if test="dayOfMonth == 1">
          AND regdate BETWEEN TRUNC(SYSDATE) AND SYSDATE   
@@ -68,8 +82,12 @@
       <if test="dayOfMonth == 30">
          AND regdate BETWEEN SYSDATE-30 AND SYSDATE 
       </if>
+      <if test="category_id != 0">
+         AND al.category_id = #{category_id}
+      </if>
       
    </select>
+
 	
 	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
 		SELECT 
