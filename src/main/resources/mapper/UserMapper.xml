@@ -70,7 +70,7 @@
                 ,'4004'
                 </if>
                 <if test="regdate == null">
-                ,TO_DATE(SYSDATE, 'YYYY-MM-DD')
+                ,TO_CHAR(SYSDATE, 'YYYY-MM-DD')
                 </if>
                 <if test="regdate != null">
                 ,TO_DATE(#{regdate}, 'YYYY-MM-DD')
