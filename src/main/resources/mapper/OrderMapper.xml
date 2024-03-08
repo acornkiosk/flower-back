@@ -28,29 +28,48 @@
 		)
 	</insert>
 
-	<select id="getOrders" parameterType="orderDto" resultType="orderDto">
-		SELECT 
-			ORDER_ID 
-			,ID 
-			,KIOSK_ID 
-			,MENU_NAME 
-			,MENU_PRICE 
-			,MENU_COUNT 
-			,OPTIONS
-			,IS_COMPLETED
-			,REGDATE
-		FROM 
-			CART
-		<if test="order_id != 0">
-		WHERE 
-			ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
-		</if>
-		<if test="order_id == 0">
-		WHERE
-			IS_COMPLETED = 'false'
-		</if>
-		
-	</select>
+	 <select id="getOrders" parameterType="orderDto" resultType="orderDto">
+      SELECT 
+         c.ORDER_ID AS order_id
+         ,c.ID AS id
+         ,c.KIOSK_ID AS kiosk_id 
+         ,c.MENU_NAME AS menu_name
+         ,c.MENU_PRICE AS menu_price
+         ,c.MENU_COUNT AS menu_count
+         ,c.OPTIONS AS options
+         ,c.IS_COMPLETED AS is_completed
+         ,c.REGDATE AS regdate
+         ,m.category_id AS category_id
+      FROM 
+         CART c
+      JOIN 
+         menu m on c.MENU_NAME = m.NAME
+      <if test="order_id > 0">
+      WHERE 
+         ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
+      </if>
+      <if test="order_id == 0">
+      WHERE
+         IS_COMPLETED = 'false'
+      </if>
+       <if test="order_id == -1"> 
+      WHERE
+         IS_COMPLETED = 'true'
+      </if>
+      <if test="category_id != 0">
+         AND m.category_id = #{category_id}
+      </if>
+      <if test="dayOfMonth == 1">
+         AND regdate BETWEEN TRUNC(SYSDATE) AND SYSDATE   
+      </if>
+      <if test="dayOfMonth == 7">
+         AND regdate BETWEEN SYSDATE-7 AND SYSDATE 
+      </if>
+      <if test="dayOfMonth == 30">
+         AND regdate BETWEEN SYSDATE-30 AND SYSDATE 
+      </if>
+      
+   </select>
 	
 	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
 		SELECT 
