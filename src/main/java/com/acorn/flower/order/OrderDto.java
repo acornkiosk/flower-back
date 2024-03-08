@@ -20,4 +20,6 @@ public class OrderDto {
 	private String options;
 	private String is_completed;
 	private String regdate;
+	private int dayOfMonth;
+	private int category_id;
 }
