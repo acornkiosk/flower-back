@@ -22,5 +22,6 @@ public class UserDto {
 	private int startRowNum;
 	private int endRowNum;
 	private String save;
+	private int pageNum;
 }
 
