@@ -9,13 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-
 import com.acorn.flower.user.UserDao;
 import com.acorn.flower.user.UserDto;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Service
 public class JwtUtil {
@@ -28,6 +29,9 @@ public class JwtUtil {
 	
 	@Autowired
 	private UserDao dao;
+	
+	  @Autowired
+	    private HttpServletResponse response;
 	
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
@@ -77,4 +81,31 @@ public class JwtUtil {
         //DB 에 저장된 userName 이고 토큰 유효기간이 만료가 안되었는지 확인해서 유효성 여부를 리턴한다. 
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }	
+    
+    //쿠키 생성 및 쿠시 삭제 처리 하는 메서도
+    public void createCookie(UserDto dto) {
+    	
+    	//체크박스 체크할 경우 쿠키값을 생성한다.	
+  		if("save".equals(dto.getSave())) {
+  			//쿠키 생성하기
+  			Cookie cookie=new Cookie("cid",dto.getId());
+  			cookie.setMaxAge(60*60);
+  			cookie.setPath("/");
+  			response.addCookie(cookie);
+
+  			System.out.println("yes:");
+  			
+  		}
+  		//체크박스 체크 하지 않을 경우 쿠키값을 삭제해준다.
+  		else {
+  			//쿠키 삭제하기
+  			Cookie cookie=new Cookie("cid","");
+  			cookie.setMaxAge(0);
+  			cookie.setPath("/");
+  			response.addCookie(cookie);
+  			
+  			System.out.println("no:");
+  		}
+    }
+
 }
