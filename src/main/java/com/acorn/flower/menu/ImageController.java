@@ -31,7 +31,6 @@ public class ImageController {
 	MediaType.IMAGE_GIF_VALUE}) //{경로변수}
 	
 	public byte[] image(@RequestBody ImageDto dto) throws IOException {
-
 		//읽어드릴 파일 절대경로
 		String absolutePath= fileLocation+File.separator+dto.getName();
 		//파일에서 읽어들일 inputStream

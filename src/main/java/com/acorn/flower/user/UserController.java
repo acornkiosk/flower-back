@@ -32,10 +32,10 @@ public class UserController {
      * @return
      */
     @PostMapping("/api/user/list")
-    public ResponseEntity<UserResponse> getUserList(@RequestBody int pageNum) {
+    public ResponseEntity<UserResponse> getUserList(@RequestBody UserDto dto) {
         UserResponse response = new UserResponse();
         try {
-            response = service.selectPage(pageNum);
+            response = service.selectPage(dto);
             if (!response.getList().isEmpty()) {
                 for (UserDto tmp : response.getList()) {
                     log.info("user = {}", tmp.toString());

@@ -13,5 +13,5 @@ public interface UserService {
 
     public boolean updateUser(UserDto dto);
 
-    public UserResponse selectPage(int pageNum);
+    public UserResponse selectPage(UserDto dto);
 }
