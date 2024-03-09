@@ -73,8 +73,11 @@
 			       JOIN 
 			       		common c ON m.CATEGORY_ID =c.CODE_ID 
 			       <if test="category_id != 0">
-				    WHERE 
+				   WHERE 
 				    	m.category_id = #{category_id}
+				   </if>
+				   <if test="sort == null">
+				   ORDER BY m.id desc
 				   </if>
 			       <if test ="sort=='asc'">
 				   ORDER BY price asc
