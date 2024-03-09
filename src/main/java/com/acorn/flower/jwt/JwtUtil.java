@@ -59,6 +59,7 @@ public class JwtUtil {
     	//테스트로 추가 정보도 담아보
     	UserDto dto=dao.getUser(id);
     	claims.put("rank", dto.getRank());
+    	claims.put("tset", "t123123");
     	return createToken(claims,id);
     }
     
