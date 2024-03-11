@@ -58,6 +58,7 @@
 	         CART c
 	      JOIN 
 	         menu m on c.MENU_NAME = m.NAME
+	      ORDER BY ORDER_ID DESC
       ) al
       JOIN
       	 common cm on al.category_id = cm.code_id
