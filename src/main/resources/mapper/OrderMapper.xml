@@ -86,6 +86,7 @@
       <if test="category_id != 0">
          AND al.category_id = #{category_id}
       </if>
+      ORDER BY order_id desc
       
    </select>
 
