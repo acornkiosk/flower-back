@@ -23,5 +23,6 @@ public class UserDto {
 	private int endRowNum;
 	private String save;
 	private int pageNum;
+	private String sort;
 }
 
