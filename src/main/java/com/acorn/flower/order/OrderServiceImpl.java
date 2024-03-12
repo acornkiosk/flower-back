@@ -5,11 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acorn.flower.common.CommonDao;
+import com.acorn.flower.common.CommonDto;
+import com.acorn.flower.common.CommonService;
+import com.acorn.flower.common.CommonServiceImpl;
+
 @Service
 public class OrderServiceImpl implements OrderService {
 
 	@Autowired
 	private OrderDao dao;
+	@Autowired
+	private CommonService commonService;
 
 	@Override
 	public boolean insert(OrderDto dto) {
@@ -30,6 +37,21 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderDto> getOrders(OrderDto dto) {
 		List<OrderDto> list = dao.getOrders(dto);
+		for(OrderDto result : list) {
+			String[] code_ids = result.getOptions().split(", ");
+			StringBuilder codeNamesBuilder = new StringBuilder();
+			for(String codeIdString : code_ids) {
+				int code_id=Integer.parseInt(codeIdString.trim()); 
+				CommonDto commonDto = new CommonDto(code_id);
+				String code_name = commonService.getCommon(commonDto).getCode_name();
+				codeNamesBuilder.append(code_name).append(", ");
+			}
+			String code_names = codeNamesBuilder.toString();
+			if(code_names.length() > 0) {
+				code_names = code_names.substring(0, code_names.length() -2);
+			}
+			result.setOptions(code_names);
+		}
 		return list;
 	}
 
