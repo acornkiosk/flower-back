@@ -35,6 +35,15 @@
                 WHERE
                         RANK=#{rank}
                 </if>
+                <if test="sort == null">
+                    ORDER BY id desc
+                </if>
+                <if test ="sort=='asc'">
+                    ORDER BY regdate asc
+                </if>
+                <if test ="sort=='desc'">
+                    ORDER BY regdate desc
+                </if>
             ) result1
         )
         <if test="startRowNum != 0">
