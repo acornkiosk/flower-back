@@ -18,8 +18,4 @@ public class CommonDto {
 	private String code_name;
 	private String code_value;
 	private String code_img;
-	
-	public CommonDto(int code_id) {
-		this.code_id = code_id;
-	}
 }

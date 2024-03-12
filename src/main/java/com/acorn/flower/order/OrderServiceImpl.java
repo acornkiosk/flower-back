@@ -42,7 +42,8 @@ public class OrderServiceImpl implements OrderService {
 			StringBuilder codeNamesBuilder = new StringBuilder();
 			for(String codeIdString : code_ids) {
 				int code_id=Integer.parseInt(codeIdString.trim()); 
-				CommonDto commonDto = new CommonDto(code_id);
+				CommonDto commonDto = new CommonDto();
+				commonDto.setCode_id(code_id);
 				String code_name = commonService.getCommon(commonDto).getCode_name();
 				codeNamesBuilder.append(code_name).append(", ");
 			}
