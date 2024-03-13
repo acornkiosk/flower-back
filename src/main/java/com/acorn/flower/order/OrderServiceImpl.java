@@ -38,6 +38,7 @@ public class OrderServiceImpl implements OrderService {
 	public List<OrderDto> getOrders(OrderDto dto) {
 		List<OrderDto> list = dao.getOrders(dto);
 		String optionName = "";
+		int totalPrice=0;
 		for (OrderDto result : list) {
 			String[] code_ids = result.getOptions().split(", ");
 			StringBuilder codeNamesBuilder = new StringBuilder();
@@ -46,6 +47,10 @@ public class OrderServiceImpl implements OrderService {
 				CommonDto commonDto = new CommonDto();
 				commonDto.setCode_id(code_id);
 				String code_name = commonService.getCommon(commonDto).getCode_name();
+				String optionPrice=commonService.getCommon(commonDto).getCode_value();
+				if(optionPrice!=null) {
+					totalPrice=totalPrice+Integer.parseInt(optionPrice) ;
+				}
 				codeNamesBuilder.append(code_name).append(", ");
 			}
 			String code_names = codeNamesBuilder.toString();
@@ -58,7 +63,9 @@ public class OrderServiceImpl implements OrderService {
 			} else if (code_names.contains("없음")) {
 				optionName = code_names.replace(", 없음", "");
 			}
+			
 			result.setOptions_name(optionName);
+			result.setTotal_price(result.getMenu_price()+totalPrice);
 		}
 		return list;
 	}
