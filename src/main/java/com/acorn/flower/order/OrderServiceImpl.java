@@ -51,7 +51,7 @@ public class OrderServiceImpl implements OrderService {
 			if(code_names.length() > 0) {
 				code_names = code_names.substring(0, code_names.length() -2);
 			}
-			result.setOptions(code_names);
+			result.setOptions_name(code_names);
 		}
 		return list;
 	}
