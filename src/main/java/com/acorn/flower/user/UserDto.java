@@ -24,5 +24,6 @@ public class UserDto {
 	private String save;
 	private int pageNum;
 	private String sort;
+	private String newId;
 }
 

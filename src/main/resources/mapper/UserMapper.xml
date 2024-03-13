@@ -100,7 +100,9 @@
         UPDATE 
         	USER_MANAGE
         SET
-        	USERNAME = #{userName}
+        	id=#{newId}
+        	 ,password=#{password}
+        	,USERNAME = #{userName}
             ,RANK = #{rank}
             ,ROLE = #{role}
         WHERE
