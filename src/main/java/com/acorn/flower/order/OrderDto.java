@@ -23,4 +23,5 @@ public class OrderDto {
 	private int dayOfMonth;
 	private int category_id;
 	private String category_name;
+	private String options_name;
 }
