@@ -37,21 +37,28 @@ public class OrderServiceImpl implements OrderService {
 	@Override
 	public List<OrderDto> getOrders(OrderDto dto) {
 		List<OrderDto> list = dao.getOrders(dto);
-		for(OrderDto result : list) {
+		String optionName = "";
+		for (OrderDto result : list) {
 			String[] code_ids = result.getOptions().split(", ");
 			StringBuilder codeNamesBuilder = new StringBuilder();
-			for(String codeIdString : code_ids) {
-				int code_id=Integer.parseInt(codeIdString.trim()); 
+			for (String codeIdString : code_ids) {
+				int code_id = Integer.parseInt(codeIdString.trim());
 				CommonDto commonDto = new CommonDto();
 				commonDto.setCode_id(code_id);
 				String code_name = commonService.getCommon(commonDto).getCode_name();
 				codeNamesBuilder.append(code_name).append(", ");
 			}
 			String code_names = codeNamesBuilder.toString();
-			if(code_names.length() > 0) {
-				code_names = code_names.substring(0, code_names.length() -2);
+			if (code_names.length() > 0) {
+				code_names = code_names.substring(0, code_names.length() - 2);
+				optionName=code_names;
 			}
-			result.setOptions_name(code_names);
+			if (code_names.contains("없음,")) {
+				optionName = code_names.replace("없음,", "");
+			} else if (code_names.contains("없음")) {
+				optionName = code_names.replace(", 없음", "");
+			}
+			result.setOptions_name(optionName);
 		}
 		return list;
 	}
