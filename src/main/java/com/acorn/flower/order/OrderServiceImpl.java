@@ -1,5 +1,6 @@
 package com.acorn.flower.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,10 @@ public class OrderServiceImpl implements OrderService {
 		List<OrderDto> list = dao.getOrders(dto);
 		String optionName = "";
 		int totalPrice=0;
-		if(dto.getOrder_id() != 0) {
-			for (OrderDto result : list) {
-				String[] code_ids = result.getOptions().split(", ");
+		List<OrderDto> filteredList = new ArrayList<>();
+		for (OrderDto result : list) {
+			if(result.getOrder_id()!=0) {
+				String[] code_ids= result.getOptions().split(", ");	
 				StringBuilder codeNamesBuilder = new StringBuilder();
 				for (String codeIdString : code_ids) {
 					int code_id = Integer.parseInt(codeIdString.trim());
@@ -67,9 +69,11 @@ public class OrderServiceImpl implements OrderService {
 				
 				result.setOptions_name(optionName);
 				result.setTotal_price(result.getMenu_price()+totalPrice);
-			}
+				filteredList.add(result); // order_id가 0이 아닌 경우만 추가
+			}							  //일단 보류
+			
 		}
-		return list;
+		return filteredList;
 	}
 
 	@Override
