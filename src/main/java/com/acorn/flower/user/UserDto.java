@@ -25,5 +25,6 @@ public class UserDto {
 	private int pageNum;
 	private String sort;
 	private String newId;
+	private String newPassword;
 }
 

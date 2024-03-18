@@ -52,6 +52,10 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateUser(UserDto dto) {
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		if(dto.getNewPassword() != null) {
+		dto.setNewPassword(encoder.encode(dto.getNewPassword()));
+		}
 		int result = dao.update(dto);
 
 		if (result == 0)

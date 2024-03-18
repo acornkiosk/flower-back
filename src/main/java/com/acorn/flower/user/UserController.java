@@ -154,6 +154,7 @@ public class UserController {
      */
     @PostMapping("/api/user/update")
     public ResponseEntity<UserResponse> userUpdate(@RequestBody UserDto dto) {
+    	System.out.println(dto.getId() +" new "+dto.getNewId() +"passw"+dto.getNewPassword()+ "name" +dto.getUserName());
         UserResponse response = new UserResponse();
         try {
             boolean isSuccess = service.updateUser(dto);
