@@ -100,11 +100,15 @@
         UPDATE 
         	USER_MANAGE
         SET
-        	id=#{newId}
-        	 ,password=#{password}
-        	,USERNAME = #{userName}
+        	USERNAME = #{userName}
             ,RANK = #{rank}
             ,ROLE = #{role}
+            <if test="newId != null ">
+             ,id=#{newId}
+            </if>
+            <if test="newPassword != null ">
+             ,password=#{newPassword}
+            </if>
         WHERE
             id = #{id}
     </update>
