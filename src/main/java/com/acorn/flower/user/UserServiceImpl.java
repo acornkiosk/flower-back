@@ -12,7 +12,8 @@ public class UserServiceImpl implements UserService {
 	final int PAGE_ROW_COUNT = 10;
 	// 하단 페이지를 몇개씩 표시할 것인지
 	final int PAGE_DISPLAY_COUNT = 5;
-
+	
+	private BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 	@Autowired
 	private UserDao dao;
 
@@ -30,7 +31,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean insert(UserDto dto) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		dto.setPassword(encoder.encode(dto.getPassword()));
 		int result = dao.insert(dto);
 
@@ -52,7 +53,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean updateUser(UserDto dto) {
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		if(dto.getNewPassword() != null) {
 		dto.setNewPassword(encoder.encode(dto.getNewPassword()));
 		}
@@ -104,8 +105,8 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public boolean checkId(String id) {
-		String result = dao.checkId(id);
+	public boolean checkId(UserDto dto) {
+		String result = dao.checkId(dto);
 		if (result == null)
 			return true;
 
