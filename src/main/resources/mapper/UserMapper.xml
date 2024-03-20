@@ -126,7 +126,7 @@
           	RANK NOT IN(3001,3002)
     </select>
     
-        <select id="checkId" parameterType="String" resultType="String">
+        <select id="checkId" parameterType="userDto" resultType="String">
     	SELECT
     		ID
     	FROM

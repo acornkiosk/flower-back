@@ -154,7 +154,6 @@ public class UserController {
      */
     @PostMapping("/api/user/update")
     public ResponseEntity<UserResponse> userUpdate(@RequestBody UserDto dto) {
-    	System.out.println(dto.getId() +" new "+dto.getNewId() +"passw"+dto.getNewPassword()+ "name" +dto.getUserName());
         UserResponse response = new UserResponse();
         try {
             boolean isSuccess = service.updateUser(dto);
@@ -176,10 +175,27 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @PostMapping("/api/user/checkid")
-    public boolean checkId(@RequestBody String id){
-    	 boolean isSuccess = service.checkId(id);
- 
-        return isSuccess;
+  @PostMapping("/api/user/checkid")
+  public ResponseEntity<UserResponse> checkId(@RequestBody UserDto dto){
+	  UserResponse response = new UserResponse();
+  	try {
+        boolean isSuccess = service.checkId(dto);
+        if (isSuccess) {
+            log.info(dto.getId() + "사용 가능한 아이딥니다.");
+            response.setHasID(isSuccess);
+            response.setStatus(HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        } else {
+            log.info(dto.getId()+"사용 불가능한 아이디입니다.");
+            response.setHasID(isSuccess);
+            response.setStatus(HttpStatus.OK);
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        }
+    } catch (Exception e) {
+        log.error("서버에 문제가 있습니다.");
+        response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
     }
+  }
+    
 }
