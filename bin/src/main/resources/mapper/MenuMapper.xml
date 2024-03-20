@@ -1,68 +1,109 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
-<mapper namespace="mapper.MenuMapper"></mapper>
-=======
 <mapper namespace="menu">
 
 	<!-- 등록 -->
    <insert id="insert" parameterType="menuDto">
       INSERT INTO menu
-      (
-      	id,
-      	name,
-      	price 
-      	<if test="img_name != null">,img_name</if>,
-      	summary,
-      	description,
-      	is_sold,
-      	category_id
-      )
+	      (
+	      	id
+	      	,name
+	      	,price
+	      	<if test="img_name != null">,img_name</if>
+	      	,summary
+	      	,description
+	      	,is_sold
+	      	,category_id
+	      )
       VALUES
-      (
-      seq_menu_id.NEXTVAL,
-      #{name},
-      #{price}
-      <if test="img_name != null">,#{img_name}</if>,
-      #{summary},
-      #{description},
-      'false',
-      #{category_id})
+	      (
+		      seq_menu_id.NEXTVAL
+		      ,#{name}
+		      ,#{price}
+		      <if test="img_name != null">,#{img_name}</if>
+		      ,#{summary}
+		      ,#{description}
+		      ,'false'
+		      ,#{category_id}
+	      )
    </insert>
    
-   <!-- 마지막꺼 가져오기 -->
-	<select id="getLast" resultType="menuDto">
-		SELECT *
-		FROM
-			(SELECT  *
-			FROM menu
-			ORDER BY id DESC) 
-		WHERE ROWNUM=1
+
+   	<select id="getCount" parameterType="menuDto" resultType="int">
+		SELECT 
+			NVL(MAX(ROWNUM),0)
+		FROM 
+			menu
+		<if test="category_id != 0">
+	    WHERE 
+	    	category_id=#{category_id}
+	    </if>
 	</select>
 	
 	<!-- 전체 or 카테고리별 메뉴 리스트-->
    <select id="getList" parameterType="menuDto" resultType="menuDto">
-       SELECT m.id AS id, m.name AS name,m.price AS price,m.img_name AS img_name,
-		      m.summary AS summary,m.description as description, m.is_sold AS is_sold,
-		      m.category_id AS category_id,c.CODE_NAME AS category
-		      FROM menu m 
-		      JOIN common c ON m.CATEGORY_ID =c.CODE_ID 
-      <if test="category_id != 0">
-	    WHERE m.category_id = #{category_id}
-	  </if>
+       SELECT 
+       		ID
+       		,NAME
+       		,PRICE
+       		,IMG_NAME
+       		,SUMMARY
+       		,DESCRIPTION
+       		,IS_SOLD
+       		,CATEGORY_ID
+       		,CATEGORY
+       FROM
+	       (
+	       	SELECT 
+	       		result1.*, ROWNUM AS rnum
+	       	FROM
+		       (
+			       SELECT 
+			       		m.id AS id
+		       		    ,m.name AS name
+		       		    ,m.price AS price
+		       		    ,m.img_name AS img_name
+				        ,m.summary AS summary
+				        ,m.description as description
+				        ,m.is_sold AS is_sold
+				        ,m.category_id AS category_id
+				        ,c.CODE_NAME AS category
+			       FROM 
+			       		menu m 
+			       JOIN 
+			       		common c ON m.CATEGORY_ID =c.CODE_ID 
+			       <if test="category_id != 0">
+				   WHERE 
+				    	m.category_id = #{category_id}
+				   </if>
+				   <if test="sort == null">
+				   ORDER BY m.id desc
+				   </if>
+			       <if test ="sort=='asc'">
+				   ORDER BY price asc
+				   </if>
+				   <if test ="sort=='desc'">
+				   ORDER BY price desc
+				   </if>		
+			   ) result1
+			)
+		<if test="startRowNum != 0">
+		WHERE 
+	   		rnum BETWEEN #{startRowNum} AND #{endRowNum}
+		</if>
    </select>
    
-   <select id="getMenu" parameterType="int" resultType="menuDto">
+   <select id="getMenu" parameterType="menuDto" resultType="menuDto">
    	  SELECT
-		  m.ID AS id,
-		  m.NAME AS name,
-		  m.PRICE AS price,
-		  m.IMG_NAME AS img_name,
-		  m.SUMMARY AS summary ,
-		  m.DESCRIPTION AS description, 
-		  m.IS_SOLD AS is_sold,
-		  m.CATEGORY_ID AS category_id,
-		  c.CODE_NAME AS category
+		  m.ID AS id
+		  ,m.NAME AS name
+		  ,m.PRICE AS price
+		  ,m.IMG_NAME AS img_name
+		  ,m.SUMMARY AS summary 
+		  ,m.DESCRIPTION AS description
+		  ,m.IS_SOLD AS is_sold
+		  ,m.CATEGORY_ID AS category_id
+		  ,c.CODE_NAME AS category
 	  FROM
 		  menu m
 	  JOIN common c ON
@@ -72,34 +113,27 @@
    	  
    </select>
    
-   <update id="update" parameterType="menuDto">
+   <update id="update" parameterType="menuDto">	
    	  UPDATE 
    	      menu 
    	  SET 
-   	  	  name=#{name}, 
-   	 	  price=#{price}, 
-   	 	  <if test="img_name != null">img_name=#{img_name},</if>
-   	  	  summary=#{summary}, 
-   	  	  description=#{description},
-   	  	  is_sold=#{is_sold},
-   	  	  category_id=#{category_id}
+   	  	  name=#{name} 
+   	 	  ,price=#{price} 
+   	 	  ,img_name=#{img_name}
+   	  	  ,summary=#{summary} 
+   	  	  ,description=#{description}
+   	  	  ,is_sold=#{is_sold}
+   	  	  ,category_id=#{category_id}
    	  WHERE 
    	  	  id=#{id}
    	 
    </update>
    
-   <delete id="delete" parameterType="int">
+   <delete id="delete" parameterType="menuDto">
    	  DELETE 
    	  FROM 
-   	  		menu
+   	  	   menu
    	  WHERE 
-   	  		id=#{id} 
+   	  	   id=#{id} 
    </delete>
-   
-   
-   
-   
-  
-
 </mapper>
->>>>>>> origin

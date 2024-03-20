@@ -14,4 +14,6 @@ public interface UserService {
     public boolean updateUser(UserDto dto);
 
     public UserResponse selectPage(UserDto dto);
+    
+    public boolean checkId(String id);
 }

@@ -102,4 +102,14 @@ public class UserServiceImpl implements UserService {
 		res.setPageNum(pageNum);
 		return res;
 	}
+	
+	@Override
+	public boolean checkId(String id) {
+		String result = dao.checkId(id);
+		System.out.println("service에서 호출"+result);
+		if (result == null)
+			return true;
+
+		return false;
+	}
 }

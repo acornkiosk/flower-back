@@ -2,73 +2,85 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="kiosk">
 	<insert id="insert" parameterType="kioskDto">
-		INSERT INTO KIOSK (ID,LOCATION,POWER)
-		VALUES (seq_kiosk_id.NEXTVAL,#{location},'off')
+		INSERT INTO KIOSK 
+			(
+				ID
+				,LOCATION
+				,POWER
+			)
+		VALUES 
+			(
+				seq_kiosk_id.NEXTVAL
+				,#{location}
+				,'off'
+			)
 	</insert>
 	
-	<select id="getList" resultType="kioskDto">
-		SELECT ID , LOCATION , POWER 
-		FROM KIOSK 
-<<<<<<< HEAD
-=======
-		ORDER BY ID ASC 
->>>>>>> origin
-	</select>
-	
-	<select id="getKiosk" parameterType="int" resultType="kioskDto">
-		SELECT ID , LOCATION , POWER
-		FROM KIOSK
-		WHERE id = #{id}
-	</select>
-	
-<<<<<<< HEAD
-=======
-	<select id="getLast" resultType="kioskDto">
-		SELECT ID, LOCATION, POWER
-			FROM (
-				SELECT ID ,LOCATION ,POWER 
-				FROM KIOSK 	
-				ORDER BY id desc
+	<select id="getList" parameterType="kioskDto" resultType="kioskDto">
+		SELECT 
+			ID
+			,LOCATION
+			,POWER
+		FROM
+			(
+				SELECT 
+					result1.*
+					,ROWNUM AS rnum
+				FROM
+					(
+						SELECT 
+							ID
+							,LOCATION
+							,POWER 
+						FROM 
+							KIOSK
+						<if test="power != null">
+						WHERE 
+							power = #{power}
+						</if> 
+						ORDER BY ID ASC	
+					) result1
 			)
-		WHERE ROWNUM = 1
+		<if test="startRowNum != 0">
+		WHERE 
+			rnum BETWEEN #{startRowNum} AND #{endRowNum}
+		</if>
+				 
 	</select>
 	
->>>>>>> origin
-	<delete id="delete" parameterType="int">
-		DELETE FROM KIOSK
-		WHERE id = #{id}
+	<select id="getKiosk" parameterType="kioskDto" resultType="kioskDto">
+		SELECT 
+			ID
+			,LOCATION
+			,POWER
+		FROM 
+			KIOSK
+		WHERE 
+			id = #{id}
+	</select>
+	
+	<delete id="delete" parameterType="kioskDto">
+		DELETE 
+		FROM 
+			KIOSK
+		WHERE 
+			id = #{id}
 	</delete>
 	
-	<update id="turnOn" parameterType="int">
-		UPDATE KIOSK
-		SET POWER = 'on'
-		WHERE ID = #{id}
+	<update id="update" parameterType="kioskDto">
+		UPDATE 
+			KIOSK
+		SET 
+			LOCATION = #{location}
+			,POWER = #{power}
+		WHERE
+			id = #{id}
 	</update>
 	
-	<update id="turnOff" parameterType="int">
-		UPDATE KIOSK
-		SET POWER = 'off'
-		WHERE ID = #{id}
-	</update>
-	
-	<update id="turnOnAll">
-		UPDATE KIOSK
-		SET POWER = 'on'
-	</update>
-	
-	<update id="turnOffAll">
-		UPDATE KIOSK
-		SET POWER = 'off'
-	</update>
-	
-	<update id="updateLocation" parameterType="kioskDto">
-		UPDATE KIOSK
-		SET LOCATION = #{location}
-		WHERE id = #{id}
-	</update>
-<<<<<<< HEAD
+	<select id="getCount" resultType="Integer">
+		SELECT
+			NVL(MAX(ROWNUM),0)
+		FROM
+			KIOSK
+	</select>
 </mapper>
-
-=======
-</mapper>
->>>>>>> origin
