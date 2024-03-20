@@ -176,4 +176,10 @@ public class UserController {
             return new ResponseEntity<>(response, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @PostMapping("/api/user/checkid")
+    public boolean checkId(@RequestBody String id){
+    	 boolean isSuccess = service.checkId(id);
+ 
+        return isSuccess;
+    }
 }

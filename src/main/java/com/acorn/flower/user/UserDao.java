@@ -14,5 +14,7 @@ public interface UserDao {
     public int update(UserDto dto);
 
     public int getCount();
+    
+    public String checkId(String id);
 }
 

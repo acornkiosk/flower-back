@@ -119,4 +119,13 @@
         FROM
             USER_MANAGE
     </select>
+    
+        <select id="checkId" parameterType="String" resultType="String">
+    	SELECT
+    		ID
+    	FROM
+    		USER_MANAGE
+    	WHERE
+    		id=#{id}
+    </select>
 </mapper>
