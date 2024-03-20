@@ -4,7 +4,6 @@ server:
     context-path: /flower
     session:
       tracking-modes: cookie
-
 spring:
   profiles:
     active:
