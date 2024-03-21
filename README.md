@@ -3,7 +3,8 @@
 **팀 프로젝트의 백엔드 Repository 입니다.**
 
 [프론트 Repositroy](https://github.com/acornkiosk/flower_front)<br/>
-[키오스크 메인 Repository](https://github.com/acornkiosk/flower_kiosk)
+[키오스크 메인 Repository](https://github.com/acornkiosk/flower_kiosk)<br/>
+[키오스크 안드로이드 Repository](https://github.com/acornkiosk/flower_android)
 ## 프로젝트 특징
 
 * React, Spring Boot을 기반으로 꽃을 판매하는 키오스크 서비스

@@ -31,6 +31,10 @@
                     <include refid="query_insert"/>
                 FROM
                     USER_MANAGE
+                <if test="rank == 0">
+                WHERE
+                	RANK NOT IN(3001,3002)
+                </if>
                 <if test="rank != 0">
                 WHERE
                         RANK=#{rank}
@@ -118,5 +122,16 @@
             NVL(MAX(ROWNUM),0)
         FROM
             USER_MANAGE
+        WHERE
+          	RANK NOT IN(3001,3002)
+    </select>
+    
+        <select id="checkId" parameterType="userDto" resultType="String">
+    	SELECT
+    		ID
+    	FROM
+    		USER_MANAGE
+    	WHERE
+    		id=#{id}
     </select>
 </mapper>

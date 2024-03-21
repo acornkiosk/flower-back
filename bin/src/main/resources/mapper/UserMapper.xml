@@ -1,22 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
-<mapper namespace="mapper.UserMapper"></mapper>
-=======
 <mapper namespace="users">
-    <select id="getUserList" resultType="userDto">
-        SELECT ID, PASSWORD, USERNAME, RANK, ROLE, REGDATE
-        FROM USER_MANAGE
+	<sql id="query">
+			ID
+	        ,PASSWORD
+	        ,USERNAME
+	        ,RANK
+	        ,ROLE
+	        ,TO_CHAR(REGDATE, 'YYYY/MM/DD') AS REGDATE
+	</sql>
+	<sql id="query_insert">
+			ID
+	        ,PASSWORD
+	        ,USERNAME
+	        ,RANK
+	        ,ROLE
+	        ,REGDATE
+	</sql>
+    <select id="getUserList" resultType="userDto" parameterType="userDto">
+        SELECT
+            <include refid="query"/>
+        FROM
+        (
+            SELECT
+                result1.*
+                ,ROWNUM AS rnum
+            FROM
+            (
+                SELECT
+                    <include refid="query_insert"/>
+                FROM
+                    USER_MANAGE
+                <if test="rank != 0">
+                WHERE
+                        RANK=#{rank}
+                </if>
+                <if test="sort == null">
+                    ORDER BY id desc
+                </if>
+                <if test ="sort=='asc'">
+                    ORDER BY regdate asc
+                </if>
+                <if test ="sort=='desc'">
+                    ORDER BY regdate desc
+                </if>
+            ) result1
+        )
+        <if test="startRowNum != 0">
+        WHERE
+            rnum BETWEEN #{startRowNum} AND #{endRowNum}
+        </if>
     </select>
 
     <select id="getUser" parameterType="String" resultType="userDto">
         SELECT
-            ID,
-            PASSWORD,
-            USERNAME,
-            RANK,
-            ROLE,
-            REGDATE
+            <include refid="query"/>
         FROM
             USER_MANAGE
         WHERE
@@ -26,25 +64,31 @@
     <insert id="insert" parameterType="userDto">
         INSERT INTO USER_MANAGE
             (
-                ID,
-                PASSWORD,
-                USERNAME,
-                RANK,
-                ROLE,
-                REGDATE
+               <include refid="query_insert"/>
             )
         VALUES
             (
-                #{id},
-                #{password},
-                #{userName},
-                #{rank},
-                '[4004]',
-                SYSDATE
+                #{id}
+                ,#{password}
+                ,#{userName}
+                ,#{rank}
+                <if test="rank == 3002 || rank == 3001">
+                ,'4001,4002,4003,4004'
+                </if>
+                <if test="rank == 3003 || rank == 3004">
+                ,'4004'
+                </if>
+                <if test="regdate == null">
+                ,TO_CHAR(SYSDATE, 'YYYY-MM-DD')
+                </if>
+                <if test="regdate != null">
+                ,TO_DATE(#{regdate}, 'YYYY-MM-DD')
+                </if>
+                
             )
     </insert>
 
-    <delete id="delete" parameterType="String">
+    <delete id="delete" parameterType="userDto">
         DELETE
         FROM
             USER_MANAGE
@@ -53,12 +97,26 @@
     </delete>
 
     <update id="update" parameterType="userDto">
-        UPDATE USER_MANAGE
+        UPDATE 
+        	USER_MANAGE
         SET
-            RANK = #{rank},
-            ROLE = #{role}
+        	USERNAME = #{userName}
+            ,RANK = #{rank}
+            ,ROLE = #{role}
+            <if test="newId != null ">
+             ,id=#{newId}
+            </if>
+            <if test="newPassword != null ">
+             ,password=#{newPassword}
+            </if>
         WHERE
             id = #{id}
     </update>
+
+    <select id="getCount" resultType="Integer">
+        SELECT
+            NVL(MAX(ROWNUM),0)
+        FROM
+            USER_MANAGE
+    </select>
 </mapper>
->>>>>>> origin

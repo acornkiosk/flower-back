@@ -1,85 +1,145 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<<<<<<< HEAD
-<mapper namespace="mapper.OrderMapper"></mapper>
-=======
 <mapper namespace="order">
 	<insert id="insert" parameterType="orderDto">
 		INSERT INTO CART
 		(	
-			ORDER_ID,
-			ID,
-			KIOSK_ID,
-			MENU_NAME,
-			MENU_PRICE,
-			MENU_COUNT,
-			OPTIONS,
-			REGDATE
+			ORDER_ID
+			,ID
+			,KIOSK_ID
+			,MENU_NAME
+			,MENU_PRICE
+			,MENU_COUNT
+			,OPTIONS
+			,IS_COMPLETED
+			,REGDATE
 		)
 		VALUES
 		(
-			#{order_id},
-			seq_order_id.nextval,
-			#{kiosk_id},
-			#{menu_name},
-			#{menu_price},
-			#{menu_count},
-			#{options},
-			SYSDATE
+			#{order_id}
+			,seq_order_id.nextval
+			,#{kiosk_id}
+			,#{menu_name}
+			,#{menu_price}
+			,#{menu_count}
+			,#{options}
+			,'false'
+			,SYSDATE
 		)
 	</insert>
 
-	<select id="getOrders" parameterType="int" resultType="orderDto">
-		SELECT ORDER_ID ,ID ,KIOSK_ID , MENU_NAME ,MENU_PRICE ,MENU_COUNT ,OPTIONS ,REGDATE
-		FROM CART
-		WHERE ORDER_ID = #{id}
+	<select id="getOrders" parameterType="orderDto" resultType="orderDto">
+      SELECT
+      	al.ORDER_ID AS order_id
+      	,al.ID AS id
+      	,al.KIOSK_ID AS kiosk_id 
+      	,al.MENU_NAME AS menu_name
+      	,al.MENU_PRICE AS menu_price
+      	,al.MENU_COUNT AS menu_count
+      	,al.OPTIONS AS options
+      	,al.IS_COMPLETED AS is_completed
+      	,al.REGDATE AS regdate
+      	,al.category_id AS category_id
+      	,cm.code_name AS category_name
+      FROM
+      (
+	      SELECT 
+	         c.ORDER_ID AS order_id
+	         ,c.ID AS id
+	         ,c.KIOSK_ID AS kiosk_id 
+	         ,c.MENU_NAME AS menu_name
+	         ,c.MENU_PRICE AS menu_price
+	         ,c.MENU_COUNT AS menu_count
+	         ,c.OPTIONS AS options
+	         ,c.IS_COMPLETED AS is_completed
+	         ,c.REGDATE AS regdate
+	         ,m.category_id AS category_id
+	      FROM 
+	         CART c
+	      JOIN 
+	         menu m on c.MENU_NAME = m.NAME
+	      ORDER BY ORDER_ID DESC
+      ) al
+      JOIN
+      	 common cm on al.category_id = cm.code_id
+      <if test="order_id>0">
+      WHERE 
+         ORDER_ID = #{order_id} AND IS_COMPLETED = 'false'
+      </if>
+      <if test="order_id==0">
+      WHERE
+         IS_COMPLETED = 'false'
+      </if>
+       <if test="order_id==-1"> 
+      WHERE
+         IS_COMPLETED = 'true'
+      </if>
+      <if test="dayOfMonth == 1">
+         AND regdate BETWEEN TRUNC(SYSDATE) AND SYSDATE   
+      </if>
+      <if test="dayOfMonth == 7">
+         AND regdate BETWEEN SYSDATE-7 AND SYSDATE 
+      </if>
+      <if test="dayOfMonth == 30">
+         AND regdate BETWEEN SYSDATE-30 AND SYSDATE 
+      </if>
+      <if test="category_id != 0">
+         AND al.category_id = #{category_id}
+      </if>
+      ORDER BY order_id desc    
+   </select>
+
+	
+	<select id="getOrder" parameterType="orderDto" resultType="orderDto">
+		SELECT 
+			ORDER_ID 
+			,ID 
+			,KIOSK_ID 
+			,MENU_NAME 
+			,MENU_PRICE 
+			,MENU_COUNT 
+			,OPTIONS
+			,IS_COMPLETED 
+			,REGDATE 
+		FROM 
+			CART 
+		WHERE 
+			ID = #{id}
 	</select>
 	
-	<select id="getAllOrders" resultType="orderDto">
-		SELECT
-			ORDER_ID,
-			ID ,
-			KIOSK_ID ,
-			MENU_NAME ,
-			MENU_PRICE ,
-			MENU_COUNT ,
-			OPTIONS ,
-			REGDATE
+	<delete id="deleteAll" parameterType="orderDto">
+		DELETE 
 		FROM 
 			CART
-	</select>
-	
-	<select id="getOrder" parameterType="int" resultType="orderDto">
-		SELECT 
-			ORDER_ID ,
-			ID ,
-			KIOSK_ID ,
-			MENU_NAME ,
-			MENU_PRICE ,
-			MENU_COUNT ,
-			OPTIONS ,
-			REGDATE 
-		FROM CART 
-		WHERE ID = #{id}
-	</select>
-	
-	<delete id="deleteAll" parameterType="int">
-		DELETE FROM CART
-		WHERE ORDER_ID = #{id}	
+		WHERE 
+			ORDER_ID = #{order_id}	
 	</delete>
 	
-	<delete id="delete" parameterType="int">
-		DELETE FROM CART
-		WHERE id= #{id}
+	<delete id="delete" parameterType="orderDto">
+		DELETE 
+		FROM 
+			CART
+		WHERE 
+			id= #{id}
 	</delete>
 	
 	<update id="update" parameterType="orderDto">
 		UPDATE CART 
 		SET 
-			MENU_PRICE = #{menu_price},
-			MENU_COUNT = #{menu_count},
-			OPTIONS =  #{options}
-		WHERE id=#{id}
+			MENU_PRICE = #{menu_price}
+			,MENU_COUNT = #{menu_count}
+			,IS_COMPLETED = #{is_completed}
+			<if test="options != null">
+			,OPTIONS =  #{options}
+			</if>
+		WHERE 
+			id=#{id}
 	</update>
+	
+	<select id="getCartId" resultType="int">
+		SELECT 
+			SEQ_CART_ID.NEXTVAL
+		FROM 
+			DUAL 
+	</select>
 </mapper>
->>>>>>> origin

@@ -18,4 +18,5 @@ public class UserResponse {
     private int totalPageCount;
     private int pageNum;
     private HttpStatus status;
+    private boolean hasID;
 }

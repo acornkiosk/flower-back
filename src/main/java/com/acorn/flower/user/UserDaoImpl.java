@@ -43,4 +43,9 @@ public class UserDaoImpl implements UserDao {
 		int result = session.selectOne("users.getCount");
 		return result;
 	}
+	@Override
+	public String checkId(UserDto dto) {
+		String result = session.selectOne("users.checkId",dto);
+		return result;
+	}
 }
