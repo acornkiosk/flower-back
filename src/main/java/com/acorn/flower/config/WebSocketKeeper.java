@@ -9,6 +9,7 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import com.acorn.flower.kiosk.KioskDao;
@@ -19,7 +20,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
 public class WebSocketKeeper {
 
@@ -31,7 +34,9 @@ public class WebSocketKeeper {
 	@Data
 	public class SessionDto{
 		private String id;
-		private URI uri; // 요청자 구분하기 
+		private URI uri;
+		private String user;
+		private String kioskId;
 		private WebSocketSession session;
 	}
 	
@@ -41,10 +46,40 @@ public class WebSocketKeeper {
 		SessionDto dto = new SessionDto();
 		dto.setId(id);
 		dto.setUri(uri);
+		dto.setUser(extractUserFromUri(uri));
+		if(extractUserFromUri(uri).equals("kiosk")) {
+			dto.setKioskId(KioskId(uri));
+		}else {
+			dto.setKioskId(null);
+		}
 		dto.setSession(session);
 		
 		map.put(id, dto);
-		System.out.println("웹소켓 session 추가");
+		log.info("WebSocket session Add = {}", dto.toString());
+	}
+	public void delete(String id, URI uri) {
+		String Requester = extractUserFromUri(uri);
+		if(Requester.equals("owner")) {
+			map.remove(id);
+			log.info("WebSocket session Delete = 사장님 웹소켓 삭제");
+		}else{
+			map.remove(id);
+			log.info("WebSocket session Delete = 키오스크 웹소켓 삭제");
+		}
+	}
+	/** 키오스크 번호 주입 */
+	public String KioskId(URI uri) {
+		String kioskId = "";
+		/** 사용자 구분하기 */
+		String user = extractUserFromUri(uri);
+		if(user.equals("kiosk")) {
+			kioskId = extractIdFromUri(uri);
+			log.info("WebSocket session Get = "+kioskId+"번 키오스크");
+		}else {
+			kioskId = "";
+			log.warn("WebSocket session Get = 정보를 확인해보시기 바랍니다. 키오스크 정보가 아닙니다.");
+		}
+		return kioskId;
 	}
 	/** 사용자 식별단어 추출하기 */
 	public static String extractUserFromUri(URI uri) {
@@ -68,35 +103,18 @@ public class WebSocketKeeper {
 	        }
 	    }
 	    /** 올바른 형식이 아닌 경우 빈 문자열 반환 또는 예외 처리 */
-	    return "대상이 아닙니다.";
-	}
-	/** TODO : 하나만 삭제할 때 다른 session 에도 주는 지 확인차 구현중 */
-	public void delete(String id, URI uri) {
-		String Requester = extractUserFromUri(uri);
-		if(Requester.equals("owner")) {
-			map.remove(id);
-			System.out.println("웹소켓 사장님 삭제");
-		}else {
-			map.remove(id);
-			System.out.println("웹소켓 kiosk 삭제");
-		}
-	}
-	
-	public WebSocketSession find(String id) {
-		SessionDto dto = map.get(id);
-		System.out.println("웹소켓 session 가져옴");
-		return dto.getSession();
+	    log.warn("키오스크 번호를 확인할 수 없습니다.");
+	    return null;
 	}
 	
 	public List<WebSocketSession> getWs()  {
 		List<WebSocketSession> list = new ArrayList<WebSocketSession>();
-		System.out.println("웹소켓 session list를 가져옴");
-		
 		Set<String> set = map.keySet();
 		for(String key : set) {
 			WebSocketSession session = map.get(key).getSession();
 			list.add(session);
 		}
+		log.info("WebSocket session GetList = {}", list);
 		return list;
 	}
 	
