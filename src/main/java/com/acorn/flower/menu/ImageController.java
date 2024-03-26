@@ -22,8 +22,7 @@ public class ImageController {
 	private String fileLocation;
 	
 	/**
-	 * 이미지 획득 image_name 필요
-	 * @param dto
+	 * @param img_name
 	 * @return
 	 * @throws IOException
 	 */

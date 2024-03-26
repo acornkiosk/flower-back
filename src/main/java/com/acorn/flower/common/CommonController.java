@@ -55,7 +55,6 @@ public class CommonController {
 
 	/**
 	 * 단일 정보 조회
-	 * code_id 필요
 	 * @param code_id
 	 * @return
 	 */
@@ -84,8 +83,7 @@ public class CommonController {
 	
 	/**
 	 * 공통코드 추가
-	 * code_id,p_code_id,code_name,code_value,code_img 필요
-	 * @param dto
+	 * @param code_id, p_code_id, code_name, code_value, code_img
 	 * @return
 	 */
 	@PostMapping("/api/common/insert")
@@ -116,7 +114,7 @@ public class CommonController {
 	/**
 	 * 공통코드 수정
 	 * 
-	 * @param dto
+	 * @param p_code_id, code_name, code_value, code_img, code_id
 	 * @return
 	 */
 	@PostMapping("/api/common/update")
@@ -144,7 +142,7 @@ public class CommonController {
 	/**
 	 * 공통코드 삭제
 	 * code_id 필요
-	 * @param dto
+	 * @param code_id
 	 * @return
 	 */
 	@PostMapping("/api/common/delete")
