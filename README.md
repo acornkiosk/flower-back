@@ -52,13 +52,13 @@
 
 
 ## API 설계
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/9009d22c-debf-45c1-9502-144bbc5a843e)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/e7564ea9-07cb-4164-b72a-0dce3870981f)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/0734253a-81c6-4287-8f1c-b72decbc88fb)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/6cc545d5-9c34-42bd-801a-a726668b17e3)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/25801c98-c4d8-4412-ac83-8e2f92960691)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/6cf3f077-8d32-4299-ac7f-a5696261be1b)
-![image](https://github.com/acornkiosk/Flower_back/assets/94777814/81dad43d-1cbe-48e9-817a-631494b2b34e)
+![스크린샷 2024-03-26 170825](https://github.com/acornkiosk/flower-back/assets/149052247/0df7919b-0995-4f5d-9388-93ec09adfe71)
+![스크린샷 2024-03-26 170911](https://github.com/acornkiosk/flower-back/assets/149052247/89919f5e-e52a-4a1c-b425-473f0098309c)
+![스크린샷 2024-03-26 170939](https://github.com/acornkiosk/flower-back/assets/149052247/40a061aa-6afe-4f16-927c-462e5db73a9b)
+![스크린샷 2024-03-26 171032](https://github.com/acornkiosk/flower-back/assets/149052247/8061cec1-6675-44d7-a2ca-f4cdd818cd57)
+![스크린샷 2024-03-26 171054](https://github.com/acornkiosk/flower-back/assets/149052247/68e41ab3-f2dc-42f1-bb26-c2d124cafc9a)
+![스크린샷 2024-03-26 171114](https://github.com/acornkiosk/flower-back/assets/149052247/1bbf3524-86a1-4bec-abd1-a3b0e78c25ee)
+![스크린샷 2024-03-26 171131](https://github.com/acornkiosk/flower-back/assets/149052247/36025f96-40da-48fd-923d-e5308cce2df6)
 
 ## 로그인 프로세스
 ![image](https://github.com/acornkiosk/Flower_back/assets/94777814/769b7e44-8d16-45f4-808d-7af70177fd63)
