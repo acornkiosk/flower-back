@@ -28,7 +28,7 @@ public class UserController {
 
     /**
      * list all members of user 
-     * pageNum 필요
+     * rank, startRowNum, endRowNum 필요
      * @return
      */
     @PostMapping("/api/user/list")
@@ -86,7 +86,7 @@ public class UserController {
 
     /**
      * create a new user, find a user by dto
-     * id, password,userName, rank 필요
+     * id, password,userName, rank, regdate 필요
      * @param dto
      * @return
      */

@@ -24,7 +24,7 @@ public class OrderController {
 
 	/**
 	 * 주문 추가 body : order dto
-	 * @param dto
+	 * @param order_id, kiosk_id, menu_name, menu_price, menu_count, oprtions 필요
 	 * @return
 	 */
 	@PostMapping("/api/order")
@@ -54,7 +54,7 @@ public class OrderController {
 
 	/**
 	 * 단일 주문 조회 body : order id
-	 * @param id
+	 * @param id, order_id
 	 * @return
 	 */
 	@PostMapping("/api/order/get")
@@ -82,7 +82,7 @@ public class OrderController {
 
 	/**
 	 * 주문번호 주문 리스트 조회 body order order_id = 0 이면 전체 조회
-	 * @param order_id
+	 * @param order_id, category_id
 	 * @return
 	 */
 	@PostMapping("/api/order/list")
@@ -173,7 +173,7 @@ public class OrderController {
 
 	/**
 	 * 주문 정보 수정 body order dto
-	 * @param dto
+	 * @param menu_price, menu_count, is_completed, options, id
 	 * @return
 	 */
 	@PostMapping("/api/order/update")

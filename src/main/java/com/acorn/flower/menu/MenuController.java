@@ -27,7 +27,7 @@ public class MenuController {
 	/**
 	 * 메뉴 수정
 	 * 
-	 * @param dto
+	 * @param name, price, img_name, summary, description, is_sold, category_id, id
 	 * @return
 	 */
 	@PostMapping("/api/menu/update")
@@ -122,7 +122,7 @@ public class MenuController {
 	/**
 	 * 카테고리별 or 전체 리스트 가져오기
 	 * 
-	 * @param dto
+	 * @param category_id, startRowNum, endRowNum
 	 * @return list
 	 */
 	@PostMapping("/api/menu/list")
@@ -154,7 +154,7 @@ public class MenuController {
 	/**
 	 * 메뉴 등록
 	 * 
-	 * @param dto
+	 * @param name, price, summary, description, img_name, category_id
 	 * @return
 	 */
 	@PostMapping("/api/menu")
